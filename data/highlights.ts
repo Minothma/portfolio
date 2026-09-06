@@ -17,6 +17,9 @@ export interface CertificationItem {
   year: string;
   title: string;
   issuer: string;
+  category?: "Cloud & DevOps" | "AI / ML & Data Science" | "Databases & Backend" | "Programming & Web" | "All";
+  verifyUrl?: string;
+  skills?: string[];
   status?: string;
 }
 
@@ -85,13 +88,82 @@ export const leadershipHistory: LeadershipItem[] = [
 ];
 
 export const certificationsList: CertificationItem[] = [
-  { year: "Expected 2027", title: "AI/ML & Data Science Bootcamp", issuer: "Peritus Research", status: "In Progress" },
-  { year: "May 2025", title: "Cloud Essentials", issuer: "IBM", status: "Verified" },
-  { year: "Mar 2025", title: "Python for Data Science", issuer: "IBM", status: "Verified" },
-  { year: "Mar 2025", title: "SQL and Relational Databases 101", issuer: "IBM", status: "Verified" },
-  { year: "Apr 2025", title: "SQL (Advanced)", issuer: "HackerRank", status: "Verified" },
-  { year: "Feb 2025", title: "Web Design for Beginners", issuer: "University of Moratuwa", status: "Verified" },
-  { year: "Feb 2025", title: "Python for Beginners", issuer: "University of Moratuwa", status: "Verified" },
+  {
+    year: "May 2025",
+    title: "Cloud Essentials",
+    issuer: "IBM",
+    category: "Cloud & DevOps",
+    verifyUrl: "https://www.credly.com/badges/8e9d4fd7-ce51-4207-8a83-101791dd6be2",
+    skills: ["Cloud Computing", "IaaS / PaaS / SaaS", "Cloud Security"],
+    status: "Credly Badge",
+  },
+  {
+    year: "May 2025",
+    title: "Introduction to Cloud (CC0101EN)",
+    issuer: "IBM / Cognitive Class",
+    category: "Cloud & DevOps",
+    verifyUrl: "https://courses.cognitiveclass.ai/certificates/8938568a53da4f7c96e16c85f338d217",
+    skills: ["Cloud Architecture", "Hybrid Cloud", "Cloud Storage"],
+    status: "Verified Certificate",
+  },
+  {
+    year: "Mar 2025",
+    title: "Python for Data Science",
+    issuer: "IBM",
+    category: "AI / ML & Data Science",
+    verifyUrl: "https://www.credly.com/badges/a8ea2fd3-15c5-4e87-888a-901221507702",
+    skills: ["Python", "Data Science", "Pandas", "NumPy"],
+    status: "Credly Badge",
+  },
+  {
+    year: "Mar 2025",
+    title: "Python 101 for Data Science (PY0101EN)",
+    issuer: "IBM / Cognitive Class",
+    category: "AI / ML & Data Science",
+    verifyUrl: "https://courses.cognitiveclass.ai/certificates/894eb296615c4f23a52f96fdf73d8eef",
+    skills: ["Python", "Data Analysis", "Algorithms"],
+    status: "Verified Certificate",
+  },
+  {
+    year: "Mar 2025",
+    title: "SQL and Relational Databases 101",
+    issuer: "IBM",
+    category: "Databases & Backend",
+    skills: ["SQL", "Relational Databases", "Schema Design"],
+    status: "Verified",
+  },
+  {
+    year: "Apr 2025",
+    title: "SQL (Advanced)",
+    issuer: "HackerRank",
+    category: "Databases & Backend",
+    skills: ["Advanced SQL", "Complex Joins", "Aggregations"],
+    status: "Verified",
+  },
+  {
+    year: "Feb 2025",
+    title: "Web Design for Beginners",
+    issuer: "University of Moratuwa",
+    category: "Programming & Web",
+    skills: ["HTML5", "CSS3", "Responsive UI"],
+    status: "Verified",
+  },
+  {
+    year: "Feb 2025",
+    title: "Python for Beginners",
+    issuer: "University of Moratuwa",
+    category: "Programming & Web",
+    skills: ["Python", "OOP", "Basic Scripting"],
+    status: "Verified",
+  },
+  {
+    year: "Expected 2027",
+    title: "AI/ML & Data Science Bootcamp",
+    issuer: "Peritus Research",
+    category: "AI / ML & Data Science",
+    skills: ["Machine Learning", "Data Science", "Deep Learning"],
+    status: "In Progress",
+  },
 ];
 
 export const referencesList: ReferenceItem[] = [

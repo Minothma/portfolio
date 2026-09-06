@@ -1,10 +1,24 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { educationHistory, leadershipHistory, certificationsList, referencesList } from "@/data/highlights";
-import { Award, UserCheck, Mail, Phone } from "lucide-react";
+import { Award, UserCheck, Mail, Phone, ExternalLink, ShieldCheck } from "lucide-react";
 
 export function Journey() {
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
+
+  const categories = [
+    "All",
+    "Cloud & DevOps",
+    "AI / ML & Data Science",
+    "Databases & Backend",
+    "Programming & Web",
+  ];
+
+  const filteredCertifications = certificationsList.filter((cert) => {
+    if (selectedCategory === "All") return true;
+    return cert.category === selectedCategory;
+  });
   return (
     <section id="journey" className="py-24 relative border-t border-white/[0.04]">
       <div className="w-full max-w-5xl mx-auto px-6 sm:px-10 lg:pl-16 lg:pr-8">
@@ -100,30 +114,82 @@ export function Journey() {
 
         {/* Certifications Sub-block */}
         <div className="pt-10 border-t border-white/[0.04] mb-14">
-          <div className="flex items-center gap-2 text-xs font-mono tracking-widest text-slate-500 uppercase mb-6">
-            <Award className="w-4 h-4 text-emerald-400" />
-            <span>LICENSES & CERTIFICATIONS</span>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+            <div className="flex items-center gap-2 text-xs font-mono tracking-widest text-slate-500 uppercase">
+              <Award className="w-4 h-4 text-emerald-400" />
+              <span>LICENSES & CERTIFICATIONS ({certificationsList.length})</span>
+            </div>
+
+            {/* Category Filter Pills */}
+            <div className="flex flex-wrap items-center gap-1.5 font-mono text-[11px]">
+              {categories.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setSelectedCategory(cat)}
+                  className={`px-2.5 py-1 rounded-md transition-colors ${
+                    selectedCategory === cat
+                      ? "bg-emerald-400 text-slate-950 font-bold"
+                      : "bg-[#0c1017] text-slate-400 border border-white/[0.06] hover:text-white"
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 font-mono text-xs">
-            {certificationsList.map((cert, idx) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3.5 font-mono text-xs">
+            {filteredCertifications.map((cert, idx) => (
               <div
                 key={idx}
-                className="p-3.5 rounded-xl bg-[#0c1017] border border-white/[0.06] hover:border-emerald-500/40 transition-colors space-y-1.5"
+                className="group relative p-4 rounded-xl bg-[#0c1017] border border-white/[0.06] hover:border-emerald-500/40 transition-all duration-200 flex flex-col justify-between space-y-3 hover:shadow-lg hover:shadow-emerald-950/20"
               >
-                <div className="flex items-center justify-between text-[10px] text-emerald-400">
-                  <span>{cert.issuer}</span>
-                  <span className="text-slate-500">{cert.year}</span>
-                </div>
-                <div className="font-semibold text-slate-200 line-clamp-1 text-xs">
-                  {cert.title}
-                </div>
-                {cert.status && (
-                  <div className="text-[10px] text-slate-500 flex items-center gap-1">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                    <span>{cert.status}</span>
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between text-[10px]">
+                    <span className="text-emerald-400 font-semibold">{cert.issuer}</span>
+                    <span className="text-slate-500">{cert.year}</span>
                   </div>
-                )}
+
+                  <div className="font-bold text-slate-100 text-xs leading-snug group-hover:text-white">
+                    {cert.title}
+                  </div>
+
+                  {cert.skills && cert.skills.length > 0 && (
+                    <div className="flex flex-wrap gap-1 pt-1">
+                      {cert.skills.map((skill) => (
+                        <span
+                          key={skill}
+                          className="px-1.5 py-0.5 rounded text-[10px] text-slate-400 bg-[#121824] border border-white/[0.04]"
+                        >
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                <div className="pt-2 border-t border-white/[0.04] flex items-center justify-between text-[10px]">
+                  {cert.status && (
+                    <span className="text-slate-400 flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                      <span>{cert.status}</span>
+                    </span>
+                  )}
+
+                  {cert.verifyUrl ? (
+                    <a
+                      href={cert.verifyUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-emerald-400 hover:text-emerald-300 font-semibold transition-colors group-hover:underline"
+                    >
+                      <span>Verify</span>
+                      <ExternalLink className="w-3 h-3" />
+                    </a>
+                  ) : (
+                    <span className="text-slate-600">Verified</span>
+                  )}
+                </div>
               </div>
             ))}
           </div>
