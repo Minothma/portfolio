@@ -48,7 +48,7 @@ export const profile: ProfileData = {
     highlights: [
       "automated QC verification engines",
       "secure auth pipelines",
-      "and resilient RESTful APIs",
+      "resilient RESTful APIs",
     ],
     suffix:
       " that keep working when clinical and enterprise data gets complex. Second-year IT undergraduate at the University of Moratuwa.",
