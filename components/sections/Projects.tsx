@@ -21,10 +21,10 @@ export function Projects() {
         
         {/* Eyebrow and Section Header */}
         <div className="flex items-center gap-4 mb-4">
-          <span className="text-xs font-mono tracking-widest text-amber-accent font-semibold uppercase">
+          <span className="text-xs font-mono tracking-widest text-emerald-400 font-semibold uppercase">
             SELECTED WORK
           </span>
-          <span className="h-[1px] w-16 bg-amber-accent/40" />
+          <span className="h-[1px] w-16 bg-emerald-500/40" />
         </div>
 
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
@@ -47,7 +47,7 @@ export function Projects() {
               onClick={() => setSelectedCategory(cat)}
               className={`px-3.5 py-1.5 rounded-full text-xs font-mono tracking-wider transition-all duration-200 ${
                 selectedCategory === cat
-                  ? "bg-amber-accent text-slate-950 font-bold shadow-sm"
+                  ? "bg-emerald-400 text-slate-950 font-bold shadow-sm"
                   : "bg-[#0c1017] text-slate-400 border border-white/[0.06] hover:border-white/20 hover:text-slate-200"
               }`}
             >
@@ -61,7 +61,7 @@ export function Projects() {
           {filteredProjects.map((project) => (
             <div
               key={project.id}
-              className="group relative rounded-xl bg-[#0c1017] border border-white/[0.08] hover:border-amber-accent/40 transition-all duration-200 p-6 sm:p-8 space-y-5 shadow-lg shadow-black/20"
+              className="group relative rounded-xl bg-[#0c1017] border border-white/[0.08] hover:border-emerald-500/40 transition-all duration-200 p-6 sm:p-8 space-y-5 shadow-lg shadow-black/20"
             >
               {/* Card Header: Metadata + READ MORE button */}
               <div className="flex flex-wrap items-center justify-between gap-4">
@@ -81,7 +81,7 @@ export function Projects() {
 
                 <button
                   onClick={() => setSelectedProject(project)}
-                  className="px-3.5 py-1.5 rounded-full text-[11px] font-mono tracking-wider text-slate-300 border border-white/20 hover:border-amber-accent hover:text-amber-accent transition-colors active:scale-95"
+                  className="px-3.5 py-1.5 rounded-full text-[11px] font-mono tracking-wider text-slate-300 border border-white/20 hover:border-emerald-400 hover:text-emerald-400 transition-colors active:scale-95"
                 >
                   READ MORE
                 </button>
@@ -104,7 +104,7 @@ export function Projects() {
                     key={i}
                     className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-400 leading-normal"
                   >
-                    <span className="text-amber-accent font-bold mt-0.5">•</span>
+                    <span className="text-emerald-400 font-bold mt-0.5">•</span>
                     <span>{item}</span>
                   </li>
                 ))}
@@ -135,7 +135,7 @@ export function Projects() {
             {/* Modal Header */}
             <div className="flex items-start justify-between gap-4 pb-4 border-b border-white/10">
               <div className="space-y-1">
-                <div className="text-xs font-mono uppercase tracking-wider text-amber-accent">
+                <div className="text-xs font-mono uppercase tracking-wider text-emerald-400">
                   {selectedProject.badge}
                 </div>
                 <h3 className="text-2xl sm:text-3xl font-bold text-white">
@@ -169,7 +169,7 @@ export function Projects() {
               <div className="space-y-2">
                 {selectedProject.writeUp.architecture.map((item, i) => (
                   <div key={i} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-300">
-                    <CheckCircle2 className="w-4 h-4 text-amber-accent flex-shrink-0 mt-0.5" />
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
                     <span>{item}</span>
                   </div>
                 ))}
@@ -179,13 +179,13 @@ export function Projects() {
             {/* The Hard Parts / Tradeoffs */}
             {selectedProject.writeUp.hardParts && selectedProject.writeUp.hardParts.length > 0 && (
               <div className="space-y-3">
-                <h4 className="text-xs font-mono uppercase tracking-wider text-amber-accent">
+                <h4 className="text-xs font-mono uppercase tracking-wider text-emerald-400">
                   // THE HARD PARTS & CONCURRENCY TRADEOFFS
                 </h4>
                 <div className="space-y-2">
                   {selectedProject.writeUp.hardParts.map((item, i) => (
-                    <div key={i} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-300 bg-amber-500/5 p-3 rounded-lg border border-amber-500/15">
-                      <AlertCircle className="w-4 h-4 text-amber-accent flex-shrink-0 mt-0.5" />
+                    <div key={i} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-300 bg-emerald-500/5 p-3 rounded-lg border border-emerald-500/15">
+                      <AlertCircle className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
                       <span>{item}</span>
                     </div>
                   ))}
@@ -213,7 +213,7 @@ export function Projects() {
               <span>{selectedProject.writeUp.repoNote || "Repository available on request."}</span>
               <button
                 onClick={() => setSelectedProject(null)}
-                className="px-4 py-2 rounded bg-amber-accent text-slate-950 font-bold hover:bg-amber-hover transition-colors"
+                className="px-4 py-2 rounded bg-emerald-400 text-slate-950 font-bold hover:bg-emerald-300 transition-colors"
               >
                 Close Write-up
               </button>

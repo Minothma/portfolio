@@ -53,14 +53,14 @@ export function Hero() {
             <div className="flex flex-wrap items-center gap-3 pt-2">
               <a
                 href="#work"
-                className="px-6 py-3 rounded-md text-xs sm:text-sm font-semibold font-mono tracking-wide text-slate-950 bg-amber-accent hover:bg-amber-hover transition-all duration-200 shadow-md shadow-amber-500/10 active:scale-95"
+                className="px-6 py-3 rounded-md text-xs sm:text-sm font-semibold font-mono tracking-wide text-slate-950 bg-emerald-400 hover:bg-emerald-300 transition-all duration-200 shadow-md shadow-emerald-500/20 active:scale-95"
               >
                 See what I've built
               </a>
 
               <a
                 href="#contact"
-                className="px-5 py-3 rounded-md text-xs sm:text-sm font-mono tracking-wide text-slate-300 bg-surface-card hover:bg-surface-cardHover border border-white/10 hover:border-white/20 transition-all duration-200 active:scale-95"
+                className="px-5 py-3 rounded-md text-xs sm:text-sm font-mono tracking-wide text-slate-300 bg-surface-card hover:bg-surface-cardHover border border-white/10 hover:border-emerald-500/40 transition-all duration-200 active:scale-95"
               >
                 Get in touch
               </a>
@@ -71,7 +71,7 @@ export function Hero() {
                 rel="noopener noreferrer"
                 className="px-4 py-3 rounded-md text-xs sm:text-sm font-mono text-slate-400 hover:text-white border border-transparent hover:border-white/10 transition-all flex items-center gap-1.5"
               >
-                <FileText className="w-3.5 h-3.5 text-amber-accent" />
+                <FileText className="w-3.5 h-3.5 text-emerald-400" />
                 <span>CV</span>
                 <ArrowUpRight className="w-3 h-3 opacity-60" />
               </a>
@@ -80,7 +80,7 @@ export function Hero() {
 
           {/* Right Column: Terminal Spec Profile Card */}
           <div className="lg:col-span-5">
-            <div className="rounded-xl bg-[#0c1017] border border-white/[0.08] p-6 shadow-2xl space-y-5 font-mono text-xs select-none hover:border-amber-accent/30 transition-colors">
+            <div className="rounded-xl bg-[#0c1017] border border-white/[0.08] p-6 shadow-2xl space-y-5 font-mono text-xs select-none hover:border-emerald-500/40 transition-colors">
               
               {/* Terminal Card Header */}
               <div className="flex items-center justify-between text-[11px] text-slate-500 pb-3 border-b border-white/[0.06] tracking-wider">
@@ -156,7 +156,7 @@ export function Hero() {
           <div className="p-4 rounded-xl bg-[#0c1017]/80 border border-white/[0.05]">
             <div className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
               {profile.metrics.gpa}
-              <span className="text-xs text-amber-accent font-normal ml-1">
+              <span className="text-xs text-emerald-400 font-normal ml-1">
                 {profile.metrics.gpaScale}
               </span>
             </div>

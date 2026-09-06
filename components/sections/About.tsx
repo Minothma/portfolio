@@ -10,10 +10,10 @@ export function About() {
         
         {/* Section Header */}
         <div className="flex items-center gap-4 mb-12">
-          <span className="text-xs font-mono tracking-widest text-amber-accent font-semibold uppercase">
+          <span className="text-xs font-mono tracking-widest text-emerald-400 font-semibold uppercase">
             ABOUT
           </span>
-          <span className="h-[1px] w-16 bg-amber-accent/40" />
+          <span className="h-[1px] w-16 bg-emerald-500/40" />
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-start">
@@ -35,7 +35,7 @@ export function About() {
 
           {/* Right Column: Custom Visual Portrait Frame with Watermark */}
           <div className="lg:col-span-5 flex justify-center lg:justify-end">
-            <div className="relative w-full max-w-[340px] aspect-[4/5] rounded-2xl bg-gradient-to-b from-[#e5a93c] via-[#ca8a27] to-[#8c5a14] p-[1.5px] shadow-2xl overflow-hidden group">
+            <div className="relative w-full max-w-[340px] aspect-[4/5] rounded-2xl bg-gradient-to-b from-emerald-400 via-emerald-500/30 to-cyan-500/20 p-[1.5px] shadow-2xl shadow-emerald-950/40 overflow-hidden group hover:shadow-[0_0_35px_rgba(16,185,129,0.2)] transition-all duration-300">
               
               {/* Inner portrait content */}
               <div className="relative w-full h-full rounded-[14px] bg-[#0c1017] flex flex-col items-center justify-between p-6 overflow-hidden">
@@ -44,15 +44,15 @@ export function About() {
                 <div 
                   className="absolute inset-0 opacity-15"
                   style={{
-                    backgroundImage: `radial-gradient(rgba(255, 255, 255, 0.4) 1px, transparent 1px)`,
+                    backgroundImage: `radial-gradient(rgba(16, 185, 129, 0.4) 1px, transparent 1px)`,
                     backgroundSize: "24px 24px",
                   }}
                 />
 
                 {/* Top Badge */}
                 <div className="relative z-10 w-full flex items-center justify-between text-[10px] font-mono text-slate-400">
-                  <span className="flex items-center gap-1.5 text-amber-accent">
-                    <span className="w-1.5 h-1.5 rounded-full bg-amber-accent" />
+                  <span className="flex items-center gap-1.5 text-emerald-400">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                     UOM · ITM
                   </span>
                   <span className="text-slate-500">FACULTY OF IT</span>
@@ -60,23 +60,23 @@ export function About() {
 
                 {/* Center Monogram Graphic */}
                 <div className="relative z-10 flex flex-col items-center my-auto">
-                  <div className="w-28 h-28 rounded-2xl bg-gradient-to-br from-amber-500/20 via-slate-900 to-slate-950 border border-amber-accent/30 flex items-center justify-center shadow-2xl mb-4 group-hover:scale-105 transition-transform duration-300">
-                    <span className="text-4xl font-extrabold font-mono tracking-tight text-white">
+                  <div className="w-28 h-28 rounded-2xl bg-gradient-to-br from-emerald-500/20 via-slate-900 to-cyan-950 border border-emerald-500/40 flex items-center justify-center shadow-2xl shadow-emerald-950/50 mb-4 group-hover:scale-105 group-hover:border-emerald-400/70 transition-transform duration-300">
+                    <span className="text-4xl font-extrabold font-mono tracking-tight bg-gradient-to-br from-emerald-200 via-white to-cyan-200 bg-clip-text text-transparent">
                       MS
                     </span>
                   </div>
                   <span className="text-base font-bold text-white tracking-wide">
                     {profile.name}
                   </span>
-                  <span className="text-xs font-mono text-slate-400 mt-0.5">
+                  <span className="text-xs font-mono text-emerald-400/90 mt-0.5">
                     Software Engineering Intern
                   </span>
                 </div>
 
-                {/* Watermark at bottom right matching screenshot 5 */}
+                {/* Watermark at bottom right */}
                 <div className="relative z-10 w-full flex items-center justify-between text-[11px] font-mono text-slate-500 pt-3 border-t border-white/[0.06]">
                   <span className="text-slate-500 uppercase">MORATUWA · 2026</span>
-                  <span className="text-amber-accent/80 text-[12px]">+</span>
+                  <span className="text-emerald-400 text-[12px] font-bold">+</span>
                 </div>
 
               </div>

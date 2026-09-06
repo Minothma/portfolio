@@ -16,9 +16,9 @@ export function TechMarquee() {
         {repeatedList.map((tech, index) => (
           <div
             key={`${tech}-${index}`}
-            className="flex items-center gap-2 px-4 py-1.5 mx-2 rounded-lg bg-[#121824] border border-white/[0.06] text-xs font-mono text-slate-300 whitespace-nowrap shrink-0 hover:border-amber-accent/40 hover:text-white transition-colors select-none"
+            className="flex items-center gap-2 px-4 py-1.5 mx-2 rounded-lg bg-[#121824] border border-white/[0.06] text-xs font-mono text-slate-300 whitespace-nowrap shrink-0 hover:border-emerald-400/50 hover:text-white transition-colors select-none"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-amber-accent/80" />
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
             <span>{tech}</span>
           </div>
         ))}

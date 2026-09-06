@@ -19,10 +19,10 @@ export function Contact() {
         
         {/* Eyebrow */}
         <div className="flex items-center gap-4 mb-4">
-          <span className="text-xs font-mono tracking-widest text-amber-accent font-semibold uppercase">
+          <span className="text-xs font-mono tracking-widest text-emerald-400 font-semibold uppercase">
             CONTACT
           </span>
-          <span className="h-[1px] w-16 bg-amber-accent/40" />
+          <span className="h-[1px] w-16 bg-emerald-500/40" />
         </div>
 
         <div className="mb-12">
@@ -55,7 +55,7 @@ export function Contact() {
             {/* Email Action Field */}
             <div className="p-4 rounded-lg bg-[#121824] border border-white/[0.06] flex flex-col sm:flex-row sm:items-center justify-between gap-3 font-mono text-xs">
               <div className="flex items-center gap-2.5 text-slate-200">
-                <Mail className="w-4 h-4 text-amber-accent" />
+                <Mail className="w-4 h-4 text-emerald-400" />
                 <span className="select-all">{profile.email}</span>
               </div>
 
@@ -80,7 +80,7 @@ export function Contact() {
 
                 <a
                   href={`mailto:${profile.email}?subject=Software%20Engineering%20Internship%20Inquiry`}
-                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded bg-amber-accent hover:bg-amber-hover text-slate-950 font-bold transition-colors shadow-sm active:scale-95"
+                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-bold transition-colors shadow-sm active:scale-95"
                 >
                   <span>Email Me</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
@@ -101,10 +101,10 @@ export function Contact() {
               href={profile.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-4 rounded-xl bg-[#0c1017] border border-white/[0.07] hover:border-amber-accent/40 transition-colors flex items-center justify-between group block"
+              className="p-4 rounded-xl bg-[#0c1017] border border-white/[0.07] hover:border-emerald-500/40 transition-colors flex items-center justify-between group block"
             >
               <div className="flex items-center gap-3">
-                <Linkedin className="w-4 h-4 text-slate-400 group-hover:text-amber-accent transition-colors" />
+                <Linkedin className="w-4 h-4 text-slate-400 group-hover:text-emerald-400 transition-colors" />
                 <div>
                   <div className="font-semibold text-slate-200 group-hover:text-white">LinkedIn</div>
                   <div className="text-[11px] text-slate-500">linkedin.com/in/minothma</div>
@@ -118,10 +118,10 @@ export function Contact() {
               href={profile.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-4 rounded-xl bg-[#0c1017] border border-white/[0.07] hover:border-amber-accent/40 transition-colors flex items-center justify-between group block"
+              className="p-4 rounded-xl bg-[#0c1017] border border-white/[0.07] hover:border-emerald-500/40 transition-colors flex items-center justify-between group block"
             >
               <div className="flex items-center gap-3">
-                <Github className="w-4 h-4 text-slate-400 group-hover:text-amber-accent transition-colors" />
+                <Github className="w-4 h-4 text-slate-400 group-hover:text-emerald-400 transition-colors" />
                 <div>
                   <div className="font-semibold text-slate-200 group-hover:text-white">GitHub</div>
                   <div className="text-[11px] text-slate-500">github.com/Minothma</div>

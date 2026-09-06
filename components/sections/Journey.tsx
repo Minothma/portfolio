@@ -27,10 +27,10 @@ export function Journey() {
               {educationHistory.map((edu, idx) => (
                 <div key={idx} className="relative pl-6 space-y-1.5 group">
                   {/* Square timeline marker */}
-                  <span className="absolute left-0 top-1 w-2 h-2 rounded-[2px] border border-amber-accent/80 bg-background group-hover:bg-amber-accent transition-colors" />
+                  <span className="absolute left-0 top-1 w-2 h-2 rounded-[2px] border border-emerald-400/80 bg-background group-hover:bg-emerald-400 transition-colors" />
 
-                  {/* Year Tag in amber mono */}
-                  <div className="text-xs font-mono text-amber-accent tracking-wide font-medium">
+                  {/* Year Tag in emerald mono */}
+                  <div className="text-xs font-mono text-emerald-400 tracking-wide font-medium">
                     {edu.year}
                   </div>
 
@@ -69,10 +69,10 @@ export function Journey() {
               {leadershipHistory.map((lead, idx) => (
                 <div key={idx} className="relative pl-6 space-y-1 group">
                   {/* Square timeline marker */}
-                  <span className="absolute left-0 top-1 w-2 h-2 rounded-[2px] border border-amber-accent/80 bg-background group-hover:bg-amber-accent transition-colors" />
+                  <span className="absolute left-0 top-1 w-2 h-2 rounded-[2px] border border-emerald-400/80 bg-background group-hover:bg-emerald-400 transition-colors" />
 
-                  {/* Year Tag in amber mono */}
-                  <div className="text-xs font-mono text-amber-accent tracking-wide font-medium">
+                  {/* Year Tag in emerald mono */}
+                  <div className="text-xs font-mono text-emerald-400 tracking-wide font-medium">
                     {lead.year}
                   </div>
 
@@ -101,7 +101,7 @@ export function Journey() {
         {/* Certifications Sub-block */}
         <div className="pt-10 border-t border-white/[0.04] mb-14">
           <div className="flex items-center gap-2 text-xs font-mono tracking-widest text-slate-500 uppercase mb-6">
-            <Award className="w-4 h-4 text-amber-accent" />
+            <Award className="w-4 h-4 text-emerald-400" />
             <span>LICENSES & CERTIFICATIONS</span>
           </div>
 
@@ -109,9 +109,9 @@ export function Journey() {
             {certificationsList.map((cert, idx) => (
               <div
                 key={idx}
-                className="p-3.5 rounded-xl bg-[#0c1017] border border-white/[0.06] hover:border-amber-accent/40 transition-colors space-y-1.5"
+                className="p-3.5 rounded-xl bg-[#0c1017] border border-white/[0.06] hover:border-emerald-500/40 transition-colors space-y-1.5"
               >
-                <div className="flex items-center justify-between text-[10px] text-amber-accent">
+                <div className="flex items-center justify-between text-[10px] text-emerald-400">
                   <span>{cert.issuer}</span>
                   <span className="text-slate-500">{cert.year}</span>
                 </div>
@@ -143,7 +143,7 @@ export function Journey() {
                 className="p-4 rounded-xl bg-[#0c1017] border border-white/[0.06] space-y-1.5"
               >
                 <div className="text-sm font-bold text-white font-sans">{ref.name}</div>
-                <div className="text-xs text-amber-accent">{ref.title}</div>
+                <div className="text-xs text-emerald-400">{ref.title}</div>
                 <div className="text-xs text-slate-400">{ref.organization}</div>
                 <div className="pt-2 border-t border-white/[0.04] text-[11px] text-slate-500 space-y-1">
                   <div className="flex items-center gap-2">

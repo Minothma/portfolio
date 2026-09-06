@@ -10,10 +10,10 @@ export function Toolkit() {
         
         {/* Eyebrow Header */}
         <div className="flex items-center gap-4 mb-4">
-          <span className="text-xs font-mono tracking-widest text-amber-accent font-semibold uppercase">
+          <span className="text-xs font-mono tracking-widest text-emerald-400 font-semibold uppercase">
             TOOLKIT
           </span>
-          <span className="h-[1px] w-16 bg-amber-accent/40" />
+          <span className="h-[1px] w-16 bg-emerald-500/40" />
         </div>
 
         <div className="mb-12">
@@ -30,10 +30,10 @@ export function Toolkit() {
           {skills.map((category) => (
             <div
               key={category.category}
-              className="p-6 rounded-xl bg-[#0c1017] border border-white/[0.07] hover:border-amber-accent/30 transition-all duration-200 space-y-4"
+              className="p-6 rounded-xl bg-[#0c1017] border border-white/[0.07] hover:border-emerald-500/40 transition-all duration-200 space-y-4 hover:shadow-lg hover:shadow-emerald-950/20"
             >
               <div className="space-y-1">
-                <h3 className="text-sm font-mono uppercase tracking-wider text-amber-accent font-semibold">
+                <h3 className="text-sm font-mono uppercase tracking-wider text-emerald-400 font-semibold">
                   {category.category}
                 </h3>
                 <p className="text-xs text-slate-500">
