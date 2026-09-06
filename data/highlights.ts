@@ -19,6 +19,7 @@ export interface CertificationItem {
   issuer: string;
   category?: "Cloud & DevOps" | "AI / ML & Data Science" | "Databases & Backend" | "Programming & Web" | "All";
   verifyUrl?: string;
+  verificationCode?: string;
   skills?: string[];
   status?: string;
 }
@@ -146,18 +147,20 @@ export const certificationsList: CertificationItem[] = [
     title: "Python for Beginners",
     issuer: "University of Moratuwa (CODL)",
     category: "Programming & Web",
-    verifyUrl: "https://open.uom.lk/verify",
+    verifyUrl: "https://open.uom.lk/lms/mod/customcert/verify_certificate.php?code=I4JR3gc9Wb",
+    verificationCode: "I4JR3gc9Wb",
     skills: ["Python", "Algorithms", "Dept. of CSE"],
-    status: "Code: I4JR3gc9Wb",
+    status: "Verified",
   },
   {
     year: "Feb 2025",
     title: "Web Design for Beginners",
     issuer: "University of Moratuwa (CODL)",
     category: "Programming & Web",
-    verifyUrl: "https://open.uom.lk/verify",
+    verifyUrl: "https://open.uom.lk/lms/mod/customcert/verify_certificate.php?code=rEWM10jISt",
+    verificationCode: "rEWM10jISt",
     skills: ["HTML5", "CSS3", "Responsive UI", "Faculty of IT"],
-    status: "Code: rEWM10jISt",
+    status: "Verified",
   },
   {
     year: "Expected 2027",

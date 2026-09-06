@@ -2,10 +2,17 @@
 
 import React, { useState } from "react";
 import { educationHistory, leadershipHistory, certificationsList, referencesList } from "@/data/highlights";
-import { Award, UserCheck, Mail, Phone, ExternalLink, ShieldCheck } from "lucide-react";
+import { Award, UserCheck, Mail, Phone, ExternalLink, Copy, Check } from "lucide-react";
 
 export function Journey() {
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
+  const [copiedCode, setCopiedCode] = useState<string | null>(null);
+
+  const handleCopyCode = (code: string) => {
+    navigator.clipboard.writeText(code);
+    setCopiedCode(code);
+    setTimeout(() => setCopiedCode(null), 2000);
+  };
 
   const categories = [
     "All",
@@ -168,26 +175,39 @@ export function Journey() {
                   )}
                 </div>
 
-                <div className="pt-2 border-t border-white/[0.04] flex items-center justify-between text-[10px]">
-                  {cert.status && (
+                <div className="pt-2 border-t border-white/[0.04] flex items-center justify-between text-[10px] gap-2">
+                  {cert.verificationCode ? (
+                    <button
+                      onClick={() => handleCopyCode(cert.verificationCode!)}
+                      title="Click to copy verification code"
+                      className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#121824] hover:bg-emerald-500/10 border border-white/10 hover:border-emerald-500/40 text-[10px] text-slate-300 hover:text-emerald-300 transition-all active:scale-95"
+                    >
+                      <span>Code: {cert.verificationCode}</span>
+                      {copiedCode === cert.verificationCode ? (
+                        <Check className="w-2.5 h-2.5 text-emerald-400" />
+                      ) : (
+                        <Copy className="w-2.5 h-2.5 opacity-50" />
+                      )}
+                    </button>
+                  ) : cert.status ? (
                     <span className="text-slate-400 flex items-center gap-1.5">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                       <span>{cert.status}</span>
                     </span>
+                  ) : (
+                    <span className="text-slate-600">Verified</span>
                   )}
 
-                  {cert.verifyUrl ? (
+                  {cert.verifyUrl && (
                     <a
                       href={cert.verifyUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-emerald-400 hover:text-emerald-300 font-semibold transition-colors group-hover:underline"
+                      className="inline-flex items-center gap-1 text-emerald-400 hover:text-emerald-300 font-semibold transition-colors group-hover:underline shrink-0"
                     >
                       <span>Verify</span>
                       <ExternalLink className="w-3 h-3" />
                     </a>
-                  ) : (
-                    <span className="text-slate-600">Verified</span>
                   )}
                 </div>
               </div>
