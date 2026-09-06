@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { profile } from "@/data/profile";
 
 export function About() {
@@ -33,50 +34,53 @@ export function About() {
             </p>
           </div>
 
-          {/* Right Column: Custom Visual Portrait Frame with Watermark */}
+          {/* Right Column: High-Fidelity Photograph Frame with Emerald Glow */}
           <div className="lg:col-span-5 flex justify-center lg:justify-end">
-            <div className="relative w-full max-w-[340px] aspect-[4/5] rounded-2xl bg-gradient-to-b from-emerald-400 via-emerald-500/30 to-cyan-500/20 p-[1.5px] shadow-2xl shadow-emerald-950/40 overflow-hidden group hover:shadow-[0_0_35px_rgba(16,185,129,0.2)] transition-all duration-300">
+            <div className="relative w-full max-w-[340px] aspect-[4/5] rounded-2xl bg-gradient-to-b from-emerald-400 via-emerald-500/30 to-cyan-500/20 p-[1.5px] shadow-2xl shadow-emerald-950/40 overflow-hidden group hover:shadow-[0_0_35px_rgba(16,185,129,0.25)] transition-all duration-300">
               
-              {/* Inner portrait content */}
-              <div className="relative w-full h-full rounded-[14px] bg-[#0c1017] flex flex-col items-center justify-between p-6 overflow-hidden">
+              {/* Inner portrait container */}
+              <div className="relative w-full h-full rounded-[14px] bg-[#0c1017] flex flex-col justify-between overflow-hidden">
                 
-                {/* Subtle top subtle grid */}
-                <div 
-                  className="absolute inset-0 opacity-15"
-                  style={{
-                    backgroundImage: `radial-gradient(rgba(16, 185, 129, 0.4) 1px, transparent 1px)`,
-                    backgroundSize: "24px 24px",
-                  }}
-                />
+                {/* Real Profile Image with subtle zoom on hover */}
+                <div className="absolute inset-0 z-0">
+                  <Image
+                    src="/profile.jpg"
+                    alt={profile.name}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 340px"
+                    className="object-cover object-top filter brightness-[0.92] contrast-[1.05] group-hover:scale-105 transition-transform duration-500 ease-out"
+                    priority
+                  />
+                  {/* Subtle dark gradient overlay at top and bottom */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#070a0e] via-[#070a0e]/30 to-[#070a0e]/60 pointer-events-none" />
+                </div>
 
                 {/* Top Badge */}
-                <div className="relative z-10 w-full flex items-center justify-between text-[10px] font-mono text-slate-400">
-                  <span className="flex items-center gap-1.5 text-emerald-400">
+                <div className="relative z-10 w-full flex items-center justify-between p-4 text-[10px] font-mono text-slate-300 backdrop-blur-sm bg-black/20">
+                  <span className="flex items-center gap-1.5 text-emerald-300 font-semibold">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                     UOM · ITM
                   </span>
-                  <span className="text-slate-500">FACULTY OF IT</span>
+                  <span className="text-slate-300/90 font-mono">FACULTY OF IT</span>
                 </div>
 
-                {/* Center Monogram Graphic */}
-                <div className="relative z-10 flex flex-col items-center my-auto">
-                  <div className="w-28 h-28 rounded-2xl bg-gradient-to-br from-emerald-500/20 via-slate-900 to-cyan-950 border border-emerald-500/40 flex items-center justify-center shadow-2xl shadow-emerald-950/50 mb-4 group-hover:scale-105 group-hover:border-emerald-400/70 transition-transform duration-300">
-                    <span className="text-4xl font-extrabold font-mono tracking-tight bg-gradient-to-br from-emerald-200 via-white to-cyan-200 bg-clip-text text-transparent">
-                      MS
-                    </span>
+                {/* Bottom Overlay Info & Watermark */}
+                <div className="relative z-10 p-5 backdrop-blur-md bg-black/40 border-t border-white/10 space-y-1">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h3 className="text-base font-bold text-white tracking-wide">
+                        {profile.name}
+                      </h3>
+                      <p className="text-xs font-mono text-emerald-400 mt-0.5">
+                        Software Engineering Intern
+                      </p>
+                    </div>
                   </div>
-                  <span className="text-base font-bold text-white tracking-wide">
-                    {profile.name}
-                  </span>
-                  <span className="text-xs font-mono text-emerald-400/90 mt-0.5">
-                    Software Engineering Intern
-                  </span>
-                </div>
 
-                {/* Watermark at bottom right */}
-                <div className="relative z-10 w-full flex items-center justify-between text-[11px] font-mono text-slate-500 pt-3 border-t border-white/[0.06]">
-                  <span className="text-slate-500 uppercase">MORATUWA · 2026</span>
-                  <span className="text-emerald-400 text-[12px] font-bold">+</span>
+                  <div className="flex items-center justify-between text-[11px] font-mono text-slate-400 pt-2 border-t border-white/10">
+                    <span className="uppercase text-[10px] text-slate-400">MORATUWA · 2026</span>
+                    <span className="text-emerald-400 font-bold text-[12px]">+</span>
+                  </div>
                 </div>
 
               </div>
