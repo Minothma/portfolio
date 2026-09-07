@@ -14,13 +14,12 @@ export interface ProjectWriteUp {
   hardParts: string[];
   stackBreakdown: { category: string; tools: string }[];
   repoNote?: string;
-  bonusBullets?: string[];
 }
 
 export interface ProjectItem {
   id: string;
   name: string;
-  badge: string; // e.g. "2ND-YEAR GROUP PROJECT   AUG 2025 — AUG 2026"
+  badge: string; // e.g. "2ND-YEAR GROUP PROJECT · COMPLETED"
   statusTag: "ONGOING" | "COMPLETED" | "IN PROGRESS";
   category: "Full-Stack" | "Enterprise & Healthcare" | "Embedded & IoT";
   tagline?: string;
@@ -38,20 +37,20 @@ export const projectsData: ProjectItem[] = [
   {
     id: "durdans-lims",
     name: "Durdans Hospital LIMS",
-    badge: "ENTERPRISE GROUP PROJECT   AUG 2025 — AUG 2026",
-    statusTag: "ONGOING",
+    badge: "2ND-YEAR GROUP PROJECT · COMPLETED",
+    statusTag: "COMPLETED",
     category: "Enterprise & Healthcare",
     tagline:
-      "Mission-Critical Enterprise Clinical Diagnostic Platform for Durdans Hospital PLC (in collaboration with IFS Sri Lanka & University of Moratuwa)",
+      "Enterprise Full-Stack Clinical Diagnostic Platform for Durdans Hospital PLC (with IFS Sri Lanka & University of Moratuwa)",
     role: "Full-Stack Software Engineer (Pre-Analytics, MLT & IQC Lead)",
     teamContext: "5 Members · University of Moratuwa, IFS Sri Lanka & Durdans Hospital PLC",
     description:
-      "Mission-critical enterprise healthcare platform digitizing and automating the end-to-end clinical diagnostic pipeline across hospital branches, enforcing strict ISO 15189, CLSI C28-A3, and Westgard Multi-Rules compliance.",
+      "Production-grade, enterprise healthcare platform digitizing and automating the end-to-end clinical diagnostic pipeline across hospital branches, enforcing strict ISO 15189, CLSI C28-A3, and Westgard Multi-Rules compliance.",
     highlights: [
-      "Engineered an ISO 15189 5-point pre-analytical quality gate with dynamic vacutainer container verification and CAP rejection handling.",
+      "Engineered an ISO 15189 5-point pre-analytical quality gate with dynamic container verification, CAP rejection handling, and 3-tier STAT priority triage.",
       "Implemented a Clinical Decision Support (CDS) auto-flagging engine with a Delta-Check algorithm (Δ% ≥ 40%) comparing patient baselines to prevent specimen mix-ups.",
-      "Built a Westgard Multi-Rules QC engine (1-2s warning, 1-3s and 2-2s rejections with dynamic Z-scores) and live PostgreSQL analyzer telemetry with zero mock data.",
-      "Developed idempotent barcode thermal reprinting preserving unbroken chain-of-custody, alongside accessioning audit logs with Excel/CSV export.",
+      "Built a Westgard Multi-Rules IQC engine (1-2s warning, 1-3s and 2-2s rejections with dynamic Z-scores) and live PostgreSQL analyzer telemetry with zero mock data.",
+      "Developed idempotent barcode thermal reprinting preserving unbroken chain-of-custody, and accessioning audit log Excel exports.",
       "Architected secure Spring Boot 3 & Keycloak OIDC micro-architecture with Apache Kafka transactional outbox messaging.",
     ],
     stack: [
@@ -68,39 +67,50 @@ export const projectsData: ProjectItem[] = [
     demoUrl: null,
     writeUp: {
       tagline:
-        "Mission-Critical Laboratory Information Management System · Enterprise Full-Stack Clinical Diagnostic Platform for Durdans Hospital PLC (with IFS Sri Lanka & University of Moratuwa)",
+        "Durdans LIMS — Mission-Critical Laboratory Information Management System · Enterprise Full-Stack Clinical Diagnostic Platform for Durdans Hospital PLC (with IFS Sri Lanka & University of Moratuwa)",
       role: "Full-Stack Software Engineer (Pre-Analytics, MLT & IQC Lead)",
       teamContext: "5 Members (University of Moratuwa, IFS Sri Lanka, Durdans Hospital PLC)",
       complianceStandards: [
         "ISO 15189 (Medical Laboratories Quality & Competence)",
         "CLSI C28-A3 (Defining, Establishing, and Verifying Reference Intervals)",
-        "Westgard Multi-Rules Quality Control (1-2s, 1-3s, 2-2s)",
+        "Westgard Multi-Rules Quality Control (1-2s, 1-3s, 2-2s with Dynamic Z-Scores)",
       ],
       overview:
         "Durdans LIMS is a production-grade, enterprise healthcare platform designed to digitize and automate the end-to-end clinical diagnostic pipeline across hospital branches. Engineered to eliminate human diagnostic errors, the system enforces strict international laboratory compliance standards (ISO 15189, CLSI C28-A3, and Westgard Quality Multi-Rules) from patient specimen accessioning to diagnostic report dispatch.",
       contributions: [
         {
-          title: "1️⃣ Pre-Analytical Accessioning & ISO 15189 Quality Gate",
+          title: "1️⃣ Pre-Analytical Specimen Accessioning & Chain-of-Custody",
           points: [
-            "ISO 15189 5-Point Quality Checklist: Engineered an automated verification gate validating vacutainer container types (Gold SST, Purple EDTA, Citrate), minimum volume adequacy (≥ 3.0 mL), and specimen integrity.",
-            "Standardized CAP Rejection Engine: Automated rejection workflows capturing CAP reason codes (HEMOLYZED, CLOTTED, MISLABELED) with instant recollection requests to phlebotomy.",
-            "Strict 3-Tier STAT Priority Triage: Built a real-time priority queue pinning emergency ICU specimens with visual indicators to prevent Turnaround Time (TAT) breaches.",
+            "Sample Accessioning Dashboard: Built a 3-Tier Priority Queue (STAT, Urgent, Normal) to immediately prioritize emergency ICU specimens and prevent Turnaround Time (TAT) breaches.",
+            "Dynamic Search & Filter: Enabled barcode and patient ID lookups with multi-criteria filtering by test type and clinical priority.",
+            "Chain-of-Custody View: Real-time tracking of specimen collection timestamps, phlebotomist identity, container types (Gold SST, Purple EDTA, Citrate), and patient demographics for unbroken traceability.",
           ],
         },
         {
-          title: "2️⃣ Clinical Decision Support (CDS) & Analytical MLT Engine",
+          title: "2️⃣ ISO 15189 5-Point Quality Verification Gate & CAP Rejection Engine",
           points: [
-            "CLSI C28-A3 Auto-Flagging Engine: Developed real-time reference interval evaluation that dynamically flags diagnostic results into Normal, Low, High, and high-visibility Critical/Panic Alerts for life-threatening values.",
-            "Automated Delta-Check Algorithm (Δ% ≥ 40%): Implemented mathematical variance checks comparing current results against historical patient baselines (|Current - Previous| / Previous × 100 ≥ 40%) to intercept pre-analytical specimen mix-ups.",
-            "Dual Workflow Execution: Designed intermediate Save Draft capability for in-progress testing alongside permanent Legal Record Locking upon submission for supervisor verification.",
+            "ISO 15189 5-Point Quality Gate: Automated verification checking: 1) Barcode legibility, 2) Correct container type, 3) Minimum volume adequacy (≥ 3.0 mL), 4) Specimen integrity (no hemolysis or clots), and 5) Collection window.",
+            "Idempotent Barcode Thermal Printing: Seamless one-click barcode reprinting for damaged labels without creating duplicate database records.",
+            "Standardized CAP Rejection Engine: Captures standardized CAP rejection reason codes (HEMOLYZED, CLOTTED, MISLABELED) and instantly triggers automated recollection requests to phlebotomy.",
+            "Direct MLT Handoff & Audit Logs: Immediate workflow transition into the MLT worklist upon quality acceptance, with Excel export for daily accessioning audit reports.",
           ],
         },
         {
-          title: "3️⃣ Internal Quality Control (IQC) & Live IoT Instrument Telemetry",
+          title: "3️⃣ Analytical MLT Processing & Clinical Decision Support (CDS)",
           points: [
-            "Westgard Multi-Rules Engine: Formulated mathematical evaluation for 1-2s warnings, and 1-3s / 2-2s statistical rejections with dynamic Z-score calculations (Z = (x - μ) / SD).",
-            "100% Live DB Telemetry Hub: Replaced static mock fixtures with live PostgreSQL aggregations computing real-time analyzer throughput (Tests today) and per-analyte calibration health.",
-            "Chain-of-Custody Traceability: Built idempotent barcode thermal reprinting without duplicate database records, alongside accessioning audit logs with Excel/CSV export.",
+            "MLT Sample Worklist: Priority-ordered worklist organizing pending diagnostic tests with instrument selection (e.g., Cobas e411) and technical note attachments.",
+            "CLSI C28-A3 Auto-Flagging Engine: Real-time reference range evaluation automatically classifying results into Normal (green), High (orange), and high-visibility CRITICAL HIGH panic alerts for life-threatening values.",
+            "Mathematical Delta-Check Algorithm (Δ% ≥ 40%): Longitudinal variance check comparing current test values against the patient's historical baseline (|Current - Previous| / Previous × 100 ≥ 40%) to intercept pre-analytical specimen mix-ups.",
+            "ISO 15189 Dual Workflow: Intermediate 'Save Draft' functionality for in-progress testing alongside 'Submit for Verification' with permanent legal record locking for supervisor approval.",
+          ],
+        },
+        {
+          title: "4️⃣ Internal Quality Control (IQC), Live Instrument Telemetry & Cross-Department Radar",
+          points: [
+            "Westgard Multi-Rules Engine: Mathematical evaluation of 1-2s warnings and 1-3s / 2-2s statistical rejections with dynamic Z-score computations (Z = (x - μ) / SD).",
+            "Toggleable Audit History: Instant switching between Today's active analytical runs and the Full Historical Audit Trail with calendar timestamps.",
+            "100% Live DB Instrument Telemetry Hub: Eliminated static mock data — analyzer operational statuses, daily test throughput counts (Tests today), and per-analyte calibration health are calculated live from PostgreSQL database aggregations with background auto-polling.",
+            "Cross-Department All Worklist: Full laboratory radar enabling supervisors to monitor real-time specimen lifecycles across Collected, Accepted, Entered, and Dispatched states.",
           ],
         },
       ],
@@ -128,19 +138,13 @@ export const projectsData: ProjectItem[] = [
         { category: "Cloud & DevOps", tools: "AWS (VPC, EC2, RDS, S3, ECR), Terraform (IaC), Docker, GitHub Actions (7 CI/CD Pipelines)" },
         { category: "Observability", tools: "Prometheus, Grafana, Alertmanager, OpenTelemetry Distributed Tracing" },
       ],
-      bonusBullets: [
-        "Engineered an ISO 15189 5-point pre-analytical quality gate with dynamic vacutainer validation and CAP rejection handling.",
-        "Implemented a Clinical Decision Support (CDS) auto-flagging engine with a Delta-Check algorithm (Δ% ≥ 40%) comparing patient baselines to prevent specimen mix-ups.",
-        "Built a Westgard Multi-Rules QC engine (1-2s, 1-3s, 2-2s with dynamic Z-scores) and live PostgreSQL analyzer telemetry with zero mock data.",
-        "Developed idempotent barcode reprinting preserving unbroken sample traceability, and accessioning audit log Excel exports.",
-      ],
       repoNote: "Enterprise Collaboration · Durdans Hospital PLC, IFS Sri Lanka & University of Moratuwa",
     },
   },
   {
     id: "job-tracker",
     name: "Job Application Tracker",
-    badge: "INDIVIDUAL PROJECT   AUG 2026 — SEP 2026",
+    badge: "INDIVIDUAL PROJECT · COMPLETED",
     statusTag: "COMPLETED",
     category: "Full-Stack",
     tagline: "Career Lifecycle Management Platform with Real-Time Kanban & AWS S3 Presigned Uploads",
@@ -183,7 +187,7 @@ export const projectsData: ProjectItem[] = [
   {
     id: "inkora",
     name: "Inkora Content Platform",
-    badge: "PERSONAL PROJECT   DEC 2025 — JAN 2026",
+    badge: "PERSONAL PROJECT · COMPLETED",
     statusTag: "COMPLETED",
     category: "Full-Stack",
     tagline: "Full-Stack Content Platform with Real-Time Search & Security Hardening",
@@ -224,7 +228,7 @@ export const projectsData: ProjectItem[] = [
   {
     id: "battery-vitals",
     name: "Battery Vitals Testbed",
-    badge: "1ST-YEAR GROUP PROJECT   AUG 2024 — AUG 2025",
+    badge: "1ST-YEAR GROUP PROJECT · COMPLETED",
     statusTag: "COMPLETED",
     category: "Embedded & IoT",
     tagline: "Automated Hardware Testbed & Python Telemetry Pipeline for Li-Po Batteries",

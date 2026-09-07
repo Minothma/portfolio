@@ -18,18 +18,14 @@ import {
   Database,
   ExternalLink,
   Github,
-  Check,
-  Copy,
   Award,
   Radio,
-  FileCheck2,
 } from "lucide-react";
 
 export function Projects() {
   const [mounted, setMounted] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
-  const [copiedBullets, setCopiedBullets] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -41,13 +37,6 @@ export function Projects() {
     selectedCategory === "All"
       ? projectsData
       : projectsData.filter((p) => p.category === selectedCategory);
-
-  const handleCopyBullets = (bullets: string[]) => {
-    const textToCopy = bullets.map((b) => `• ${b}`).join("\n");
-    navigator.clipboard.writeText(textToCopy);
-    setCopiedBullets(true);
-    setTimeout(() => setCopiedBullets(false), 2500);
-  };
 
   return (
     <section id="work" className="py-24 relative border-t border-white/[0.04]">
@@ -108,7 +97,7 @@ export function Projects() {
                     <span>DURDANS HOSPITAL PLC · IFS SRI LANKA · UOM</span>
                   </div>
                   <span className="px-2.5 py-0.5 rounded text-[10px] font-mono font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20">
-                    🟢 ONGOING
+                    🟢 COMPLETED
                   </span>
                 </div>
 
@@ -594,41 +583,6 @@ export function Projects() {
                   ))}
                 </div>
               </div>
-
-              {/* ATS Resume Ready Bullet Points Box */}
-              {selectedProject.writeUp.bonusBullets && (
-                <div className="p-5 rounded-2xl bg-[#080d14] border border-emerald-500/30 space-y-3">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2 text-xs font-mono uppercase text-emerald-400 font-bold">
-                      <FileCheck2 className="w-4 h-4" />
-                      <span>ATS-FRIENDLY RESUME BULLET POINTS (ONE-CLICK COPY)</span>
-                    </div>
-                    <button
-                      onClick={() =>
-                        handleCopyBullets(selectedProject.writeUp.bonusBullets!)
-                      }
-                      className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-xs font-mono text-emerald-300 transition-all active:scale-95"
-                    >
-                      {copiedBullets ? (
-                        <>
-                          <Check className="w-3.5 h-3.5 text-emerald-400" />
-                          <span className="font-bold">Copied!</span>
-                        </>
-                      ) : (
-                        <>
-                          <Copy className="w-3.5 h-3.5" />
-                          <span>Copy Bullets</span>
-                        </>
-                      )}
-                    </button>
-                  </div>
-                  <div className="p-3 rounded-xl bg-black/40 border border-white/[0.04] text-xs font-mono text-slate-300 space-y-1.5 leading-relaxed">
-                    {selectedProject.writeUp.bonusBullets.map((bullet, bIdx) => (
-                      <p key={bIdx}>• {bullet}</p>
-                    ))}
-                  </div>
-                </div>
-              )}
 
               {/* Modal Footer */}
               <div className="pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-4 text-xs font-mono text-slate-400">
