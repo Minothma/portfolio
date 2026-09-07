@@ -11,7 +11,7 @@ export function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["hero", "about-details", "work", "toolkit", "journey", "contact"];
+      const sections = ["hero", "about", "work", "toolkit", "journey", "contact"];
       const scrollPosition = window.scrollY + 180;
 
       for (let i = sections.length - 1; i >= 0; i--) {
@@ -35,7 +35,7 @@ export function Navbar() {
   }, []);
 
   const navLinks = [
-    { label: "About", id: "about-details" },
+    { label: "About", id: "about" },
     { label: "Work", id: "work" },
     { label: "Toolkit", id: "toolkit" },
     { label: "Journey", id: "journey" },
@@ -53,7 +53,7 @@ export function Navbar() {
       </div>
 
       {/* Floating Island Header */}
-      <header className="fixed top-4 sm:top-6 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
+      <header className="fixed top-4 sm:top-6 left-0 right-0 z-40 flex justify-center px-4 pointer-events-none">
         <div className="w-full max-w-5xl rounded-2xl sm:rounded-full bg-[#0c1118]/85 backdrop-blur-xl border border-white/[0.08] shadow-2xl shadow-black/60 px-5 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between pointer-events-auto transition-all duration-300">
           
           {/* Brand Monogram & Name */}

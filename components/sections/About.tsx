@@ -37,7 +37,7 @@ export function About() {
               </p>
 
               <p>
-                In my 2nd-year group project, <strong className="text-emerald-300 font-medium">Durdans Hospital LIMS</strong>, I co-architected the clinical specimen validation workflow—implementing tube-cap classification, STAT triage, and real-time Westgard QC multi-rule evaluations to ensure ISO compliance and zero diagnostic error.
+                In my enterprise project, <strong className="text-emerald-300 font-medium">Durdans Hospital LIMS</strong> (developed with IFS Sri Lanka, Durdans Hospital PLC, and UoM), I co-architected the pre-analytical accessioning and clinical decision support engines—enforcing ISO 15189 quality gates, mathematical delta-checks (|Δ%| ≥ 40%), and real-time Westgard QC multi-rules with dynamic Z-scores.
               </p>
 
               <p>

@@ -1,17 +1,31 @@
+export interface ProjectContributionSection {
+  title: string;
+  points: string[];
+}
+
 export interface ProjectWriteUp {
   overview: string;
+  tagline?: string;
+  role?: string;
+  teamContext?: string;
+  complianceStandards?: string[];
+  contributions?: ProjectContributionSection[];
   architecture: string[];
   hardParts: string[];
   stackBreakdown: { category: string; tools: string }[];
   repoNote?: string;
+  bonusBullets?: string[];
 }
 
 export interface ProjectItem {
   id: string;
   name: string;
-  badge: string; // e.g. "GROUP PROJECT   AUG 2025 — AUG 2026"
+  badge: string; // e.g. "2ND-YEAR GROUP PROJECT   AUG 2025 — AUG 2026"
   statusTag: "ONGOING" | "COMPLETED" | "IN PROGRESS";
   category: "Full-Stack" | "Enterprise & Healthcare" | "Embedded & IoT";
+  tagline?: string;
+  role?: string;
+  teamContext?: string;
   description: string;
   highlights: string[];
   stack: string[];
@@ -24,42 +38,103 @@ export const projectsData: ProjectItem[] = [
   {
     id: "durdans-lims",
     name: "Durdans Hospital LIMS",
-    badge: "2ND-YEAR GROUP PROJECT   AUG 2025 — AUG 2026",
+    badge: "ENTERPRISE GROUP PROJECT   AUG 2025 — AUG 2026",
     statusTag: "ONGOING",
     category: "Enterprise & Healthcare",
+    tagline:
+      "Mission-Critical Enterprise Clinical Diagnostic Platform for Durdans Hospital PLC (in collaboration with IFS Sri Lanka & University of Moratuwa)",
+    role: "Full-Stack Software Engineer (Pre-Analytics, MLT & IQC Lead)",
+    teamContext: "5 Members · University of Moratuwa, IFS Sri Lanka & Durdans Hospital PLC",
     description:
-      "Enterprise laboratory management system covering clinical specimen reception, accessioning, MLT result validation, and quality control with automated tube-cap recognition and real-time Westgard QC evaluation.",
+      "Mission-critical enterprise healthcare platform digitizing and automating the end-to-end clinical diagnostic pipeline across hospital branches, enforcing strict ISO 15189, CLSI C28-A3, and Westgard Multi-Rules compliance.",
     highlights: [
-      "Built end-to-end laboratory modules: Sample Reception, Accessioning, MLT Result Entry, and Quality Control.",
-      "Developed automated sample verification with tube-cap recognition, rejection workflows, and priority triage (STAT/Urgent/Routine).",
-      "Implemented real-time result validation with dynamic reference ranges, delta-checks, and Westgard QC rules.",
-      "Integrated Keycloak RBAC and PostgreSQL audit logs for secure APIs and complete specimen traceability.",
-      "Designed responsive real-time lab dashboards with live Turnaround Time (TAT) tracking and panic test alerts.",
+      "Engineered an ISO 15189 5-point pre-analytical quality gate with dynamic vacutainer container verification and CAP rejection handling.",
+      "Implemented a Clinical Decision Support (CDS) auto-flagging engine with a Delta-Check algorithm (Δ% ≥ 40%) comparing patient baselines to prevent specimen mix-ups.",
+      "Built a Westgard Multi-Rules QC engine (1-2s warning, 1-3s and 2-2s rejections with dynamic Z-scores) and live PostgreSQL analyzer telemetry with zero mock data.",
+      "Developed idempotent barcode thermal reprinting preserving unbroken chain-of-custody, alongside accessioning audit logs with Excel/CSV export.",
+      "Architected secure Spring Boot 3 & Keycloak OIDC micro-architecture with Apache Kafka transactional outbox messaging.",
     ],
-    stack: ["Next.js", "React", "TypeScript", "Spring Boot", "PostgreSQL", "Keycloak", "Westgard QC"],
-    githubUrl: null, // [PLACEHOLDER — team project]
+    stack: [
+      "Next.js 15",
+      "Java 21 / Spring Boot 3",
+      "PostgreSQL",
+      "Apache Kafka",
+      "Keycloak OIDC",
+      "Liquibase",
+      "Docker",
+      "AWS / Terraform",
+    ],
+    githubUrl: "https://github.com/kalanas210/durdans-lims",
     demoUrl: null,
     writeUp: {
+      tagline:
+        "Mission-Critical Laboratory Information Management System · Enterprise Full-Stack Clinical Diagnostic Platform for Durdans Hospital PLC (with IFS Sri Lanka & University of Moratuwa)",
+      role: "Full-Stack Software Engineer (Pre-Analytics, MLT & IQC Lead)",
+      teamContext: "5 Members (University of Moratuwa, IFS Sri Lanka, Durdans Hospital PLC)",
+      complianceStandards: [
+        "ISO 15189 (Medical Laboratories Quality & Competence)",
+        "CLSI C28-A3 (Defining, Establishing, and Verifying Reference Intervals)",
+        "Westgard Multi-Rules Quality Control (1-2s, 1-3s, 2-2s)",
+      ],
       overview:
-        "Durdans Hospital LIMS is an enterprise-scale clinical laboratory information management system designed to eliminate specimen handling bottlenecks, prevent clinical errors, and enforce rigorous ISO-aligned quality control standards.",
+        "Durdans LIMS is a production-grade, enterprise healthcare platform designed to digitize and automate the end-to-end clinical diagnostic pipeline across hospital branches. Engineered to eliminate human diagnostic errors, the system enforces strict international laboratory compliance standards (ISO 15189, CLSI C28-A3, and Westgard Quality Multi-Rules) from patient specimen accessioning to diagnostic report dispatch.",
+      contributions: [
+        {
+          title: "1️⃣ Pre-Analytical Accessioning & ISO 15189 Quality Gate",
+          points: [
+            "ISO 15189 5-Point Quality Checklist: Engineered an automated verification gate validating vacutainer container types (Gold SST, Purple EDTA, Citrate), minimum volume adequacy (≥ 3.0 mL), and specimen integrity.",
+            "Standardized CAP Rejection Engine: Automated rejection workflows capturing CAP reason codes (HEMOLYZED, CLOTTED, MISLABELED) with instant recollection requests to phlebotomy.",
+            "Strict 3-Tier STAT Priority Triage: Built a real-time priority queue pinning emergency ICU specimens with visual indicators to prevent Turnaround Time (TAT) breaches.",
+          ],
+        },
+        {
+          title: "2️⃣ Clinical Decision Support (CDS) & Analytical MLT Engine",
+          points: [
+            "CLSI C28-A3 Auto-Flagging Engine: Developed real-time reference interval evaluation that dynamically flags diagnostic results into Normal, Low, High, and high-visibility Critical/Panic Alerts for life-threatening values.",
+            "Automated Delta-Check Algorithm (Δ% ≥ 40%): Implemented mathematical variance checks comparing current results against historical patient baselines (|Current - Previous| / Previous × 100 ≥ 40%) to intercept pre-analytical specimen mix-ups.",
+            "Dual Workflow Execution: Designed intermediate Save Draft capability for in-progress testing alongside permanent Legal Record Locking upon submission for supervisor verification.",
+          ],
+        },
+        {
+          title: "3️⃣ Internal Quality Control (IQC) & Live IoT Instrument Telemetry",
+          points: [
+            "Westgard Multi-Rules Engine: Formulated mathematical evaluation for 1-2s warnings, and 1-3s / 2-2s statistical rejections with dynamic Z-score calculations (Z = (x - μ) / SD).",
+            "100% Live DB Telemetry Hub: Replaced static mock fixtures with live PostgreSQL aggregations computing real-time analyzer throughput (Tests today) and per-analyte calibration health.",
+            "Chain-of-Custody Traceability: Built idempotent barcode thermal reprinting without duplicate database records, alongside accessioning audit logs with Excel/CSV export.",
+          ],
+        },
+      ],
       architecture: [
-        "Spring Boot RESTful micro-architecture with Keycloak Single Sign-On (SSO) and fine-grained Role-Based Access Control.",
-        "Automated specimen classification pipeline with tube-cap color matching, barcode reprints, and STAT priority triage.",
-        "Clinical verification engine calculating longitudinal delta-checks, demographic reference ranges, and multi-rule Westgard QC algorithms.",
-        "PostgreSQL audit logging recording immutable specimen lifecycle timestamps from accessioning to final MLT approval.",
-        "Next.js frontend with live Turnaround Time (TAT) tracking monitors and instant clinical alert banners.",
+        "Spring Boot 3 (Java 21) RESTful micro-architecture with Keycloak OIDC server-side authorization across 8 clinical roles.",
+        "Apache Kafka event streaming with Transactional Outbox Pattern to ensure guaranteed, zero-message-loss diagnostic state changes.",
+        "Automated ISO 15189 pre-analytical quality gates with multi-tube cap color recognition, barcode reprints, and STAT emergency triage.",
+        "Clinical verification engine computing real-time longitudinal delta-checks (|Δ%| ≥ 40%), demographic reference ranges, and multi-rule Westgard QC algorithms.",
+        "Liquibase version-controlled schema migrations managing normalized PostgreSQL audit logging and immutable specimen lifecycles.",
+        "Next.js 15 (App Router) client with live Turnaround Time (TAT) tracking monitors, panic alert banners, and reactive telemetry dashboards.",
+        "Infrastructure as Code (IaC) with Terraform provisioning AWS VPC, EC2, RDS, S3, and ECR with 7 GitHub Actions CI/CD automated pipelines.",
       ],
       hardParts: [
-        "Architecting multi-rule Westgard QC algorithms that compute mean, standard deviation, and rule violations across historical control batches in real time.",
-        "Guaranteeing zero specimen loss and strict audit compliance under high-throughput concurrent intake hours.",
+        "Architecting multi-rule Westgard QC algorithms that compute mean, standard deviation, and rule violations (1-2s, 1-3s, 2-2s) across historical control batches in real time with dynamic Z-scores.",
+        "Guaranteeing zero specimen loss and strict audit compliance under high-throughput concurrent intake hours through Kafka Transactional Outbox pattern.",
+        "Intercepting specimen mix-ups through mathematical longitudinal delta-checking without incurring significant PostgreSQL query latency under high load.",
       ],
       stackBreakdown: [
-        { category: "Frontend Tier", tools: "Next.js (App Router), React, TypeScript, Tailwind CSS" },
-        { category: "Backend Tier", tools: "Spring Boot, Java 21, Spring Security, Keycloak RBAC" },
-        { category: "Database & Audit", tools: "PostgreSQL, Hibernate/JPA, Envers Audit Logging" },
-        { category: "Clinical Protocols", tools: "Westgard Multi-Rule QC, Longitudinal Delta-Checks" },
+        { category: "Frontend Tier", tools: "Next.js 15 (App Router), React, TypeScript, Tailwind CSS, Lucide Icons, Axios" },
+        { category: "Backend Tier", tools: "Java 21, Spring Boot 3, Spring Data JPA, Hibernate, Gradle Multi-Module" },
+        { category: "Security & Auth", tools: "Keycloak OIDC (8 Clinical Roles RBAC Server-side Authorization)" },
+        { category: "Messaging & Events", tools: "Apache Kafka (Transactional Outbox Pattern for Zero Message Loss)" },
+        { category: "Database & Migrations", tools: "PostgreSQL, Liquibase (Version-controlled Schema Migrations)" },
+        { category: "Testing & QA", tools: "JUnit 5, Testcontainers (Real PostgreSQL Integration Tests), k6 Load Testing" },
+        { category: "Cloud & DevOps", tools: "AWS (VPC, EC2, RDS, S3, ECR), Terraform (IaC), Docker, GitHub Actions (7 CI/CD Pipelines)" },
+        { category: "Observability", tools: "Prometheus, Grafana, Alertmanager, OpenTelemetry Distributed Tracing" },
       ],
-      repoNote: "2nd-Year Group Project (Faculty of IT, University of Moratuwa).",
+      bonusBullets: [
+        "Engineered an ISO 15189 5-point pre-analytical quality gate with dynamic vacutainer validation and CAP rejection handling.",
+        "Implemented a Clinical Decision Support (CDS) auto-flagging engine with a Delta-Check algorithm (Δ% ≥ 40%) comparing patient baselines to prevent specimen mix-ups.",
+        "Built a Westgard Multi-Rules QC engine (1-2s, 1-3s, 2-2s with dynamic Z-scores) and live PostgreSQL analyzer telemetry with zero mock data.",
+        "Developed idempotent barcode reprinting preserving unbroken sample traceability, and accessioning audit log Excel exports.",
+      ],
+      repoNote: "Enterprise Collaboration · Durdans Hospital PLC, IFS Sri Lanka & University of Moratuwa",
     },
   },
   {
@@ -68,6 +143,9 @@ export const projectsData: ProjectItem[] = [
     badge: "INDIVIDUAL PROJECT   AUG 2026 — SEP 2026",
     statusTag: "COMPLETED",
     category: "Full-Stack",
+    tagline: "Career Lifecycle Management Platform with Real-Time Kanban & AWS S3 Presigned Uploads",
+    role: "Lead Full-Stack Developer",
+    teamContext: "Individual Full-Stack Project",
     description:
       "End-to-end career lifecycle management platform featuring an interactive drag-and-drop Kanban board, multi-version resume management via direct AWS S3 presigned uploads, and containerized NestJS REST APIs.",
     highlights: [
@@ -78,7 +156,7 @@ export const projectsData: ProjectItem[] = [
       "Responsive analytics dashboard providing real-time application metrics and progress tracking.",
     ],
     stack: ["Next.js", "React", "TypeScript", "NestJS", "PostgreSQL", "Prisma", "Flyway", "AWS S3", "Docker"],
-    githubUrl: null, // [PLACEHOLDER]
+    githubUrl: null,
     demoUrl: null,
     writeUp: {
       overview:
@@ -108,6 +186,9 @@ export const projectsData: ProjectItem[] = [
     badge: "PERSONAL PROJECT   DEC 2025 — JAN 2026",
     statusTag: "COMPLETED",
     category: "Full-Stack",
+    tagline: "Full-Stack Content Platform with Real-Time Search & Security Hardening",
+    role: "Full-Stack Developer",
+    teamContext: "Personal Project",
     description:
       "Full-stack blogging platform with user authentication, rich-text publishing, draft auto-saving, real-time AJAX search, and an admin moderation dashboard with CSRF and SQL injection defense.",
     highlights: [
@@ -118,7 +199,7 @@ export const projectsData: ProjectItem[] = [
       "Comprehensive Admin Dashboard for moderation, user management, and article analytics.",
     ],
     stack: ["PHP", "MySQL", "JavaScript", "HTML5", "CSS3", "Bootstrap", "AJAX"],
-    githubUrl: null, // [PLACEHOLDER]
+    githubUrl: null,
     demoUrl: null,
     writeUp: {
       overview:
@@ -146,34 +227,38 @@ export const projectsData: ProjectItem[] = [
     badge: "1ST-YEAR GROUP PROJECT   AUG 2024 — AUG 2025",
     statusTag: "COMPLETED",
     category: "Embedded & IoT",
+    tagline: "Automated Hardware Testbed & Python Telemetry Pipeline for Li-Po Batteries",
+    role: "Embedded Software & Telemetry Developer",
+    teamContext: "1st-Year Group Project · Faculty of IT, University of Moratuwa",
     description:
       "Automated charging, resting, and discharging testbed for Li-Po batteries using ESP32, relay switching, DS18B20 thermal monitoring, and a Python pipeline for State of Health (SOH) curve evaluation.",
     highlights: [
-      "Automated charging, resting, and discharging cycles for Li-Po batteries using ESP32 and relay switching.",
-      "Integrated TP4056, TP5100, and IP2312 charging modules with configurable discharge loads.",
-      "Real-time temperature monitoring and fan-based thermal protection using DS18B20 digital sensors.",
-      "Contributed to State of Health (SOH) analysis through Python charge-discharge curve evaluation.",
+      "Engineered an automated charge-rest-discharge testbed with relay switching and emergency thermal cutoffs.",
+      "Implemented continuous temperature tracking using the DS18B20 1-Wire protocol with high-temperature cutoffs.",
+      "Developed an automated Python data collection and processing pipeline for battery telemetry.",
+      "Generated discharge curves and evaluated internal resistance to determine battery State of Health (SOH).",
     ],
-    stack: ["Python", "ESP32", "Embedded Systems", "Sensors", "C"],
-    githubUrl: null, // [PLACEHOLDER]
+    stack: ["ESP32", "C++", "Python", "Matplotlib", "NumPy", "IoT Hardware"],
+    githubUrl: null,
     demoUrl: null,
     writeUp: {
       overview:
-        "An automated hardware-software testbed engineered to evaluate Li-Po battery degradation patterns and thermal safety over repeated charge-discharge lifecycles.",
+        "An automated embedded hardware testing apparatus built to run cyclic charging and discharging protocols on Li-Po batteries, generating empirical voltage-decay curves and diagnosing battery degradation.",
       architecture: [
-        "ESP32 firmware controlling multi-module charging circuits (TP4056/TP5100/IP2312) and relay switching matrices.",
-        "Continuous thermal protection loop reading DS18B20 1-wire sensors with automated cooling fan speed modulation.",
-        "Python telemetry ingestion script plotting voltage-time discharge profiles and calculating battery capacity fade.",
+        "ESP32 firmware written in C++ orchestrating relay switching across Charge, Rest, and Discharge state machines.",
+        "Digital thermal monitoring via DS18B20 sensor with hardware interrupt failsafes shutting off current on threshold breaches.",
+        "Serial telemetry logging voltage and temperature metrics over time into Python processing scripts.",
+        "State of Health (SOH) calculation engine computing internal resistance and curve deviations.",
       ],
       hardParts: [
-        "Managing voltage calibration under active current loads and preventing relay inductive kickback spikes on the ESP32 GPIOs.",
+        "Calibrating ADC readings under fluctuating load currents to eliminate thermal drift artifacts in voltage measurements.",
       ],
       stackBreakdown: [
-        { category: "Firmware", tools: "C / C++, Arduino / ESP-IDF Framework" },
-        { category: "Hardware", tools: "ESP32, TP4056, TP5100, IP2312, DS18B20, Relays" },
-        { category: "Data Analysis", tools: "Python, Matplotlib, NumPy" },
+        { category: "Firmware", tools: "ESP32, C++, FreeRTOS Tasks, Arduino Framework" },
+        { category: "Hardware", tools: "DS18B20 Sensor, 4-Channel Relays, Constant Current Load" },
+        { category: "Analytics", tools: "Python, NumPy, Matplotlib, Pandas" },
       ],
-      repoNote: "1st-Year Hardware Group Project (University of Moratuwa).",
+      repoNote: "1st-Year Group Project (Faculty of IT, University of Moratuwa).",
     },
   },
 ];
