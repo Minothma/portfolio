@@ -82,32 +82,34 @@ export function Hero() {
 
           {/* Right Column: Signature Visual Bento Card */}
           <div className="lg:col-span-5 flex justify-center lg:justify-end">
-            <div className="relative w-full max-w-[360px] aspect-[4/5] rounded-3xl bg-gradient-to-b from-emerald-400/80 via-emerald-500/20 to-cyan-500/30 p-[1.5px] shadow-2xl shadow-emerald-950/40 group hover:shadow-[0_0_40px_rgba(16,185,129,0.25)] transition-all duration-300">
+            <div className="relative w-full max-w-[360px] aspect-[4/5] rounded-3xl bg-gradient-to-b from-emerald-400/80 via-emerald-500/20 to-cyan-500/30 p-[1.5px] shadow-2xl shadow-emerald-950/40 group hover:shadow-[0_0_40px_rgba(16,185,129,0.3)] transition-all duration-300">
               
               {/* Inner Card Frame */}
               <div className="relative w-full h-full rounded-[22px] bg-[#0c1118] overflow-hidden flex flex-col justify-between">
                 
-                {/* Real Profile Photo with cinematic lighting */}
+                {/* Real Profile Photo with bright, natural lighting & full headroom */}
                 <div className="absolute inset-0 z-0">
                   <Image
                     src="/profile.jpg"
                     alt={profile.name}
                     fill
                     sizes="(max-width: 768px) 100vw, 360px"
-                    className="object-cover object-top filter brightness-[0.95] contrast-[1.05] group-hover:scale-105 transition-transform duration-500 ease-out"
+                    className="object-cover object-[center_8%] filter brightness-[1.05] contrast-[1.02] saturate-[1.05] group-hover:scale-105 transition-transform duration-500 ease-out"
                     priority
                   />
-                  {/* Subtle multi-layer gradient vignette */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#070a0e] via-[#070a0e]/20 to-[#070a0e]/50 pointer-events-none" />
+                  {/* Smooth bottom-only dark gradient to ensure text readability without darkening face/head */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#070a0e] via-[#070a0e]/70 via-30% to-transparent pointer-events-none" />
                 </div>
 
-                {/* Top Badge */}
-                <div className="relative z-10 w-full flex items-center justify-between p-4 text-[10px] font-mono text-slate-300 backdrop-blur-md bg-black/30 border-b border-white/5">
-                  <span className="flex items-center gap-1.5 text-emerald-300 font-semibold">
+                {/* Lightweight Floating Top Badge (Doesn't block head) */}
+                <div className="relative z-10 w-full flex items-center justify-between p-3.5">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-mono font-semibold text-emerald-300 bg-black/40 backdrop-blur-md border border-white/10 shadow-sm">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                     UoM · ITM '26
                   </span>
-                  <span className="text-slate-300 font-mono">FACULTY OF IT</span>
+                  <span className="px-2.5 py-1 rounded-full text-[10px] font-mono text-slate-300 bg-black/40 backdrop-blur-md border border-white/10">
+                    FACULTY OF IT
+                  </span>
                 </div>
 
                 {/* Bottom Overlay Glass Card */}
