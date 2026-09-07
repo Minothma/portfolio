@@ -2,7 +2,21 @@
 
 import React, { useState } from "react";
 import { projectsData, ProjectItem } from "@/data/projects";
-import { X, CheckCircle2, AlertCircle, ArrowUpRight, Sparkles } from "lucide-react";
+import {
+  X,
+  ArrowUpRight,
+  Sparkles,
+  Layers,
+  Activity,
+  Kanban,
+  FileCode2,
+  Cpu,
+  CheckCircle2,
+  ShieldAlert,
+  Server,
+  Database,
+  ExternalLink,
+} from "lucide-react";
 
 export function Projects() {
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
@@ -17,120 +31,349 @@ export function Projects() {
 
   return (
     <section id="work" className="py-24 relative border-t border-white/[0.04]">
-      <div className="w-full max-w-5xl mx-auto px-6 sm:px-10 lg:pl-16 lg:pr-8">
+      <div className="w-full max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
         
         {/* Eyebrow and Section Header */}
         <div className="flex items-center gap-4 mb-4">
           <span className="text-xs font-mono tracking-widest text-emerald-400 font-semibold uppercase">
-            SELECTED WORK
+            SELECTED WORK // PRODUCTION ARCHITECTURE
           </span>
           <span className="h-[1px] w-16 bg-emerald-500/40" />
         </div>
 
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
           <div>
-            <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-white mb-2">
-              Things I've built <br className="hidden sm:inline" />
-              end to end.
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-3">
+              Featured Systems & <br className="hidden sm:inline" />
+              Full-Stack Architectures.
             </h2>
+            <p className="text-xs sm:text-sm text-slate-400 max-w-xl leading-relaxed">
+              Engineered end-to-end with clean layer separation, automated quality checks, and production security standards.
+            </p>
           </div>
-          <p className="text-xs sm:text-sm text-slate-400 max-w-sm leading-relaxed">
-            Open a project for the full write-up — architecture, the hard parts, and what I'd do differently.
-          </p>
+
+          {/* Category Filter Pills */}
+          <div className="flex flex-wrap items-center gap-2">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setSelectedCategory(cat)}
+                className={`px-3.5 py-1.5 rounded-full text-xs font-mono tracking-wider transition-all duration-200 ${
+                  selectedCategory === cat
+                    ? "bg-emerald-400 text-slate-950 font-bold shadow-md shadow-emerald-500/20 scale-105"
+                    : "bg-[#0c1118] text-slate-400 border border-white/[0.06] hover:border-emerald-500/40 hover:text-slate-200"
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
         </div>
 
-        {/* Category Filters */}
-        <div className="flex flex-wrap items-center gap-2 mb-10">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setSelectedCategory(cat)}
-              className={`px-3.5 py-1.5 rounded-full text-xs font-mono tracking-wider transition-all duration-200 ${
-                selectedCategory === cat
-                  ? "bg-emerald-400 text-slate-950 font-bold shadow-sm"
-                  : "bg-[#0c1017] text-slate-400 border border-white/[0.06] hover:border-white/20 hover:text-slate-200"
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
+        {/* Asymmetric Bento Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6">
+          
+          {/* Card 1: Durdans Hospital LIMS (Span 7 Spotlight Bento) */}
+          {filteredProjects.find((p) => p.id === "durdans-lims") && (
+            <div className="lg:col-span-7 rounded-3xl bg-gradient-to-b from-[#0e1622] to-[#0a0f16] border border-emerald-500/30 hover:border-emerald-400/60 p-7 sm:p-8 flex flex-col justify-between space-y-6 relative overflow-hidden group shadow-xl hover:shadow-[0_0_35px_rgba(16,185,129,0.18)] transition-all duration-300">
+              
+              {/* Background ambient lighting */}
+              <div className="absolute -top-24 -right-24 w-60 h-60 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none group-hover:bg-emerald-500/20 transition-all duration-500" />
 
-        {/* Project Cards Stack */}
-        <div className="space-y-6">
-          {filteredProjects.map((project) => (
-            <div
-              key={project.id}
-              className="group relative rounded-xl bg-[#0c1017] border border-white/[0.08] hover:border-emerald-500/40 transition-all duration-200 p-6 sm:p-8 space-y-5 shadow-lg shadow-black/20"
-            >
-              {/* Card Header: Metadata + READ MORE button */}
-              <div className="flex flex-wrap items-center justify-between gap-4">
-                <div className="flex items-center gap-2.5 text-[11px] font-mono tracking-wider uppercase text-slate-400">
-                  <span>{project.badge}</span>
-                  <span className="text-slate-600">•</span>
-                  <span
-                    className={`font-semibold ${
-                      project.statusTag === "ONGOING"
-                        ? "text-cyan-400"
-                        : "text-emerald-400"
-                    }`}
-                  >
-                    {project.statusTag}
+              <div>
+                {/* Header Tag Bar */}
+                <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-mono tracking-wider text-emerald-300 bg-emerald-950/60 border border-emerald-500/30">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                    <span>HEALTHCARE ENTERPRISE · 2ND YEAR PROJECT</span>
+                  </div>
+                  <span className="px-2.5 py-0.5 rounded text-[10px] font-mono font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20">
+                    🟢 ONGOING
                   </span>
                 </div>
 
+                {/* Project Title */}
+                <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-tight group-hover:text-emerald-300 transition-colors mb-3">
+                  Durdans Hospital LIMS
+                </h3>
+
+                {/* Description */}
+                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-6">
+                  Enterprise Laboratory Information Management System covering specimen reception, accessioning, MLT result validation, and automated Westgard Quality Control rules.
+                </p>
+
+                {/* Architectural Pipeline Badge */}
+                <div className="p-4 rounded-xl bg-black/40 border border-white/[0.06] mb-5 space-y-2">
+                  <div className="text-[10px] font-mono uppercase text-slate-400 tracking-wider flex items-center gap-1.5">
+                    <Activity className="w-3.5 h-3.5 text-emerald-400" />
+                    <span>CLINICAL SPECIMEN PIPELINE</span>
+                  </div>
+                  <div className="flex flex-wrap items-center gap-1.5 text-[11px] font-mono text-slate-300">
+                    <span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">STAT Triage</span>
+                    <span className="text-slate-500">→</span>
+                    <span className="px-2 py-0.5 rounded bg-white/5 text-slate-300 border border-white/10">Cap Recognition</span>
+                    <span className="text-slate-500">→</span>
+                    <span className="px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">Westgard QC Engine</span>
+                    <span className="text-slate-500">→</span>
+                    <span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">MLT Approval</span>
+                  </div>
+                </div>
+
+                {/* CV Highlights */}
+                <ul className="space-y-2 mb-6">
+                  <li className="flex items-start gap-2.5 text-xs text-slate-300 leading-relaxed">
+                    <span className="text-emerald-400 font-bold mt-0.5">✔</span>
+                    <span>Automated specimen verification with tube-cap recognition and real-time Turnaround Time (TAT) alerts.</span>
+                  </li>
+                  <li className="flex items-start gap-2.5 text-xs text-slate-300 leading-relaxed">
+                    <span className="text-emerald-400 font-bold mt-0.5">✔</span>
+                    <span>Real-time result validation with dynamic demographic reference ranges, delta-checks, and Westgard QC rules.</span>
+                  </li>
+                  <li className="flex items-start gap-2.5 text-xs text-slate-300 leading-relaxed">
+                    <span className="text-emerald-400 font-bold mt-0.5">✔</span>
+                    <span>Keycloak SSO / RBAC authentication with PostgreSQL immutable specimen audit trail.</span>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Footer: Tech Stack + Case Study Trigger */}
+              <div className="pt-4 border-t border-white/[0.06] flex flex-wrap items-center justify-between gap-4">
+                <div className="flex flex-wrap gap-1.5">
+                  {["Next.js", "Spring Boot", "PostgreSQL", "Keycloak", "Westgard QC"].map((tech) => (
+                    <span
+                      key={tech}
+                      className="px-2.5 py-1 rounded text-[11px] font-mono text-slate-300 bg-[#141d2a] border border-white/[0.08]"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
                 <button
-                  onClick={() => setSelectedProject(project)}
-                  className="px-3.5 py-1.5 rounded-full text-[11px] font-mono tracking-wider text-slate-300 border border-white/20 hover:border-emerald-400 hover:text-emerald-400 transition-colors active:scale-95"
+                  onClick={() =>
+                    setSelectedProject(projectsData.find((p) => p.id === "durdans-lims") || null)
+                  }
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-mono font-bold text-slate-950 bg-emerald-400 hover:bg-emerald-300 transition-all duration-200 shadow-md shadow-emerald-500/20 active:scale-95"
                 >
-                  READ MORE
+                  <span>Architecture Deep-Dive</span>
+                  <ArrowUpRight className="w-3.5 h-3.5" />
                 </button>
               </div>
 
-              {/* Title */}
-              <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-tight group-hover:text-slate-100 transition-colors">
-                {project.name}
-              </h3>
+            </div>
+          )}
 
-              {/* Description */}
-              <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-3xl">
-                {project.description}
-              </p>
+          {/* Card 2: Job Application Tracker (Span 5 Bento) */}
+          {filteredProjects.find((p) => p.id === "job-tracker") && (
+            <div className="lg:col-span-5 rounded-3xl bg-gradient-to-b from-[#0d141e] to-[#080d14] border border-cyan-500/30 hover:border-cyan-400/60 p-7 sm:p-8 flex flex-col justify-between space-y-6 relative overflow-hidden group shadow-xl hover:shadow-[0_0_35px_rgba(6,182,212,0.18)] transition-all duration-300">
+              
+              {/* Background ambient lighting */}
+              <div className="absolute -top-24 -right-24 w-60 h-60 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none group-hover:bg-cyan-500/20 transition-all duration-500" />
 
-              {/* Highlights from CV */}
-              <ul className="space-y-2 pt-1 border-t border-white/[0.04]">
-                {project.highlights.slice(0, 3).map((item, i) => (
-                  <li
-                    key={i}
-                    className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-400 leading-normal"
-                  >
-                    <span className="text-emerald-400 font-bold mt-0.5">•</span>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-
-              {/* Tech Stack Pills in mono */}
-              <div className="flex flex-wrap gap-2 pt-2">
-                {project.stack.map((tech) => (
-                  <span
-                    key={tech}
-                    className="px-3 py-1 rounded text-xs font-mono text-slate-300 bg-[#121824] border border-white/[0.08]"
-                  >
-                    {tech}
+              <div>
+                {/* Header Tag Bar */}
+                <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-mono tracking-wider text-cyan-300 bg-cyan-950/60 border border-cyan-500/30">
+                    <Kanban className="w-3.5 h-3.5" />
+                    <span>FULL-STACK · INDIVIDUAL</span>
+                  </div>
+                  <span className="px-2.5 py-0.5 rounded text-[10px] font-mono font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20">
+                    🟢 COMPLETED
                   </span>
-                ))}
+                </div>
+
+                {/* Project Title */}
+                <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-tight group-hover:text-cyan-300 transition-colors mb-3">
+                  Job Application Tracker
+                </h3>
+
+                {/* Description */}
+                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-6">
+                  End-to-end career lifecycle platform with drag-and-drop Kanban workflow, AWS S3 presigned resume uploads, and containerized NestJS REST APIs.
+                </p>
+
+                {/* Architecture Highlights Pill Box */}
+                <div className="p-4 rounded-xl bg-black/40 border border-white/[0.06] mb-5 space-y-2.5">
+                  <div className="flex items-center justify-between text-[11px] font-mono">
+                    <span className="text-slate-400">AWS S3 Presigned URL</span>
+                    <span className="text-cyan-400 font-semibold">Direct Cloud Upload</span>
+                  </div>
+                  <div className="flex items-center justify-between text-[11px] font-mono">
+                    <span className="text-slate-400">JWT Token Security</span>
+                    <span className="text-emerald-400 font-semibold">Rotating Refresh Tokens</span>
+                  </div>
+                  <div className="flex items-center justify-between text-[11px] font-mono">
+                    <span className="text-slate-400">Database Layer</span>
+                    <span className="text-cyan-300 font-semibold">PostgreSQL · Prisma · Flyway</span>
+                  </div>
+                </div>
+
+                {/* CV Highlights */}
+                <ul className="space-y-2 mb-6">
+                  <li className="flex items-start gap-2.5 text-xs text-slate-300 leading-relaxed">
+                    <span className="text-cyan-400 font-bold mt-0.5">✔</span>
+                    <span>Interactive drag-and-drop Kanban board managing status pipelines.</span>
+                  </li>
+                  <li className="flex items-start gap-2.5 text-xs text-slate-300 leading-relaxed">
+                    <span className="text-cyan-400 font-bold mt-0.5">✔</span>
+                    <span>Multi-container Docker Compose setup encompassing frontend, NestJS backend, and PostgreSQL.</span>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Footer: Tech Stack + Case Study Trigger */}
+              <div className="pt-4 border-t border-white/[0.06] flex flex-wrap items-center justify-between gap-4">
+                <div className="flex flex-wrap gap-1.5">
+                  {["NestJS", "Next.js", "Prisma", "PostgreSQL", "AWS S3", "Docker"].map((tech) => (
+                    <span
+                      key={tech}
+                      className="px-2.5 py-1 rounded text-[11px] font-mono text-slate-300 bg-[#121a24] border border-white/[0.08]"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                <button
+                  onClick={() =>
+                    setSelectedProject(projectsData.find((p) => p.id === "job-tracker") || null)
+                  }
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-mono font-bold text-slate-950 bg-cyan-400 hover:bg-cyan-300 transition-all duration-200 shadow-md shadow-cyan-500/20 active:scale-95"
+                >
+                  <span>Architecture Specs</span>
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                </button>
+              </div>
+
+            </div>
+          )}
+
+          {/* Card 3: Inkora Content Platform (Span 6 Bento) */}
+          {filteredProjects.find((p) => p.id === "inkora") && (
+            <div className="lg:col-span-6 rounded-3xl bg-gradient-to-b from-[#0c1118] to-[#080d14] border border-white/[0.08] hover:border-emerald-500/40 p-6 sm:p-7 flex flex-col justify-between space-y-5 relative overflow-hidden group shadow-xl hover:shadow-[0_0_30px_rgba(16,185,129,0.15)] transition-all duration-300">
+              <div>
+                <div className="flex flex-wrap items-center justify-between gap-3 mb-3">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-mono tracking-wider text-emerald-300 bg-emerald-950/40 border border-emerald-500/20">
+                    <FileCode2 className="w-3.5 h-3.5" />
+                    <span>FULL-STACK WEB · PERSONAL</span>
+                  </div>
+                  <span className="px-2.5 py-0.5 rounded text-[10px] font-mono font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20">
+                    🟢 COMPLETED
+                  </span>
+                </div>
+
+                <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight group-hover:text-emerald-300 transition-colors mb-2">
+                  Inkora Content Platform
+                </h3>
+
+                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-4">
+                  Full-stack publishing engine with user authentication, rich-text editor, draft auto-saving, real-time AJAX live search, and CSRF/SQLi defense.
+                </p>
+
+                <ul className="space-y-1.5 mb-4">
+                  <li className="flex items-start gap-2 text-xs text-slate-300">
+                    <span className="text-emerald-400 font-bold">•</span>
+                    <span>Debounced AJAX live search querying full-text MySQL indexes.</span>
+                  </li>
+                  <li className="flex items-start gap-2 text-xs text-slate-300">
+                    <span className="text-emerald-400 font-bold">•</span>
+                    <span>Security hardening with CSRF tokens, session hardening, and PDO prepared statements.</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="pt-4 border-t border-white/[0.06] flex flex-wrap items-center justify-between gap-4">
+                <div className="flex flex-wrap gap-1.5">
+                  {["PHP", "MySQL", "JavaScript", "AJAX", "Bootstrap"].map((tech) => (
+                    <span
+                      key={tech}
+                      className="px-2.5 py-0.5 rounded text-[11px] font-mono text-slate-300 bg-[#121824] border border-white/[0.06]"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                <button
+                  onClick={() =>
+                    setSelectedProject(projectsData.find((p) => p.id === "inkora") || null)
+                  }
+                  className="text-xs font-mono text-emerald-400 hover:text-emerald-300 inline-flex items-center gap-1 font-semibold"
+                >
+                  <span>Details</span>
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                </button>
               </div>
             </div>
-          ))}
+          )}
+
+          {/* Card 4: Battery Vitals Testbed (Span 6 Bento) */}
+          {filteredProjects.find((p) => p.id === "battery-vitals") && (
+            <div className="lg:col-span-6 rounded-3xl bg-gradient-to-b from-[#0c1118] to-[#080d14] border border-white/[0.08] hover:border-cyan-500/40 p-6 sm:p-7 flex flex-col justify-between space-y-5 relative overflow-hidden group shadow-xl hover:shadow-[0_0_30px_rgba(6,182,212,0.15)] transition-all duration-300">
+              <div>
+                <div className="flex flex-wrap items-center justify-between gap-3 mb-3">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-mono tracking-wider text-cyan-300 bg-cyan-950/40 border border-cyan-500/20">
+                    <Cpu className="w-3.5 h-3.5" />
+                    <span>EMBEDDED & IOT · 1ST YEAR PROJECT</span>
+                  </div>
+                  <span className="px-2.5 py-0.5 rounded text-[10px] font-mono font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20">
+                    🟢 COMPLETED
+                  </span>
+                </div>
+
+                <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight group-hover:text-cyan-300 transition-colors mb-2">
+                  Battery Vitals Testbed
+                </h3>
+
+                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-4">
+                  Automated testbed for Li-Po batteries using ESP32 microcontroller, relay switching, DS18B20 thermal monitoring, and a Python State of Health (SOH) evaluation pipeline.
+                </p>
+
+                <ul className="space-y-1.5 mb-4">
+                  <li className="flex items-start gap-2 text-xs text-slate-300">
+                    <span className="text-cyan-400 font-bold">•</span>
+                    <span>Automated charge-rest-discharge cycles with emergency thermal cutoffs.</span>
+                  </li>
+                  <li className="flex items-start gap-2 text-xs text-slate-300">
+                    <span className="text-cyan-400 font-bold">•</span>
+                    <span>Python telemetry pipeline generating voltage decay and internal resistance curves.</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="pt-4 border-t border-white/[0.06] flex flex-wrap items-center justify-between gap-4">
+                <div className="flex flex-wrap gap-1.5">
+                  {["ESP32", "C++", "Python", "IoT", "Relays"].map((tech) => (
+                    <span
+                      key={tech}
+                      className="px-2.5 py-0.5 rounded text-[11px] font-mono text-slate-300 bg-[#121824] border border-white/[0.06]"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                <button
+                  onClick={() =>
+                    setSelectedProject(projectsData.find((p) => p.id === "battery-vitals") || null)
+                  }
+                  className="text-xs font-mono text-cyan-400 hover:text-cyan-300 inline-flex items-center gap-1 font-semibold"
+                >
+                  <span>Details</span>
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            </div>
+          )}
+
         </div>
 
       </div>
 
       {/* Case Study Modal Dialog */}
       {selectedProject && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-2xl bg-[#0d121c] border border-white/10 shadow-2xl p-6 sm:p-8 space-y-6 text-slate-200">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 bg-black/85 backdrop-blur-md animate-in fade-in duration-200">
+          <div className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-3xl bg-[#0d121c] border border-white/15 shadow-2xl p-6 sm:p-8 space-y-6 text-slate-200">
             
             {/* Modal Header */}
             <div className="flex items-start justify-between gap-4 pb-4 border-b border-white/10">
@@ -144,7 +387,7 @@ export function Projects() {
               </div>
               <button
                 onClick={() => setSelectedProject(null)}
-                className="p-2 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-400 hover:text-white transition-colors"
+                className="p-2 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-400 hover:text-white transition-colors"
                 aria-label="Close modal"
               >
                 <X className="w-5 h-5" />
@@ -153,75 +396,77 @@ export function Projects() {
 
             {/* Overview */}
             <div className="space-y-2">
-              <h4 className="text-xs font-mono uppercase tracking-wider text-slate-400">
-                // OVERVIEW
+              <h4 className="text-xs font-mono uppercase tracking-wider text-emerald-400">
+                // SYSTEM OVERVIEW
               </h4>
               <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
                 {selectedProject.writeUp.overview}
               </p>
             </div>
 
-            {/* Architecture Highlights */}
+            {/* Architecture Details */}
             <div className="space-y-3">
-              <h4 className="text-xs font-mono uppercase tracking-wider text-slate-400">
-                // SYSTEM ARCHITECTURE & CORE WORKFLOWS
+              <h4 className="text-xs font-mono uppercase tracking-wider text-emerald-400">
+                // ARCHITECTURE & DESIGN DECISIONS
               </h4>
-              <div className="space-y-2">
-                {selectedProject.writeUp.architecture.map((item, i) => (
-                  <div key={i} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-300">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
+              <ul className="space-y-2.5">
+                {selectedProject.writeUp.architecture.map((item, idx) => (
+                  <li key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-300">
+                    <span className="text-emerald-400 font-bold mt-0.5">▸</span>
                     <span>{item}</span>
-                  </div>
+                  </li>
                 ))}
-              </div>
+              </ul>
             </div>
 
-            {/* The Hard Parts / Tradeoffs */}
-            {selectedProject.writeUp.hardParts && selectedProject.writeUp.hardParts.length > 0 && (
-              <div className="space-y-3">
-                <h4 className="text-xs font-mono uppercase tracking-wider text-emerald-400">
-                  // THE HARD PARTS & CONCURRENCY TRADEOFFS
-                </h4>
-                <div className="space-y-2">
-                  {selectedProject.writeUp.hardParts.map((item, i) => (
-                    <div key={i} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-300 bg-emerald-500/5 p-3 rounded-lg border border-emerald-500/15">
-                      <AlertCircle className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
-                      <span>{item}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Tech Stack Breakdown */}
-            <div className="space-y-3 pt-2">
-              <h4 className="text-xs font-mono uppercase tracking-wider text-slate-400">
-                // TECH STACK BREAKDOWN
+            {/* Hard Parts / Complex Challenges */}
+            <div className="space-y-3 p-4 rounded-xl bg-black/40 border border-white/[0.06]">
+              <h4 className="text-xs font-mono uppercase tracking-wider text-cyan-400 flex items-center gap-1.5">
+                <ShieldAlert className="w-3.5 h-3.5" />
+                <span>TECHNICAL CHALLENGES & RESOLUTIONS</span>
               </h4>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-mono">
-                {selectedProject.writeUp.stackBreakdown.map((row, i) => (
-                  <div key={i} className="p-2.5 rounded bg-[#121824] border border-white/5 space-y-0.5">
-                    <div className="text-slate-500 uppercase text-[10px]">{row.category}</div>
-                    <div className="text-slate-200 font-medium">{row.tools}</div>
+              <ul className="space-y-2">
+                {selectedProject.writeUp.hardParts.map((item, idx) => (
+                  <li key={idx} className="flex items-start gap-2.5 text-xs text-slate-300">
+                    <span className="text-cyan-400 font-bold mt-0.5">•</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Stack Breakdown */}
+            <div className="space-y-3">
+              <h4 className="text-xs font-mono uppercase tracking-wider text-emerald-400">
+                // TECHNOLOGY BREAKDOWN
+              </h4>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {selectedProject.writeUp.stackBreakdown.map((sb, idx) => (
+                  <div key={idx} className="p-3 rounded-lg bg-[#141a24] border border-white/[0.06] text-xs">
+                    <div className="font-mono text-slate-400 uppercase text-[10px] mb-1">
+                      {sb.category}
+                    </div>
+                    <div className="text-white font-medium">{sb.tools}</div>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Modal Footer Note */}
-            <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-white/10 text-xs font-mono text-slate-400">
-              <span>{selectedProject.writeUp.repoNote || "Repository available on request."}</span>
+            {/* Modal Footer */}
+            <div className="pt-4 border-t border-white/10 flex items-center justify-between text-xs font-mono text-slate-400">
+              <span>{selectedProject.writeUp.repoNote || "Faculty of IT · University of Moratuwa"}</span>
               <button
                 onClick={() => setSelectedProject(null)}
-                className="px-4 py-2 rounded bg-emerald-400 text-slate-950 font-bold hover:bg-emerald-300 transition-colors"
+                className="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
               >
-                Close Write-up
+                Close
               </button>
             </div>
 
           </div>
         </div>
       )}
+
     </section>
   );
 }

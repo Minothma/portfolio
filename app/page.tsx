@@ -1,5 +1,4 @@
 import { Navbar } from "@/components/layout/Navbar";
-import { LeftSidebarNav } from "@/components/layout/LeftSidebarNav";
 import { Hero } from "@/components/sections/Hero";
 import { About } from "@/components/sections/About";
 import { Projects } from "@/components/sections/Projects";
@@ -11,19 +10,16 @@ import { Footer } from "@/components/layout/Footer";
 export default function Home() {
   return (
     <main className="relative min-h-screen bg-background text-slate-200 bg-grid-overlay overflow-x-hidden">
-      {/* Top Fixed Navbar */}
+      {/* Top Floating Glass Island Navbar */}
       <Navbar />
 
-      {/* Left Sidebar Fixed Navigation (Scroll Spy) */}
-      <LeftSidebarNav />
-
       {/* Main Section Content */}
-      <div className="relative z-10">
+      <div className="relative z-10 pt-8 sm:pt-12">
         <Hero />
         <About />
         <Projects />
-        <Journey />
         <Toolkit />
+        <Journey />
         <Contact />
       </div>
 

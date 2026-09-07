@@ -6,85 +6,134 @@ import { profile } from "@/data/profile";
 
 export function About() {
   return (
-    <section id="about-details" className="py-24 relative border-t border-white/[0.04]">
-      <div className="w-full max-w-5xl mx-auto px-6 sm:px-10 lg:pl-16 lg:pr-8">
+    <section id="about" className="py-24 relative border-t border-white/[0.04]">
+      <div className="w-full max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
         
         {/* Section Header */}
-        <div className="flex items-center gap-4 mb-12">
+        <div className="flex items-center gap-4 mb-4">
           <span className="text-xs font-mono tracking-widest text-emerald-400 font-semibold uppercase">
-            ABOUT
+            ABOUT // BACKGROUND & PERSPECTIVE
           </span>
           <span className="h-[1px] w-16 bg-emerald-500/40" />
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-start">
+        <div className="mb-12">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-3">
+            Engineering with discipline <br className="hidden sm:inline" />
+            & architectural intent.
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-400 max-w-2xl leading-relaxed">
+            From clinical specimen accessioning pipelines to cloud-native microservices and IoT telemetry, I focus on building systems that remain reliable under stress.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
           
           {/* Narrative Story Left Column */}
-          <div className="lg:col-span-7 space-y-6 text-sm sm:text-base text-slate-300 leading-relaxed">
-            <p>
-              I'm an IT undergraduate at the University of Moratuwa, two years in, and most of what I know came from shipping things rather than sitting exams. My work tends to land on the <strong className="text-white font-semibold">server side & full-stack systems</strong> — designing schemas, writing the auth layer, and working out what happens when concurrent users trigger state changes at the exact same millisecond.
-            </p>
+          <div className="lg:col-span-6 space-y-5 text-sm sm:text-base text-slate-300 leading-relaxed">
+            <div className="p-6 rounded-2xl bg-[#0c1118] border border-white/[0.06] space-y-4 shadow-xl">
+              <p>
+                I am an Information Technology undergraduate at the <strong className="text-white font-semibold">University of Moratuwa</strong> (Faculty of Information Technology). Most of my technical growth has come from engineering end-to-end software systems and wrestling with real edge cases: concurrent state mutations, secure token lifecycles, and high-throughput data validation.
+              </p>
 
-            <p>
-              On <strong className="text-white font-semibold">Durdans Hospital LIMS</strong> I co-developed an automated clinical accessioning engine that validates specimens, classifies tube caps, and enforces real-time Westgard QC rules. On <strong className="text-white font-semibold">Job Application Tracker</strong> I engineered the backend from scratch: JWT auth with refresh token rotation, direct AWS S3 presigned uploads for multi-version resumes, and a containerized PostgreSQL environment.
-            </p>
+              <p>
+                In my 2nd-year group project, <strong className="text-emerald-300 font-medium">Durdans Hospital LIMS</strong>, I co-architected the clinical specimen validation workflow—implementing tube-cap classification, STAT triage, and real-time Westgard QC multi-rule evaluations to ensure ISO compliance and zero diagnostic error.
+              </p>
 
-            <p>
-              Away from the editor I serve as <strong className="text-white font-semibold">Director of IT</strong> for the Rotaract Club of Alumni of University of Moratuwa and contribute to IEEE student chapters — the kind of things that teach you about real deadlines and team communication. I'm looking for an internship where I can work on production systems with engineers who'll review my code properly.
-            </p>
-          </div>
+              <p>
+                In my individual projects, such as the <strong className="text-cyan-300 font-medium">Job Application Tracker</strong>, I designed the backend from scratch using NestJS, PostgreSQL, Prisma ORM, and AWS S3 presigned upload pipelines for secure, multi-version document storage.
+              </p>
+            </div>
 
-          {/* Right Column: High-Fidelity Photograph Frame with Emerald Glow */}
-          <div className="lg:col-span-5 flex justify-center lg:justify-end">
-            <div className="relative w-full max-w-[340px] aspect-[4/5] rounded-2xl bg-gradient-to-b from-emerald-400 via-emerald-500/30 to-cyan-500/20 p-[1.5px] shadow-2xl shadow-emerald-950/40 overflow-hidden group hover:shadow-[0_0_35px_rgba(16,185,129,0.25)] transition-all duration-300">
-              
-              {/* Inner portrait container */}
-              <div className="relative w-full h-full rounded-[14px] bg-[#0c1017] flex flex-col justify-between overflow-hidden">
-                
-                {/* Real Profile Image with subtle zoom on hover */}
-                <div className="absolute inset-0 z-0">
-                  <Image
-                    src="/profile.jpg"
-                    alt={profile.name}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 340px"
-                    className="object-cover object-top filter brightness-[0.92] contrast-[1.05] group-hover:scale-105 transition-transform duration-500 ease-out"
-                    priority
-                  />
-                  {/* Subtle dark gradient overlay at top and bottom */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#070a0e] via-[#070a0e]/30 to-[#070a0e]/60 pointer-events-none" />
-                </div>
-
-                {/* Top Badge */}
-                <div className="relative z-10 w-full flex items-center justify-between p-4 text-[10px] font-mono text-slate-300 backdrop-blur-sm bg-black/20">
-                  <span className="flex items-center gap-1.5 text-emerald-300 font-semibold">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                    UOM · ITM
-                  </span>
-                  <span className="text-slate-300/90 font-mono">FACULTY OF IT</span>
-                </div>
-
-                {/* Bottom Overlay Info & Watermark */}
-                <div className="relative z-10 p-5 backdrop-blur-md bg-black/40 border-t border-white/10 space-y-1">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <h3 className="text-base font-bold text-white tracking-wide">
-                        {profile.name}
-                      </h3>
-                      <p className="text-xs font-mono text-emerald-400 mt-0.5">
-                        Software Engineering Intern
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center justify-between text-[11px] font-mono text-slate-400 pt-2 border-t border-white/10">
-                    <span className="uppercase text-[10px] text-slate-400">MORATUWA · 2026</span>
-                    <span className="text-emerald-400 font-bold text-[12px]">+</span>
-                  </div>
-                </div>
-
+            <div className="p-5 rounded-2xl bg-[#080d14] border border-emerald-500/20 text-xs sm:text-sm text-slate-300 flex items-start gap-3">
+              <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-400 font-mono text-base font-bold shrink-0">
+                ⚡
+              </div>
+              <div>
+                <span className="font-semibold text-white block mb-0.5">Internship Availability</span>
+                Currently seeking a <strong className="text-emerald-300">Software Engineering Internship (2026)</strong> where I can contribute to production architectures, participate in rigorous code reviews, and ship high-impact features.
               </div>
             </div>
+          </div>
+
+          {/* Right Column: Engineering Highlights & Leadership Bento Matrix */}
+          <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            
+            {/* Bento Card 1: University */}
+            <div className="p-5 rounded-2xl bg-[#0c1118] border border-white/[0.07] hover:border-emerald-500/30 transition-all duration-200 space-y-2.5">
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-mono uppercase text-emerald-400 font-semibold tracking-wider">
+                  EDUCATION
+                </span>
+                <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-emerald-500/10 text-emerald-300 border border-emerald-500/20">
+                  UoM
+                </span>
+              </div>
+              <h4 className="text-sm font-bold text-white">
+                B.Sc. (Hons) in IT & Management
+              </h4>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                University of Moratuwa · Faculty of IT
+              </p>
+              <div className="pt-2 border-t border-white/[0.04] flex items-center justify-between text-xs font-mono">
+                <span className="text-slate-400">Cumulative GPA</span>
+                <span className="text-emerald-400 font-bold">3.47 / 4.00</span>
+              </div>
+            </div>
+
+            {/* Bento Card 2: Leadership */}
+            <div className="p-5 rounded-2xl bg-[#0c1118] border border-white/[0.07] hover:border-cyan-500/30 transition-all duration-200 space-y-2.5">
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-mono uppercase text-cyan-400 font-semibold tracking-wider">
+                  LEADERSHIP
+                </span>
+                <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-cyan-500/10 text-cyan-300 border border-cyan-500/20">
+                  ROTARACT
+                </span>
+              </div>
+              <h4 className="text-sm font-bold text-white">
+                Director of IT & Digital Media
+              </h4>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                Rotaract Club of Alumni of University of Moratuwa
+              </p>
+              <div className="pt-2 border-t border-white/[0.04] text-[11px] font-mono text-slate-400">
+                Managing digital operations & community web portals.
+              </div>
+            </div>
+
+            {/* Bento Card 3: Technical Focus */}
+            <div className="p-5 rounded-2xl bg-[#0c1118] border border-white/[0.07] hover:border-emerald-500/30 transition-all duration-200 space-y-2.5">
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-mono uppercase text-emerald-400 font-semibold tracking-wider">
+                  CORE SPECIALIZATION
+                </span>
+                <span className="text-emerald-400 font-bold">⚙️</span>
+              </div>
+              <h4 className="text-sm font-bold text-white">
+                Full-Stack & Backend Systems
+              </h4>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                Spring Boot, NestJS, Next.js, PostgreSQL, RESTful API design, Docker & JWT Auth architecture.
+              </p>
+            </div>
+
+            {/* Bento Card 4: Quality & Standards */}
+            <div className="p-5 rounded-2xl bg-[#0c1118] border border-white/[0.07] hover:border-cyan-500/30 transition-all duration-200 space-y-2.5">
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-mono uppercase text-cyan-400 font-semibold tracking-wider">
+                  STANDARDS & CERTIFICATIONS
+                </span>
+                <span className="text-cyan-400 font-bold">🛡️</span>
+              </div>
+              <h4 className="text-sm font-bold text-white">
+                10+ Verified Credentials
+              </h4>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                AWS Cloud, Postman API, Spring & Java, DeepLearning.AI, GitHub Foundations & UoM certificates.
+              </p>
+            </div>
+
           </div>
 
         </div>
