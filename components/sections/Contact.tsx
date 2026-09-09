@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { profile } from "@/data/profile";
+import { useToast } from "@/components/ui/Toast";
 import {
   Copy,
   Check,
@@ -13,15 +14,58 @@ import {
   MapPin,
   MessageSquare,
   Sparkles,
+  Send,
+  MessageCircle,
 } from "lucide-react";
 
 export function Contact() {
-  const [copied, setCopied] = useState(false);
+  const [copiedEmail, setCopiedEmail] = useState(false);
+  const [copiedPhone, setCopiedPhone] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "Software Engineering Internship",
+    message: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const { showToast } = useToast();
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(profile.email);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2500);
+    setCopiedEmail(true);
+    showToast(`Copied ${profile.email} to clipboard!`, "success");
+    setTimeout(() => setCopiedEmail(false), 2500);
+  };
+
+  const handleCopyPhone = () => {
+    navigator.clipboard.writeText(profile.phone);
+    setCopiedPhone(true);
+    showToast(`Copied ${profile.phone} to clipboard!`, "success");
+    setTimeout(() => setCopiedPhone(false), 2500);
+  };
+
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
+      showToast("Please fill in all required fields", "error");
+      return;
+    }
+
+    setIsSubmitting(true);
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setSubmitted(true);
+      showToast("Message initialized! Opening your email client...", "success");
+
+      // Construct mailto
+      const mailtoUrl = `mailto:${profile.email}?subject=${encodeURIComponent(
+        `[${formData.subject}] Inquiry from ${formData.name}`
+      )}&body=${encodeURIComponent(
+        `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+      )}`;
+      window.location.href = mailtoUrl;
+    }, 600);
   };
 
   return (
@@ -49,7 +93,7 @@ export function Contact() {
         {/* Contact Container Bento */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
-          {/* Main Action Box */}
+          {/* Main Action Box: Interactive Message Form & Email Hub */}
           <div className="lg:col-span-7 p-7 sm:p-9 rounded-3xl bg-gradient-to-b from-[#0e1622] to-[#080d14] border border-emerald-500/30 space-y-6 shadow-2xl">
             <div className="space-y-2">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono text-emerald-300 bg-emerald-950/60 border border-emerald-500/30">
@@ -57,15 +101,84 @@ export function Contact() {
                 <span>OPEN TO INTERNSHIPS · 2026</span>
               </div>
               <h3 className="text-2xl font-bold text-white tracking-tight">
-                Software Engineering Opportunities
+                Send a Direct Message
               </h3>
               <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
                 Available for on-site (Colombo / Western Province) and remote positions. Eager to contribute to full-stack, distributed backend, or cloud engineering teams.
               </p>
             </div>
 
-            {/* Email Action Field */}
-            <div className="p-4 sm:p-5 rounded-2xl bg-[#0c1118] border border-white/[0.08] flex flex-col sm:flex-row sm:items-center justify-between gap-3 font-mono text-xs">
+            {/* Quick Interactive Message Form */}
+            <form onSubmit={handleFormSubmit} className="space-y-4 font-mono text-xs">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                <div>
+                  <label className="block text-[11px] text-slate-400 mb-1">Your Name *</label>
+                  <input
+                    type="text"
+                    required
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    placeholder="Jane Doe / Recruiter"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#0c1118] border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500/50"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[11px] text-slate-400 mb-1">Your Email *</label>
+                  <input
+                    type="email"
+                    required
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    placeholder="jane@company.com"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#0c1118] border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500/50"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-[11px] text-slate-400 mb-1">Inquiry Topic</label>
+                <select
+                  value={formData.subject}
+                  onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#0c1118] border border-white/10 text-white focus:outline-none focus:border-emerald-500/50"
+                >
+                  <option value="Software Engineering Internship">Software Engineering Internship</option>
+                  <option value="Full-Stack Web Project">Full-Stack Web Project</option>
+                  <option value="Technical Consultation">Technical Consultation</option>
+                  <option value="General Engineering Inquiry">General Engineering Inquiry</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-[11px] text-slate-400 mb-1">Message *</label>
+                <textarea
+                  required
+                  rows={3}
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  placeholder="Hello Minothma, we'd like to discuss an engineering opportunity..."
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#0c1118] border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500/50 resize-none"
+                />
+              </div>
+
+              <div className="flex flex-wrap items-center justify-between gap-3 pt-2">
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-bold font-mono transition-all shadow-md shadow-emerald-500/20 active:scale-95 disabled:opacity-50"
+                >
+                  <Send className="w-3.5 h-3.5" />
+                  <span>{isSubmitting ? "Sending..." : "Dispatch Message"}</span>
+                </button>
+
+                <div className="text-[11px] text-slate-400">
+                  Direct Response guaranteed &lt; 24h
+                </div>
+              </div>
+            </form>
+
+            {/* Direct Email Display Bar */}
+            <div className="p-4 rounded-2xl bg-[#0c1118] border border-white/[0.08] flex flex-col sm:flex-row sm:items-center justify-between gap-3 font-mono text-xs">
               <div className="flex items-center gap-2.5 text-slate-200">
                 <Mail className="w-4 h-4 text-emerald-400" />
                 <span className="select-all font-semibold">{profile.email}</span>
@@ -77,7 +190,7 @@ export function Contact() {
                   className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white transition-colors active:scale-95 border border-white/10"
                   aria-label="Copy email"
                 >
-                  {copied ? (
+                  {copiedEmail ? (
                     <>
                       <Check className="w-3.5 h-3.5 text-emerald-400" />
                       <span className="text-emerald-400 font-bold">Copied</span>
@@ -85,24 +198,16 @@ export function Contact() {
                   ) : (
                     <>
                       <Copy className="w-3.5 h-3.5 opacity-60" />
-                      <span>Copy</span>
+                      <span>Copy Email</span>
                     </>
                   )}
                 </button>
-
-                <a
-                  href={`mailto:${profile.email}?subject=Software%20Engineering%20Internship%20Inquiry`}
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-bold transition-all shadow-md shadow-emerald-500/20 active:scale-95"
-                >
-                  <span>Send Email</span>
-                  <ArrowUpRight className="w-3.5 h-3.5" />
-                </a>
               </div>
             </div>
 
             <div className="flex items-center gap-2 text-xs font-mono text-slate-400 pt-1">
               <MapPin className="w-3.5 h-3.5 text-emerald-400" />
-              <span>Based in {profile.location} · University of Moratuwa</span>
+              <span>Based in {profile.location} · Faculty of IT, University of Moratuwa</span>
             </div>
           </div>
 
@@ -123,7 +228,7 @@ export function Contact() {
                   <div className="font-bold text-white group-hover:text-emerald-300 transition-colors">
                     LinkedIn
                   </div>
-                  <div className="text-[11px] text-slate-400">minothma-sithumini</div>
+                  <div className="text-[11px] text-slate-400">linkedin.com/in/minothma</div>
                 </div>
               </div>
               <ArrowUpRight className="w-4 h-4 text-slate-400 group-hover:text-emerald-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
@@ -142,32 +247,64 @@ export function Contact() {
                 </div>
                 <div>
                   <div className="font-bold text-white group-hover:text-cyan-300 transition-colors">
-                    GitHub
+                    GitHub Repositories
                   </div>
-                  <div className="text-[11px] text-slate-400">@Minothma</div>
+                  <div className="text-[11px] text-slate-400">github.com/Minothma</div>
                 </div>
               </div>
               <ArrowUpRight className="w-4 h-4 text-slate-400 group-hover:text-cyan-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
             </a>
 
-            {/* Phone / WhatsApp */}
+            {/* WhatsApp Direct */}
             <a
-              href={`tel:${profile.phone}`}
+              href={`https://wa.me/${profile.phoneFormatted.replace("+", "")}`}
+              target="_blank"
+              rel="noopener noreferrer"
               className="p-5 rounded-2xl bg-[#0c1118] border border-white/[0.08] hover:border-emerald-500/40 hover:bg-[#101722] transition-all duration-200 flex items-center justify-between group shadow-lg"
             >
               <div className="flex items-center gap-3">
                 <div className="p-2.5 rounded-xl bg-[#141e2b] text-emerald-400 group-hover:scale-110 transition-transform">
-                  <Phone className="w-4 h-4" />
+                  <MessageCircle className="w-4 h-4" />
                 </div>
                 <div>
                   <div className="font-bold text-white group-hover:text-emerald-300 transition-colors">
-                    Phone / WhatsApp
+                    WhatsApp Direct Chat
                   </div>
                   <div className="text-[11px] text-slate-400">{profile.phone}</div>
                 </div>
               </div>
               <ArrowUpRight className="w-4 h-4 text-slate-400 group-hover:text-emerald-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
             </a>
+
+            {/* Phone Copy Card */}
+            <div className="p-5 rounded-2xl bg-[#0c1118] border border-white/[0.08] flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="p-2.5 rounded-xl bg-[#141e2b] text-cyan-400">
+                  <Phone className="w-4 h-4" />
+                </div>
+                <div>
+                  <div className="font-bold text-white">Direct Phone</div>
+                  <div className="text-[11px] text-slate-400">{profile.phone}</div>
+                </div>
+              </div>
+              <button
+                onClick={handleCopyPhone}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white transition-colors text-xs active:scale-95"
+              >
+                {copiedPhone ? (
+                  <>
+                    <Check className="w-3.5 h-3.5 text-emerald-400" />
+                    <span className="text-emerald-400">Copied</span>
+                  </>
+                ) : (
+                  <>
+                    <Copy className="w-3.5 h-3.5 opacity-60" />
+                    <span>Copy</span>
+                  </>
+                )}
+              </button>
+            </div>
+
           </div>
 
         </div>
@@ -188,3 +325,4 @@ export function Contact() {
     </section>
   );
 }
+

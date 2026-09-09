@@ -2,6 +2,8 @@
 
 import React, { useState } from "react";
 import { skills } from "@/data/skills";
+import { usePortfolioUI } from "@/components/ui/PortfolioUIContext";
+import { useToast } from "@/components/ui/Toast";
 import {
   Server,
   Layout,
@@ -13,27 +15,39 @@ import {
   Layers,
   CheckCircle2,
   Cpu,
+  ArrowUpRight,
+  Filter,
 } from "lucide-react";
 
 export function Toolkit() {
-  const [activeTab, setActiveTab] = useState<string>("All");
+  const { filterBySkill, highlightedSkill } = usePortfolioUI();
+  const { showToast } = useToast();
+
+  const handleSkillClick = (skillName: string) => {
+    filterBySkill(skillName);
+    showToast(`Filtering projects built with ${skillName}...`, "info");
+  };
 
   const getCategoryIcon = (category: string) => {
     switch (category) {
+      case "Backend & Microservices":
       case "Backend":
         return <Server className="w-4 h-4 text-emerald-400" />;
       case "Frontend":
         return <Layout className="w-4 h-4 text-cyan-400" />;
+      case "Databases & Migrations":
       case "Databases & ORM":
         return <Database className="w-4 h-4 text-emerald-400" />;
+      case "DevOps, Cloud & IaC":
       case "DevOps & Cloud":
         return <Terminal className="w-4 h-4 text-cyan-400" />;
       case "Languages":
         return <Code2 className="w-4 h-4 text-emerald-400" />;
+      case "Architecture & Standards":
       case "Core Concepts":
         return <Cpu className="w-4 h-4 text-cyan-400" />;
-      case "UI/UX & Design":
-        return <Palette className="w-4 h-4 text-emerald-400" />;
+      case "Testing & Observability":
+        return <ShieldCheck className="w-4 h-4 text-emerald-400" />;
       default:
         return <Layers className="w-4 h-4 text-emerald-400" />;
     }
@@ -58,7 +72,7 @@ export function Toolkit() {
               Technical Stack.
             </h2>
             <p className="text-xs sm:text-sm text-slate-400 max-w-xl leading-relaxed">
-              Curated stack of frameworks, relational databases, DevOps tools, and architectural paradigms I use to build scalable systems.
+              Curated stack of frameworks, relational databases, DevOps tools, and architectural paradigms. <span className="text-emerald-300 font-medium">Click any skill to filter matching projects.</span>
             </p>
           </div>
 
@@ -75,7 +89,7 @@ export function Toolkit() {
             <div
               key={category.category}
               className={`p-6 sm:p-7 rounded-3xl bg-gradient-to-b from-[#0c1118] to-[#080d14] border transition-all duration-300 flex flex-col justify-between space-y-5 group hover:shadow-xl ${
-                idx === 0 || idx === 2
+                idx === 0 || idx === 2 || idx === 6
                   ? "border-emerald-500/20 hover:border-emerald-400/50 hover:shadow-[0_0_30px_rgba(16,185,129,0.12)]"
                   : "border-cyan-500/20 hover:border-cyan-400/50 hover:shadow-[0_0_30px_rgba(6,182,212,0.12)]"
               }`}
@@ -101,17 +115,31 @@ export function Toolkit() {
                 </p>
               </div>
 
-              {/* Technology Badges */}
+              {/* Technology Badges (Clickable Cross-Reference Filter) */}
               <div className="flex flex-wrap gap-2 pt-2 border-t border-white/[0.04]">
-                {category.items.map((skill) => (
-                  <span
-                    key={skill}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-mono text-slate-300 bg-[#121824] border border-white/[0.07] hover:border-emerald-400/40 hover:text-white hover:bg-emerald-950/30 transition-all duration-150"
-                  >
-                    <span className="w-1 h-1 rounded-full bg-emerald-400/60" />
-                    <span>{skill}</span>
-                  </span>
-                ))}
+                {category.items.map((skill) => {
+                  const isHighlighted = highlightedSkill === skill;
+                  return (
+                    <button
+                      key={skill}
+                      onClick={() => handleSkillClick(skill)}
+                      title={`Click to filter projects using ${skill}`}
+                      className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-mono transition-all duration-200 active:scale-95 group/btn ${
+                        isHighlighted
+                          ? "bg-emerald-400 text-slate-950 font-bold border border-emerald-300 shadow-md shadow-emerald-500/30"
+                          : "text-slate-300 bg-[#121824] border border-white/[0.07] hover:border-emerald-400/40 hover:text-white hover:bg-emerald-950/40"
+                      }`}
+                    >
+                      <span
+                        className={`w-1 h-1 rounded-full ${
+                          isHighlighted ? "bg-slate-950" : "bg-emerald-400/70"
+                        }`}
+                      />
+                      <span>{skill}</span>
+                      <ArrowUpRight className="w-2.5 h-2.5 opacity-0 group-hover/btn:opacity-100 transition-opacity" />
+                    </button>
+                  );
+                })}
               </div>
 
             </div>
@@ -122,3 +150,4 @@ export function Toolkit() {
     </section>
   );
 }
+

@@ -2,15 +2,18 @@
 
 import React, { useState } from "react";
 import { educationHistory, leadershipHistory, certificationsList, referencesList } from "@/data/highlights";
+import { useToast } from "@/components/ui/Toast";
 import { Award, UserCheck, Mail, Phone, ExternalLink, Copy, Check, GraduationCap, Users } from "lucide-react";
 
 export function Journey() {
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
+  const { showToast } = useToast();
 
   const handleCopyCode = (code: string) => {
     navigator.clipboard.writeText(code);
     setCopiedCode(code);
+    showToast(`Copied certificate verification code: ${code}`, "success");
     setTimeout(() => setCopiedCode(null), 2000);
   };
 

@@ -47,6 +47,13 @@ export const educationHistory: EducationItem[] = [
     meta: "Combined Maths: A · Chemistry: B · Physics: C · Z-score: 1.2516",
     details: "Ranked among top physical science performers in the district with distinction in Combined Mathematics.",
   },
+  {
+    year: "2018",
+    degree: "G.C.E. Ordinary Level Examination",
+    institution: "Sumana Balika Vidyalaya, Ratnapura",
+    meta: "8 A's, 1 B (Distinction Profile)",
+    details: "Excellent academic foundation with 8 Distinctions (A grades) including Mathematics, Science, and English.",
+  },
 ];
 
 export const leadershipHistory: LeadershipItem[] = [

@@ -19,11 +19,11 @@ export function About() {
 
         <div className="mb-12">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-3">
-            Engineering with discipline <br className="hidden sm:inline" />
-            & architectural intent.
+            Building software with curiosity, <br className="hidden sm:inline" />
+            discipline & clean engineering.
           </h2>
           <p className="text-xs sm:text-sm text-slate-400 max-w-2xl leading-relaxed">
-            From clinical specimen accessioning pipelines to cloud-native microservices and IoT telemetry, I focus on building systems that remain reliable under stress.
+            From hospital management web apps to cloud storage integrations and IoT telemetry, I focus on building reliable software with clean code and solid architecture.
           </p>
         </div>
 
@@ -33,15 +33,15 @@ export function About() {
           <div className="lg:col-span-6 space-y-5 text-sm sm:text-base text-slate-300 leading-relaxed">
             <div className="p-6 rounded-2xl bg-[#0c1118] border border-white/[0.06] space-y-4 shadow-xl">
               <p>
-                I am an Information Technology undergraduate at the <strong className="text-white font-semibold">University of Moratuwa</strong> (Faculty of Information Technology). Most of my technical growth has come from engineering end-to-end software systems and wrestling with real edge cases: concurrent state mutations, secure token lifecycles, and high-throughput data validation.
+                I am a 3rd-year Information Technology undergraduate at the <strong className="text-white font-semibold">University of Moratuwa</strong> (Faculty of Information Technology). Most of my technical learning comes from building full-stack applications from scratch—learning how to structure databases, design REST APIs, and create clean, responsive user interfaces.
               </p>
 
               <p>
-                In my enterprise project, <strong className="text-emerald-300 font-medium">Durdans Hospital LIMS</strong> (developed with IFS Sri Lanka, Durdans Hospital PLC, and UoM), I co-architected the pre-analytical accessioning and clinical decision support engines—enforcing ISO 15189 quality gates, mathematical delta-checks (|Δ%| ≥ 40%), and real-time Westgard QC multi-rules with dynamic Z-scores.
+                In our 2nd-year enterprise project, <strong className="text-emerald-300 font-medium">Durdans Hospital LIMS</strong> (developed in collaboration with IFS Sri Lanka, Durdans Hospital PLC, and UoM), I worked on sample accessioning, automated delta-checks, and quality control calculations using Spring Boot and Next.js.
               </p>
 
               <p>
-                In my individual projects, such as the <strong className="text-cyan-300 font-medium">Job Application Tracker</strong>, I designed the backend from scratch using NestJS, PostgreSQL, Prisma ORM, and AWS S3 presigned upload pipelines for secure, multi-version document storage.
+                In my individual projects, such as the <strong className="text-cyan-300 font-medium">Job Application Tracker</strong>, I built the full-stack system using NestJS, PostgreSQL, Prisma ORM, and AWS S3 presigned URLs for multi-version document uploads.
               </p>
             </div>
 
@@ -51,7 +51,7 @@ export function About() {
               </div>
               <div>
                 <span className="font-semibold text-white block mb-0.5">Internship Availability</span>
-                Currently seeking a <strong className="text-emerald-300">Software Engineering Internship (2026)</strong> where I can contribute to production architectures, participate in rigorous code reviews, and ship high-impact features.
+                Actively seeking a <strong className="text-emerald-300">Software Engineering Internship (2026)</strong> to learn alongside experienced engineers, contribute to real projects, and build production-ready features.
               </div>
             </div>
           </div>

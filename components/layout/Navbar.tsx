@@ -2,12 +2,14 @@
 
 import React, { useState, useEffect } from "react";
 import { profile } from "@/data/profile";
-import { Menu, X, ArrowDownToLine, Sparkles } from "lucide-react";
+import { usePortfolioUI } from "@/components/ui/PortfolioUIContext";
+import { Menu, X, ArrowDownToLine, Search, Sparkles, Command } from "lucide-react";
 
 export function Navbar() {
   const [activeSection, setActiveSection] = useState("hero");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const { openCommandPalette } = usePortfolioUI();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,10 +31,21 @@ export function Navbar() {
       }
     };
 
+    const handleGlobalKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        openCommandPalette();
+      }
+    };
+
     window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("keydown", handleGlobalKeyDown);
     handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("keydown", handleGlobalKeyDown);
+    };
+  }, [openCommandPalette]);
 
   const navLinks = [
     { label: "About", id: "about" },
@@ -54,7 +67,7 @@ export function Navbar() {
 
       {/* Floating Island Header */}
       <header className="fixed top-4 sm:top-6 left-0 right-0 z-40 flex justify-center px-4 pointer-events-none">
-        <div className="w-full max-w-5xl rounded-2xl sm:rounded-full bg-[#0c1118]/85 backdrop-blur-xl border border-white/[0.08] shadow-2xl shadow-black/60 px-5 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between pointer-events-auto transition-all duration-300">
+        <div className="w-full max-w-5xl rounded-2xl sm:rounded-full bg-[#0c1118]/85 backdrop-blur-xl border border-white/[0.08] shadow-2xl shadow-black/60 px-4 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between pointer-events-auto transition-all duration-300">
           
           {/* Brand Monogram & Name */}
           <a
@@ -91,26 +104,39 @@ export function Navbar() {
           </nav>
 
           {/* Action CTAs */}
-          <div className="hidden sm:flex items-center gap-3">
+          <div className="flex items-center gap-2.5">
+            {/* Command Palette Trigger Button */}
+            <button
+              onClick={openCommandPalette}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono text-slate-300 bg-[#121824] hover:bg-[#182232] border border-white/10 hover:border-emerald-500/30 transition-all duration-200 shadow-sm group"
+              title="Open Spotlight Search (Ctrl + K)"
+            >
+              <Search className="w-3.5 h-3.5 text-emerald-400 group-hover:scale-110 transition-transform" />
+              <span className="hidden lg:inline text-[11px] text-slate-400">Search</span>
+              <kbd className="hidden sm:inline-flex items-center px-1.5 py-0.5 text-[9px] font-mono text-slate-400 bg-black/40 rounded border border-white/10">
+                ⌘K
+              </kbd>
+            </button>
+
             <a
               href={profile.resumeUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-mono text-emerald-300 bg-emerald-500/10 border border-emerald-500/30 hover:bg-emerald-500/20 hover:border-emerald-400/50 transition-all duration-200 shadow-sm"
+              className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-mono text-emerald-300 bg-emerald-500/10 border border-emerald-500/30 hover:bg-emerald-500/20 hover:border-emerald-400/50 transition-all duration-200 shadow-sm"
             >
               <ArrowDownToLine className="w-3.5 h-3.5" />
               <span>Résumé</span>
             </a>
-          </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-1.5 rounded-lg bg-[#121824] border border-white/10 text-slate-300 hover:text-white"
-            aria-label="Toggle menu"
-          >
-            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </button>
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden p-1.5 rounded-lg bg-[#121824] border border-white/10 text-slate-300 hover:text-white"
+              aria-label="Toggle menu"
+            >
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Dropdown */}
