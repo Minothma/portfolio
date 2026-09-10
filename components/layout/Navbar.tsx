@@ -1,14 +1,27 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { profile } from "@/data/profile";
 import { usePortfolioUI } from "@/components/ui/PortfolioUIContext";
-import { Menu, X, ArrowDownToLine, Search, Sparkles, Command } from "lucide-react";
+import { MSLogo } from "@/components/ui/MSLogo";
+import {
+  Menu,
+  X,
+  ArrowDownToLine,
+  Search,
+  Sparkles,
+  ChevronDown,
+  Eye,
+  Download,
+  FileText,
+} from "lucide-react";
 
 export function Navbar() {
   const [activeSection, setActiveSection] = useState("hero");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [cvDropdownOpen, setCvDropdownOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const { openCommandPalette } = usePortfolioUI();
 
   useEffect(() => {
@@ -38,12 +51,23 @@ export function Navbar() {
       }
     };
 
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(e.target as Node)
+      ) {
+        setCvDropdownOpen(false);
+      }
+    };
+
     window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("keydown", handleGlobalKeyDown);
+    document.addEventListener("mousedown", handleClickOutside);
     handleScroll();
     return () => {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("keydown", handleGlobalKeyDown);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [openCommandPalette]);
 
@@ -74,12 +98,12 @@ export function Navbar() {
             href="#hero"
             className="group flex items-center gap-2.5 text-xs sm:text-sm font-mono tracking-wider text-slate-100 hover:text-white transition-colors"
           >
-            <span className="w-7 h-7 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-bold group-hover:scale-105 group-hover:bg-emerald-500/20 transition-transform">
-              M
-            </span>
-            <div className="flex items-center gap-1 font-bold">
-              <span>MINOTHMA</span>
-              <span className="text-emerald-400 font-normal opacity-80">.DEV</span>
+            <MSLogo className="w-6 h-6 group-hover:scale-110 group-hover:drop-shadow-[0_0_8px_rgba(52,211,153,0.6)] transition-all duration-300" />
+            <div className="flex items-center tracking-normal font-semibold">
+              <span className="text-slate-100 group-hover:text-white transition-colors">
+                minothma
+              </span>
+              <span className="text-emerald-400 font-bold font-mono">.dev</span>
             </div>
           </a>
 
@@ -118,15 +142,43 @@ export function Navbar() {
               </kbd>
             </button>
 
-            <a
-              href={profile.resumeUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-mono text-emerald-300 bg-emerald-500/10 border border-emerald-500/30 hover:bg-emerald-500/20 hover:border-emerald-400/50 transition-all duration-200 shadow-sm"
-            >
-              <ArrowDownToLine className="w-3.5 h-3.5" />
-              <span>Résumé</span>
-            </a>
+            {/* Interactive CV Action Dropdown */}
+            <div className="relative" ref={dropdownRef}>
+              <button
+                onClick={() => setCvDropdownOpen(!cvDropdownOpen)}
+                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-mono font-medium text-emerald-300 bg-emerald-500/10 border border-emerald-500/30 hover:bg-emerald-500/20 hover:border-emerald-400/50 transition-all duration-200 shadow-sm active:scale-95"
+                aria-expanded={cvDropdownOpen}
+              >
+                <ArrowDownToLine className="w-3.5 h-3.5 text-emerald-400" />
+                <span>CV</span>
+                <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${cvDropdownOpen ? "rotate-180" : ""}`} />
+              </button>
+
+              {/* Dropdown Menu */}
+              {cvDropdownOpen && (
+                <div className="absolute right-0 mt-2 w-48 rounded-2xl bg-[#0c1118]/95 border border-white/10 p-1.5 shadow-2xl backdrop-blur-xl z-50 animate-in fade-in zoom-in-95 duration-150">
+                  <a
+                    href={profile.resumeUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setCvDropdownOpen(false)}
+                    className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-mono text-slate-200 hover:text-white hover:bg-emerald-500/15 transition-colors group"
+                  >
+                    <Eye className="w-3.5 h-3.5 text-emerald-400 group-hover:scale-110 transition-transform" />
+                    <span>View CV (PDF)</span>
+                  </a>
+                  <a
+                    href={profile.resumeUrl}
+                    download="Minothma_Sithumini_CV.pdf"
+                    onClick={() => setCvDropdownOpen(false)}
+                    className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-mono text-slate-200 hover:text-white hover:bg-emerald-500/15 transition-colors group"
+                  >
+                    <Download className="w-3.5 h-3.5 text-cyan-400 group-hover:scale-110 transition-transform" />
+                    <span>Download CV</span>
+                  </a>
+                </div>
+              )}
+            </div>
 
             {/* Mobile Menu Button */}
             <button
@@ -159,16 +211,25 @@ export function Navbar() {
               ))}
             </div>
 
-            <div className="pt-3 border-t border-white/10">
+            <div className="pt-3 border-t border-white/10 grid grid-cols-2 gap-2">
               <a
                 href={profile.resumeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl text-xs font-mono text-slate-950 font-bold bg-emerald-400 hover:bg-emerald-300 transition-colors"
+                className="flex items-center justify-center gap-2 py-2.5 rounded-xl text-xs font-mono text-slate-200 bg-[#121824] border border-white/10 hover:border-emerald-400/40 transition-colors"
               >
-                <ArrowDownToLine className="w-3.5 h-3.5" />
-                <span>Download Résumé (PDF)</span>
+                <Eye className="w-3.5 h-3.5 text-emerald-400" />
+                <span>View CV</span>
+              </a>
+              <a
+                href={profile.resumeUrl}
+                download="Minothma_Sithumini_CV.pdf"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center justify-center gap-2 py-2.5 rounded-xl text-xs font-mono text-slate-950 font-bold bg-emerald-400 hover:bg-emerald-300 transition-colors"
+              >
+                <Download className="w-3.5 h-3.5" />
+                <span>Download</span>
               </a>
             </div>
           </div>
@@ -177,3 +238,4 @@ export function Navbar() {
     </>
   );
 }
+

@@ -2,20 +2,10 @@
 
 import React, { useState } from "react";
 import { educationHistory, leadershipHistory, certificationsList, referencesList } from "@/data/highlights";
-import { useToast } from "@/components/ui/Toast";
-import { Award, UserCheck, Mail, Phone, ExternalLink, Copy, Check, GraduationCap, Users } from "lucide-react";
+import { Award, UserCheck, Mail, Phone, ExternalLink, GraduationCap, Users } from "lucide-react";
 
 export function Journey() {
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
-  const [copiedCode, setCopiedCode] = useState<string | null>(null);
-  const { showToast } = useToast();
-
-  const handleCopyCode = (code: string) => {
-    navigator.clipboard.writeText(code);
-    setCopiedCode(code);
-    showToast(`Copied certificate verification code: ${code}`, "success");
-    setTimeout(() => setCopiedCode(null), 2000);
-  };
 
   const categories = [
     "All",
@@ -222,38 +212,23 @@ export function Journey() {
                 </div>
 
                 <div className="pt-3 border-t border-white/[0.04] flex items-center justify-between text-[11px] gap-2">
-                  {cert.verificationCode ? (
-                    <button
-                      onClick={() => handleCopyCode(cert.verificationCode!)}
-                      title="Click to copy verification code"
-                      className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#141d2a] hover:bg-emerald-500/10 border border-white/10 hover:border-emerald-500/40 text-[11px] text-slate-300 hover:text-emerald-300 transition-all active:scale-95"
-                    >
-                      <span>Code: {cert.verificationCode}</span>
-                      {copiedCode === cert.verificationCode ? (
-                        <Check className="w-3 h-3 text-emerald-400" />
-                      ) : (
-                        <Copy className="w-3 h-3 opacity-60" />
-                      )}
-                    </button>
-                  ) : cert.status ? (
-                    <span className="text-slate-400 flex items-center gap-1.5 text-[11px]">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                      <span>{cert.status}</span>
-                    </span>
-                  ) : (
-                    <span className="text-slate-400">Verified Credential</span>
-                  )}
+                  <span className="text-slate-400 flex items-center gap-1.5 text-[11px]">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                    <span>{cert.status || "Verified Credential"}</span>
+                  </span>
 
-                  {cert.verifyUrl && (
+                  {cert.verifyUrl ? (
                     <a
                       href={cert.verifyUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-emerald-400 hover:text-emerald-300 font-semibold transition-colors group-hover:underline shrink-0"
+                      className="inline-flex items-center gap-1 px-3 py-1 rounded-lg text-emerald-300 bg-emerald-500/10 border border-emerald-500/20 hover:bg-emerald-500/20 hover:border-emerald-400/40 font-semibold transition-all active:scale-95 shrink-0"
                     >
                       <span>Verify</span>
-                      <ExternalLink className="w-3.5 h-3.5" />
+                      <ExternalLink className="w-3 h-3" />
                     </a>
+                  ) : (
+                    <span className="text-[10px] text-slate-500 font-mono">Completed</span>
                   )}
                 </div>
               </div>

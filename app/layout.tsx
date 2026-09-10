@@ -15,9 +15,9 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Minothma Sithumini | Software Engineering Intern & Full-Stack Developer",
+  title: "Minothma Sithumini",
   description:
-    "Portfolio of Minothma Sithumini — IT Undergraduate at University of Moratuwa with hands-on experience in full-stack web engineering, Next.js, React, Spring Boot, and NestJS.",
+    "Portfolio of Minothma Sithumini — Information Technology & Management Undergraduate at University of Moratuwa with hands-on experience in full-stack web engineering, Next.js, React, Spring Boot, and NestJS.",
   keywords: [
     "Minothma Sithumini",
     "Software Engineering Intern",
@@ -33,20 +33,20 @@ export const metadata: Metadata = {
   authors: [{ name: "Minothma Sithumini" }],
   creator: "Minothma Sithumini",
   openGraph: {
-    title: "Minothma Sithumini | Software Engineering Intern & Full-Stack Developer",
+    title: "Minothma Sithumini",
     description:
-      "IT Undergraduate at University of Moratuwa specializing in full-stack engineering, resilient distributed APIs, and modern web applications.",
+      "Information Technology & Management Undergraduate at University of Moratuwa specializing in full-stack engineering, resilient distributed APIs, and modern web applications.",
     type: "website",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Minothma Sithumini | Software Engineering Intern",
+    title: "Minothma Sithumini",
     description:
-      "IT Undergraduate at University of Moratuwa with hands-on experience in Next.js, Spring Boot, and NestJS.",
+      "Information Technology & Management Undergraduate at University of Moratuwa with hands-on experience in Next.js, Spring Boot, and NestJS.",
   },
   icons: {
-    icon: "/favicon.ico",
+    icon: "/icon.svg",
   },
 };
 

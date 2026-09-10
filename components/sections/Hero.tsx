@@ -34,7 +34,7 @@ export function Hero() {
   const handleRunCommand = (cmd: string) => {
     if (cmd === "status") {
       setTerminalOutput(
-        `[STATUS]: 3rd-Year IT Undergraduate, University of Moratuwa (Batch 23)\n[CGPA]: 3.47 / 4.00 · Faculty of Information Technology\n[SEEKING]: Software Engineering Internship (2026)\n[LOCATION]: Ratnapura / Western Province, Sri Lanka`
+        `[STATUS]: Information Technology & Management Undergraduate, University of Moratuwa (Batch 23)\n[CGPA]: 3.47 / 4.00 · Faculty of Information Technology\n[SEEKING]: Software Engineering Internship (2026)\n[LOCATION]: Ratnapura, Sri Lanka`
       );
       showToast("Profile details loaded", "info");
     } else if (cmd === "projects") {
@@ -44,9 +44,7 @@ export function Hero() {
       showToast("Loaded project summaries", "success");
     } else if (cmd === "contact") {
       navigator.clipboard.writeText(profile.email);
-      setTerminalOutput(
-        `[EMAIL]: ${profile.email} (Copied to clipboard!)\n[PHONE]: ${profile.phone}\n[GITHUB]: ${profile.github}\n[LINKEDIN]: ${profile.linkedin}`
-      );
+      setTerminalOutput(profile.email);
       showToast(`Copied ${profile.email} to clipboard!`, "success");
     }
   };
@@ -54,15 +52,15 @@ export function Hero() {
   return (
     <section
       id="hero"
-      className="min-h-screen flex flex-col justify-center pt-28 sm:pt-36 pb-12 relative overflow-hidden"
+      className="min-h-[calc(100vh-2rem)] flex flex-col justify-start pt-20 sm:pt-24 pb-8 relative overflow-hidden"
     >
       {/* Background Ambient Radial Glows */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] sm:w-[800px] h-[400px] bg-gradient-to-tr from-emerald-500/10 via-cyan-500/5 to-transparent blur-3xl pointer-events-none -z-10" />
 
       <div className="w-full max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
         
-        {/* Availability & Location Pill + Command Palette Hint */}
-        <div className="flex flex-wrap items-center justify-between gap-3 mb-8">
+        {/* Availability & Location Pill */}
+        <div className="flex flex-wrap items-center justify-between gap-3 mb-5">
           <div className="flex flex-wrap items-center gap-2.5">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono tracking-wider text-emerald-300 bg-emerald-950/50 border border-emerald-500/30 shadow-[0_0_20px_rgba(16,185,129,0.15)]">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
@@ -70,41 +68,32 @@ export function Hero() {
             </div>
             <div className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono text-slate-400 bg-[#0c1118] border border-white/[0.06]">
               <MapPin className="w-3.5 h-3.5 text-emerald-400" />
-              <span>Sri Lanka</span>
+              <span>Ratnapura, Sri Lanka</span>
             </div>
           </div>
-
-          {/* Quick Spotlight search trigger pill */}
-          <button
-            onClick={openCommandPalette}
-            className="hidden md:inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-mono text-slate-400 hover:text-white bg-[#0c1118] hover:bg-[#121824] border border-white/[0.08] hover:border-emerald-500/30 transition-all shadow-sm"
-          >
-            <Search className="w-3.5 h-3.5 text-emerald-400" />
-            <span>Spotlight Search</span>
-            <kbd className="px-1.5 py-0.5 rounded bg-white/10 text-[9px] text-slate-300">Ctrl + K</kbd>
-          </button>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center mb-14">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center mb-8">
           
           {/* Left Column: Big Typography, Value Pitch & CTAs */}
-          <div className="lg:col-span-7 space-y-6">
-            <div className="space-y-2">
+          <div className="lg:col-span-7 space-y-5">
+            <div className="space-y-3">
               <div className="text-xs sm:text-sm font-mono tracking-widest text-emerald-400 uppercase font-semibold flex items-center gap-2">
-                <span>SOFTWARE ENGINEERING INTERN</span>
+                <span>IT & MANAGEMENT UNDERGRADUATE</span>
                 <span className="w-8 h-[1px] bg-emerald-500/40" />
+                <span className="text-slate-400 font-normal">UNIVERSITY OF MORATUWA</span>
               </div>
               <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-tight">
                 {profile.name}
               </h1>
               <h2 className="text-xl sm:text-2xl lg:text-3xl font-semibold bg-gradient-to-r from-emerald-300 via-teal-200 to-cyan-300 bg-clip-text text-transparent">
-                Full-Stack Developer · 3rd-Year IT Undergraduate
+                Software Engineering Intern
               </h2>
             </div>
 
             {/* Pitch narrative */}
             <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-xl">
-              3rd-year IT undergraduate at the <strong className="text-white font-semibold">University of Moratuwa</strong> (CGPA: 3.47). I build practical, reliable applications: <strong className="text-emerald-300 font-medium">scalable REST APIs</strong>, <strong className="text-emerald-300 font-medium">clean frontend architectures</strong>, and <strong className="text-emerald-300 font-medium">structured database systems</strong>.
+              {profile.heroPitch}
             </p>
 
             {/* Action CTAs */}
@@ -118,21 +107,11 @@ export function Hero() {
               </a>
 
               <a
-                href={profile.resumeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
+                href="#contact"
                 className="inline-flex items-center gap-2 px-5 py-3 rounded-full text-xs sm:text-sm font-mono text-slate-200 bg-[#0c1118] border border-white/10 hover:border-emerald-400/50 hover:text-white transition-all duration-200 active:scale-95 shadow-sm"
               >
-                <FileText className="w-3.5 h-3.5 text-emerald-400" />
-                <span>View CV (PDF)</span>
+                <span>Get In Touch</span>
                 <ArrowUpRight className="w-3.5 h-3.5 opacity-60" />
-              </a>
-
-              <a
-                href="#contact"
-                className="px-4 py-3 text-xs sm:text-sm font-mono text-slate-400 hover:text-emerald-400 transition-colors"
-              >
-                Get in touch →
               </a>
             </div>
 
@@ -142,7 +121,7 @@ export function Hero() {
                 <div className="flex items-center justify-between text-[11px] text-slate-400 pb-1.5 border-b border-white/[0.05]">
                   <span className="flex items-center gap-1.5 text-emerald-400">
                     <Terminal className="w-3.5 h-3.5" />
-                    <span>Quick Command Bar</span>
+                    <span>Quick Interactive Console</span>
                   </span>
                   <span className="text-[10px]">Click to run query</span>
                 </div>
@@ -243,7 +222,7 @@ export function Hero() {
                           {profile.name}
                         </div>
                         <div className="text-xs font-mono text-emerald-400 mt-0.5">
-                          Software Engineering Intern
+                          Full-Stack Developer
                         </div>
                       </div>
                       <div className="px-2.5 py-1 rounded-md bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 font-mono text-xs font-bold">
@@ -283,7 +262,7 @@ export function Hero() {
                         TECHNICAL PROFILE
                       </span>
                       <span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 text-[10px] font-bold border border-emerald-500/30">
-                        3RD YEAR · AVAILABLE
+                        UOM ITM · AVAILABLE
                       </span>
                     </div>
                     <div className="text-[11px] text-slate-400">
@@ -296,7 +275,7 @@ export function Hero() {
                     <div className="p-2.5 rounded-xl bg-black/40 border border-white/5 space-y-1">
                       <div className="text-[10px] text-slate-400 uppercase">Primary Focus</div>
                       <div className="text-emerald-300 font-bold flex items-center justify-between">
-                        <span>Full-Stack Web & REST APIs</span>
+                        <span>Full-Stack Web & Backend Engineering</span>
                         <span className="text-[10px] text-emerald-400">CORE</span>
                       </div>
                     </div>
@@ -304,7 +283,7 @@ export function Hero() {
                     <div className="p-2.5 rounded-xl bg-black/40 border border-white/5 space-y-1">
                       <div className="text-[10px] text-slate-400 uppercase">Core Frameworks</div>
                       <div className="text-cyan-300 font-bold flex items-center justify-between">
-                        <span>Next.js 15 · Spring Boot 3 · NestJS</span>
+                        <span>Next.js · React · Spring Boot · NestJS</span>
                         <span className="text-[10px] text-cyan-400">ACTIVE</span>
                       </div>
                     </div>
@@ -318,9 +297,9 @@ export function Hero() {
                     </div>
 
                     <div className="p-2.5 rounded-xl bg-black/40 border border-white/5 space-y-1">
-                      <div className="text-[10px] text-slate-400 uppercase">Academic Standing</div>
+                      <div className="text-[10px] text-slate-400 uppercase">Academic Degree</div>
                       <div className="text-slate-200 font-bold flex items-center justify-between">
-                        <span>University of Moratuwa (Batch 23)</span>
+                        <span>B.Sc. (Hons) IT & Management (UoM)</span>
                         <span className="text-[10px] text-emerald-400">3.47 GPA</span>
                       </div>
                     </div>

@@ -33,11 +33,11 @@ export function About() {
           <div className="lg:col-span-6 space-y-5 text-sm sm:text-base text-slate-300 leading-relaxed">
             <div className="p-6 rounded-2xl bg-[#0c1118] border border-white/[0.06] space-y-4 shadow-xl">
               <p>
-                I am a 3rd-year Information Technology undergraduate at the <strong className="text-white font-semibold">University of Moratuwa</strong> (Faculty of Information Technology). Most of my technical learning comes from building full-stack applications from scratch—learning how to structure databases, design REST APIs, and create clean, responsive user interfaces.
+                I am an Information Technology & Management undergraduate at the <strong className="text-white font-semibold">University of Moratuwa</strong> (Faculty of Information Technology). Most of my technical learning comes from building full-stack applications from scratch—learning how to structure databases, design REST APIs, and create clean, responsive user interfaces.
               </p>
 
               <p>
-                In our 2nd-year enterprise project, <strong className="text-emerald-300 font-medium">Durdans Hospital LIMS</strong> (developed in collaboration with IFS Sri Lanka, Durdans Hospital PLC, and UoM), I worked on sample accessioning, automated delta-checks, and quality control calculations using Spring Boot and Next.js.
+                In our enterprise project, <strong className="text-emerald-300 font-medium">Durdans Hospital LIMS</strong> (developed in collaboration with IFS Sri Lanka, Durdans Hospital PLC, and UoM), I worked on sample accessioning, automated delta-checks, and quality control calculations using Spring Boot and Next.js.
               </p>
 
               <p>
