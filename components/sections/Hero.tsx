@@ -23,6 +23,7 @@ import {
   Search,
   Code2,
   Copy,
+  User,
 } from "lucide-react";
 
 export function Hero() {
@@ -164,23 +165,25 @@ export function Hero() {
             <div className="flex items-center gap-1 p-1 rounded-full bg-[#0c1118] border border-white/10 shadow-lg">
               <button
                 onClick={() => setHeroMode("visual")}
-                className={`px-3.5 py-1 rounded-full text-xs font-mono font-medium transition-all ${
+                className={`inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-mono font-medium transition-all ${
                   heroMode === "visual"
                     ? "bg-emerald-400 text-slate-950 font-bold shadow-md shadow-emerald-500/20"
                     : "text-slate-400 hover:text-slate-200"
                 }`}
               >
-                👤 Visual Profile
+                <User className="w-3.5 h-3.5" />
+                <span>Visual Profile</span>
               </button>
               <button
                 onClick={() => setHeroMode("telemetry")}
-                className={`px-3.5 py-1 rounded-full text-xs font-mono font-medium transition-all ${
+                className={`inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-mono font-medium transition-all ${
                   heroMode === "telemetry"
                     ? "bg-cyan-400 text-slate-950 font-bold shadow-md shadow-cyan-500/20"
                     : "text-slate-400 hover:text-slate-200"
                 }`}
               >
-                ⚡ Tech Specs
+                <Activity className="w-3.5 h-3.5" />
+                <span>Tech Specs</span>
               </button>
             </div>
 
@@ -238,7 +241,7 @@ export function Hero() {
                       </span>
                       <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-mono text-slate-300 bg-white/10 backdrop-blur-sm border border-white/10">
                         <ShieldCheck className="w-3.5 h-3.5 text-cyan-400" />
-                        <span>10+ Badges</span>
+                        <span>8+ Badges</span>
                       </span>
                       <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-mono text-slate-300 bg-white/10 backdrop-blur-sm border border-white/10">
                         <GraduationCap className="w-3.5 h-3.5 text-emerald-400" />
@@ -353,7 +356,7 @@ export function Hero() {
 
           <div className="p-4 sm:p-5 rounded-2xl bg-[#0c1118]/80 border border-white/[0.06] hover:border-emerald-500/30 transition-colors">
             <div className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-              10+
+              {profile.metrics.certCount}
             </div>
             <div className="text-[11px] text-slate-400 mt-1 uppercase tracking-wider">
               Verified Badges & Certifications

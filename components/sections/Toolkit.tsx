@@ -79,7 +79,7 @@ export function Toolkit() {
           {/* Quick Stat Pill */}
           <div className="inline-flex items-center gap-3 px-4 py-2 rounded-2xl bg-[#0c1118] border border-white/[0.08] text-xs font-mono">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="text-slate-300">16+ Core Technologies Active</span>
+            <span className="text-slate-300">10+ Core Technologies Active</span>
           </div>
         </div>
 
