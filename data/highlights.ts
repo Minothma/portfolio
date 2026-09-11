@@ -78,13 +78,13 @@ export const leadershipHistory: LeadershipItem[] = [
   {
     year: "2025",
     role: "Finance Committee Member",
-    organization: "HackElite 2.0 — IEEE WIE Student Branch Affinity Group, UoM",
+    organization: "HackElite 2.0 - IEEE WIE Student Branch Affinity Group, UoM",
     description: "Coordinating budget allocation and sponsorship logistics for the flagship hackathon.",
   },
   {
     year: "2025",
     role: "Editorial Committee Member",
-    organization: "Rise Up Mora 2025 — IEEE Student Branch, University of Moratuwa",
+    organization: "Rise Up Mora 2025 - IEEE Student Branch, University of Moratuwa",
     description: "Contributing to promotional literature, branding, and event documentation.",
   },
   {
