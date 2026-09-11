@@ -15,7 +15,7 @@ export const skills: SkillCategory[] = [
   {
     category: "Frontend",
     description: "Modern client-side web frameworks & responsive UI",
-    items: ["Next.js", "React", "TypeScript", "Tailwind CSS", "HTML", "CSS", "Axios"],
+    items: ["Next.js", "React", "TypeScript", "HTML", "CSS", "Axios", "Tailwind CSS"],
     icon: "Layout",
   },
   {
