@@ -91,22 +91,21 @@ export function Projects() {
   });
 
   return (
-    <section id="work" className="py-24 relative border-t border-white/[0.04]">
+    <section id="projects" className="py-24 relative border-t border-white/[0.04]">
       <div className="w-full max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
         
         {/* Eyebrow and Section Header */}
-        <div className="flex items-center gap-4 mb-4">
+        <div className="flex items-center gap-2.5 mb-3">
+          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
           <span className="text-xs font-mono tracking-widest text-emerald-400 font-semibold uppercase">
-            SELECTED WORK // PRODUCTION ARCHITECTURE
+            FEATURED PROJECTS & SYSTEMS
           </span>
-          <span className="h-[1px] w-16 bg-emerald-500/40" />
         </div>
 
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
           <div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-3">
-              Featured Projects & <br className="hidden sm:inline" />
-              Web Applications.
+              Featured <span className="bg-gradient-to-r from-emerald-300 via-teal-200 to-cyan-300 bg-clip-text text-transparent">Projects.</span>
             </h2>
             <p className="text-xs sm:text-sm text-slate-400 max-w-xl leading-relaxed">
               Full-stack systems and engineering projects built with clean layer separation, secure APIs, and responsive UI design.

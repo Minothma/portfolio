@@ -150,12 +150,12 @@ export function CommandPalette({ isOpen, onClose, onSelectProject }: CommandPale
         keywords: ["about", "story", "bio", "background", "moratuwa"],
       },
       {
-        id: "nav-work",
+        id: "nav-projects",
         category: "Navigation",
-        title: "Go to Featured Work & Projects",
+        title: "Go to Featured Projects",
         subtitle: "Enterprise systems & Full-stack applications",
         icon: <FileCode2 className="w-4 h-4 text-emerald-400" />,
-        action: () => navigateTo("work"),
+        action: () => navigateTo("projects"),
         keywords: ["projects", "work", "portfolio", "systems", "code"],
       },
       {
@@ -197,7 +197,7 @@ export function CommandPalette({ isOpen, onClose, onSelectProject }: CommandPale
           if (onSelectProject) {
             onSelectProject(project.id);
           } else {
-            navigateTo("work");
+            navigateTo("projects");
           }
           onClose();
         },

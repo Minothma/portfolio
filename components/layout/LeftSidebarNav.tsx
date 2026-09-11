@@ -7,7 +7,7 @@ export function LeftSidebarNav() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["about", "work", "journey", "toolkit", "contact"];
+      const sections = ["about", "projects", "toolkit", "journey", "contact"];
       const scrollPosition = window.scrollY + window.innerHeight * 0.35;
 
       for (let i = sections.length - 1; i >= 0; i--) {
@@ -30,9 +30,9 @@ export function LeftSidebarNav() {
 
   const navItems = [
     { id: "about", label: "ABOUT" },
-    { id: "work", label: "WORK" },
-    { id: "journey", label: "JOURNEY" },
+    { id: "projects", label: "PROJECTS" },
     { id: "toolkit", label: "TOOLKIT" },
+    { id: "journey", label: "JOURNEY" },
     { id: "contact", label: "CONTACT" },
   ];
 

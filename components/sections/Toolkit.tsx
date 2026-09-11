@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { skills } from "@/data/skills";
 import { usePortfolioUI } from "@/components/ui/PortfolioUIContext";
 import { useToast } from "@/components/ui/Toast";
@@ -10,13 +10,9 @@ import {
   Database,
   Terminal,
   Code2,
-  ShieldCheck,
-  Palette,
-  Layers,
-  CheckCircle2,
   Cpu,
+  Layers,
   ArrowUpRight,
-  Filter,
 } from "lucide-react";
 
 export function Toolkit() {
@@ -30,24 +26,21 @@ export function Toolkit() {
 
   const getCategoryIcon = (category: string) => {
     switch (category) {
-      case "Backend & Microservices":
-      case "Backend":
-        return <Server className="w-4 h-4 text-emerald-400" />;
-      case "Frontend":
-        return <Layout className="w-4 h-4 text-cyan-400" />;
-      case "Databases & Migrations":
-      case "Databases & ORM":
-        return <Database className="w-4 h-4 text-emerald-400" />;
-      case "DevOps, Cloud & IaC":
-      case "DevOps & Cloud":
-        return <Terminal className="w-4 h-4 text-cyan-400" />;
       case "Languages":
         return <Code2 className="w-4 h-4 text-emerald-400" />;
-      case "Architecture & Standards":
-      case "Core Concepts":
+      case "Frontend":
+        return <Layout className="w-4 h-4 text-cyan-400" />;
+      case "Backend & APIs":
+      case "Backend":
+        return <Server className="w-4 h-4 text-emerald-400" />;
+      case "Databases & ORM":
+      case "Databases":
+        return <Database className="w-4 h-4 text-emerald-400" />;
+      case "DevOps & Cloud":
+        return <Terminal className="w-4 h-4 text-cyan-400" />;
+      case "Architecture & Principles":
+      case "Architecture":
         return <Cpu className="w-4 h-4 text-cyan-400" />;
-      case "Testing & Observability":
-        return <ShieldCheck className="w-4 h-4 text-emerald-400" />;
       default:
         return <Layers className="w-4 h-4 text-emerald-400" />;
     }
@@ -58,18 +51,17 @@ export function Toolkit() {
       <div className="w-full max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
         
         {/* Eyebrow Header */}
-        <div className="flex items-center gap-4 mb-4">
+        <div className="flex items-center gap-2.5 mb-3">
+          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
           <span className="text-xs font-mono tracking-widest text-emerald-400 font-semibold uppercase">
-            TOOLKIT // ARCHITECTURE MATRIX
+            TECHNICAL TOOLKIT & STACK
           </span>
-          <span className="h-[1px] w-16 bg-emerald-500/40" />
         </div>
 
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-3">
-              Technologies & <br className="hidden sm:inline" />
-              Technical Stack.
+              Technical <span className="bg-gradient-to-r from-emerald-300 via-teal-200 to-cyan-300 bg-clip-text text-transparent">Toolkit.</span>
             </h2>
             <p className="text-xs sm:text-sm text-slate-400 max-w-xl leading-relaxed">
               Curated stack of frameworks, relational databases, DevOps tools, and architectural paradigms. <span className="text-emerald-300 font-medium">Click any skill to filter matching projects.</span>
@@ -83,13 +75,13 @@ export function Toolkit() {
           </div>
         </div>
 
-        {/* Layered Architecture Bento Cards Grid */}
+        {/* 6-Category Bento Matrix Grid (Balanced 2x3 Grid) */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {skills.map((category, idx) => (
             <div
               key={category.category}
               className={`p-6 sm:p-7 rounded-3xl bg-gradient-to-b from-[#0c1118] to-[#080d14] border transition-all duration-300 flex flex-col justify-between space-y-5 group hover:shadow-xl ${
-                idx === 0 || idx === 2 || idx === 6
+                idx % 2 === 0
                   ? "border-emerald-500/20 hover:border-emerald-400/50 hover:shadow-[0_0_30px_rgba(16,185,129,0.12)]"
                   : "border-cyan-500/20 hover:border-cyan-400/50 hover:shadow-[0_0_30px_rgba(6,182,212,0.12)]"
               }`}
@@ -150,4 +142,3 @@ export function Toolkit() {
     </section>
   );
 }
-

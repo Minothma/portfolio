@@ -34,9 +34,9 @@ export function PortfolioUIProvider({ children }: { children: React.ReactNode })
 
   const filterBySkill = useCallback((skill: string) => {
     setHighlightedSkill(skill);
-    const workSection = document.getElementById("work");
-    if (workSection) {
-      workSection.scrollIntoView({ behavior: "smooth" });
+    const projectsSection = document.getElementById("projects") || document.getElementById("work");
+    if (projectsSection) {
+      projectsSection.scrollIntoView({ behavior: "smooth" });
     }
   }, []);
 
