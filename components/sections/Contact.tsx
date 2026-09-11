@@ -358,18 +358,6 @@ export function Contact() {
 
         </div>
 
-        {/* Minimal Footer */}
-        <div className="pt-16 mt-16 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-400">
-          <div>
-            <span>© 2026 Minothma Sithumini · Engineered with Next.js &amp; TypeScript</span>
-          </div>
-          <div className="flex items-center gap-4">
-            <a href="#hero" className="hover:text-emerald-400 transition-colors">
-              Back to top ↑
-            </a>
-          </div>
-        </div>
-
       </div>
     </section>
   );
