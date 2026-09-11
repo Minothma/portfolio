@@ -1,24 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { leadershipHistory, certificationsList, referencesList } from "@/data/highlights";
 import { Award, UserCheck, Mail, Phone, ExternalLink, Users, Calendar } from "lucide-react";
 
 export function Journey() {
-  const [selectedCategory, setSelectedCategory] = useState<string>("All");
-
-  const categories = [
-    "All",
-    "Databases & Backend",
-    "Cloud & DevOps",
-    "AI / ML & Data Science",
-    "Programming & Web",
-  ];
-
-  const filteredCertifications = certificationsList.filter((cert) => {
-    if (selectedCategory === "All") return true;
-    return cert.category === selectedCategory;
-  });
 
   return (
     <section id="journey" className="py-24 relative border-t border-white/[0.04]">
@@ -100,7 +86,7 @@ export function Journey() {
 
         </div>
 
-        {/* Section Pillar 2: Licenses & Verified Certifications */}
+        {/* Section Pillar 2: Technical Certifications (Option 1: Clean 3-Column Grid) */}
         <div className="pt-8 border-t border-white/[0.04] mb-20">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
             <div className="flex items-center gap-3">
@@ -108,35 +94,25 @@ export function Journey() {
                 <Award className="w-4 h-4" />
               </div>
               <div>
-                <h3 className="text-base sm:text-lg font-bold text-white">
-                  Licenses & Verified Certifications
+                <h3 className="text-base sm:text-lg font-bold text-white tracking-tight">
+                  Technical Certifications
                 </h3>
-                <span className="text-xs font-mono text-slate-400">
-                  {certificationsList.length} Verified Industry & University Credentials
-                </span>
+                <p className="text-xs text-slate-400 mt-0.5">
+                  Verified credentials from IBM, HackerRank, University of Moratuwa, and Sololearn
+                </p>
               </div>
             </div>
 
-            {/* Category Filter Pills */}
-            <div className="flex flex-wrap items-center gap-1.5 font-mono text-xs">
-              {categories.map((cat) => (
-                <button
-                  key={cat}
-                  onClick={() => setSelectedCategory(cat)}
-                  className={`px-3 py-1.5 rounded-full transition-all duration-150 ${
-                    selectedCategory === cat
-                      ? "bg-emerald-400 text-slate-950 font-bold shadow-md shadow-emerald-500/20"
-                      : "bg-[#0c1118] text-slate-400 border border-white/[0.06] hover:border-emerald-500/40 hover:text-white"
-                  }`}
-                >
-                  {cat}
-                </button>
-              ))}
+            {/* Total Count Badge */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0c1118] border border-emerald-500/30 text-xs font-mono text-emerald-300 shadow-sm shrink-0 self-start sm:self-auto">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span>{certificationsList.length} Verified Credentials</span>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 font-mono text-xs">
-            {filteredCertifications.map((cert, idx) => (
+          {/* Clean 3-Column Grid (12 Items: 4 Rows x 3 Columns Perfectly Balanced) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4.5 font-mono text-xs">
+            {certificationsList.map((cert, idx) => (
               <div
                 key={idx}
                 className="group relative p-5 rounded-2xl bg-[#0c1118] border border-white/[0.06] hover:border-emerald-500/40 transition-all duration-200 flex flex-col justify-between space-y-4 hover:shadow-xl hover:shadow-emerald-950/20"
@@ -147,7 +123,7 @@ export function Journey() {
                     <span className="text-slate-400">{cert.year}</span>
                   </div>
 
-                  <div className="font-bold text-slate-100 text-sm leading-snug group-hover:text-white">
+                  <div className="font-bold text-slate-100 text-sm leading-snug group-hover:text-white font-sans">
                     {cert.title}
                   </div>
 

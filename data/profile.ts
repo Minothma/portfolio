@@ -67,7 +67,7 @@ export const profile: ProfileData = {
     gpaScale: "/ 4.00",
     projectsCount: "4+",
     techCount: "10+",
-    certCount: "8+",
+    certCount: "12+",
   },
 };
 

@@ -173,6 +173,16 @@ export const certificationsList: CertificationItem[] = [
   },
   {
     year: "Feb 2025",
+    title: "Introduction to Java",
+    issuer: "Sololearn",
+    category: "Programming & Web",
+    verifyUrl: "https://www.sololearn.com/certificates/CC-J9EKNZ23",
+    verificationCode: "CC-J9EKNZ23",
+    skills: ["Java", "Core Java", "OOP Basics"],
+    status: "Verified Certificate",
+  },
+  {
+    year: "Feb 2025",
     title: "Python for Beginners",
     issuer: "University of Moratuwa (CODL)",
     category: "Programming & Web",
