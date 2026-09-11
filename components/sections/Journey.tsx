@@ -173,11 +173,11 @@ export function Journey() {
               <UserCheck className="w-4 h-4" />
             </div>
             <div>
-              <h3 className="text-base sm:text-lg font-bold text-white">
+              <h3 className="text-base sm:text-lg font-bold text-white tracking-tight">
                 Academic & Professional References
               </h3>
               <span className="text-xs font-mono text-slate-400">
-                Department of Interdisciplinary Studies · Faculty of IT
+                Faculty of Information Technology & Software Industry Mentors
               </span>
             </div>
           </div>
