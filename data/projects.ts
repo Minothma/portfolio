@@ -1,6 +1,13 @@
+export interface ScreenshotItem {
+  url: string;
+  title: string;
+  caption: string;
+}
+
 export interface ProjectContributionSection {
   title: string;
   points: string[];
+  screenshots?: ScreenshotItem[];
 }
 
 export interface ProjectWriteUp {
@@ -41,17 +48,14 @@ export const projectsData: ProjectItem[] = [
     statusTag: "COMPLETED",
     category: "Enterprise & Healthcare",
     tagline:
-      "Enterprise Full-Stack Laboratory Information Management System for Durdans Hospital PLC (with IFS Sri Lanka & University of Moratuwa)",
-    role: "Full-Stack Developer (Pre-Analytics, MLT Worklist & Quality Control Module)",
-    teamContext: "5-Member Team · University of Moratuwa, IFS Sri Lanka & Durdans Hospital PLC",
+      "Enterprise Laboratory Management ERP for Durdans Hospital Laboratories (with IFS Sri Lanka & University of Moratuwa)",
+    role: "Full-Stack Developer & Lead Technical Documenter",
+    teamContext: "5-Member Engineering Team · University of Moratuwa, IFS Sri Lanka & Durdans Hospital PLC",
     description:
-      "Full-stack healthcare web application developed to digitize and manage the laboratory diagnostic workflow across hospital branches, supporting sample intake, automated delta-checks, and quality control verification.",
+      "Full-stack healthcare enterprise ERP developed to digitize and automate clinical laboratory diagnostic workflows across 100+ hospital branches in Sri Lanka.",
     highlights: [
-      "Built a sample accessioning dashboard with priority queues (STAT, Urgent, Normal) and vacutainer container validation.",
-      "Implemented reference range auto-flagging and longitudinal delta-checks (|Δ%| ≥ 40%) to catch potential sample mix-ups.",
-      "Developed an internal quality control (IQC) module with Westgard multi-rules calculations (1-2s, 1-3s, 2-2s) and dynamic Z-scores.",
-      "Added barcode reprinting support for damaged sample labels and Excel export for daily accessioning audit logs.",
-      "Developed backend REST APIs using Spring Boot 3 with Keycloak role-based authentication and Kafka event messaging.",
+      "Built sample reception & pre-analytical accessioning worklists with 3-tier priority triage (STAT, Urgent, Normal) and 5-point quality verification.",
+      "Engineered zero-duplication barcode reprint engine and MLT diagnostic result-entry interface with biological reference range auto-flagging.",
     ],
     stack: [
       "Next.js 15",
@@ -60,83 +64,141 @@ export const projectsData: ProjectItem[] = [
       "Apache Kafka",
       "Keycloak OIDC",
       "Liquibase",
-      "Docker",
-      "AWS / Terraform",
     ],
     githubUrl: "https://github.com/Minothma/durdans-lims",
     demoUrl: null,
     writeUp: {
       tagline:
         "Durdans LIMS · 2nd-Year Enterprise Project in collaboration with IFS Sri Lanka, Durdans Hospital PLC & University of Moratuwa",
-      role: "Full-Stack Developer (Sample Accessioning, Result Entry & Quality Control Lead)",
+      role: "Full-Stack Developer (Sample Lifecycle, MLT Processing & Lead Technical Documenter)",
       teamContext: "5 Members (University of Moratuwa, IFS Sri Lanka, Durdans Hospital PLC)",
       complianceStandards: [
         "ISO 15189 Quality Verification",
-        "CLSI C28-A3 Reference Intervals",
-        "Westgard Multi-Rules Quality Control",
+        "Clinical Sample Traceability",
+        "Role-Based Access Control (RBAC)",
       ],
       overview:
-        "Durdans LIMS is an enterprise web application designed to digitize the clinical laboratory diagnostic pipeline. Built in collaboration with IFS Sri Lanka and Durdans Hospital PLC as our 2nd-year software project, the system simplifies sample intake, prevents accidental sample mix-ups through automated delta-checks, and ensures diagnostic result accuracy before reports are published.",
+        "Durdans LIMS is an enterprise web application designed to digitize and centralize laboratory operations across Durdans Hospital's network of over 100 branches in Sri Lanka. Built in collaboration with IFS Sri Lanka and Durdans Hospital PLC as our 2nd-year software engineering project, the platform unifies multi-branch laboratory operations, prevents reporting delays, enforces multi-role access control, and maintains full specimen traceability across the 8-phase clinical pipeline.",
       contributions: [
         {
-          title: "1️⃣ Sample Accessioning & Intake Workflow",
+          title: "01. Sample Reception & Pre-Analytical Accessioning Workflow",
           points: [
-            "Accessioning Dashboard: Designed a 3-tier priority queue (STAT, Urgent, Normal) to help lab staff prioritize emergency samples and maintain Turnaround Time (TAT).",
-            "Fast Search & Filtering: Implemented barcode and patient ID lookups with multi-criteria filtering by test type and department.",
-            "Specimen Tracking: Tracked collection timestamps, phlebotomist information, and tube types for end-to-end sample traceability.",
+            "Reception Worklists: Built dedicated worklists enabling reception staff to manage incoming samples with rich metadata (Patient, Sample ID, Test, Priority, Status).",
+            "Multi-Criteria Search & Filter: Implemented fast lookups by test type, laboratory department, priority (STAT, Urgent, Normal), and sample status.",
+            "Pre-Analytical Verification Gate: Developed checks for specimen integrity, tube-type matching, and collection validity, with standardized rejection reasons and recollection alerts.",
+          ],
+          screenshots: [
+            {
+              url: "/projects/durdans/durdan6.png",
+              title: "Accessioning Priority Worklist",
+              caption: "Multi-branch sample reception dashboard with STAT (4), Urgent (11), and Normal (34) priority triage queues.",
+            },
+            {
+              url: "/projects/durdans/durdan7.png",
+              title: "Specimen Chain-of-Custody",
+              caption: "Comprehensive specimen metadata view with barcode, tube container type (EDTA Purple), collector audit, and patient details.",
+            },
+            {
+              url: "/projects/durdans/durdan8.png",
+              title: "Pre-Analytical Quality Verification Gate",
+              caption: "5-point quality validation: Barcode integrity, correct container, volume sufficiency, specimen condition, and collection window check.",
+            },
+            {
+              url: "/projects/durdans/durdan9.png",
+              title: "Quality Verification Completed (5/5)",
+              caption: "Verified accessioning record passed through the pre-analytical gate, ready for analysis queue dispatch.",
+            },
           ],
         },
         {
-          title: "2️⃣ Sample Quality Verification & Rejection Handling",
+          title: "02. Zero-Duplication Barcode Reprinting & Audit Exporter",
           points: [
-            "Quality Verification Gate: Built checks for label legibility, container type matching, adequate volume (≥ 3.0 mL), and specimen integrity.",
-            "Barcode Thermal Printing: Integrated one-click barcode reprinting for damaged labels without creating duplicate database entries.",
-            "Sample Rejection Engine: Standardized rejection reasons (hemolyzed, clotted, mislabeled) and triggered automated recollection requests.",
-            "Worklist Handoff & Audit Logs: Automated handoff into the technician worklist upon acceptance, with Excel export for daily intake audits.",
+            "Zero-Duplication Barcode Reprint Engine: Allowed staff to locate existing samples and reprint damaged thermal labels without creating duplicate database records, preserving unbroken sample traceability.",
+            "Accessioning Log Excel Export: Implemented direct export of accessioning records to Excel for daily operational tracking, branch reporting, and compliance audits.",
+          ],
+          screenshots: [
+            {
+              url: "/projects/durdans/durdan10.png",
+              title: "Zero-Duplication Barcode Reprint Engine",
+              caption: "Instant sample lookup by barcode or order number with live thermal label preview and zero duplicate database writes.",
+            },
+            {
+              url: "/projects/durdans/durdan11.png",
+              title: "Accessioning Audit Trail & Excel Exporter",
+              caption: "Complete audit log of reception actions (81 actions, 68 accepted, 13 rejected) with one-click export to Excel for compliance.",
+            },
           ],
         },
         {
-          title: "3️⃣ Result Entry & Reference Range Checking",
+          title: "03. MLT Processing & Result-Entry Engine",
           points: [
-            "Technician Worklist: Structured worklist organizing pending diagnostic tests with analyzer selection and notes.",
-            "Reference Range Auto-Flagging: Evaluated test values against normal ranges, automatically highlighting abnormal or critical values.",
-            "Delta-Check Algorithm (|Δ%| ≥ 40%): Calculated percentage change against a patient's historical baseline to catch unexpected result shifts and specimen mix-ups.",
-            "Dual Action Workflow: Built 'Save Draft' for in-progress tests alongside 'Submit for Verification' to lock records for final supervisor approval.",
+            "Technician Worklists: Developed structured MLT worklists organizing pending diagnostic tests by processing status and analyzer selection.",
+            "Reference Range & Critical Auto-Flagging: Evaluated test values against normal biological reference ranges, automatically flagging abnormal or critical values.",
+            "Dual-Action State Machine: Built 'Save Draft' for in-progress tests alongside 'Submit for Technical Verification' to lock records against unauthorized modification before supervisor review.",
+          ],
+          screenshots: [
+            {
+              url: "/projects/durdans/durdan12.png",
+              title: "MLT Testing Sample Worklist",
+              caption: "Technician diagnostic queue categorized by pending tests, STAT priority, and analyzer status.",
+            },
+            {
+              url: "/projects/durdans/durdan13.png",
+              title: "Result Entry & Auto-Flagging Engine",
+              caption: "Result input with biological reference range comparison, automatic High/Critical flags, delta checks, analyzer selection, and verification submission state machine.",
+            },
           ],
         },
         {
-          title: "4️⃣ Quality Control (QC) Calculations & Telemetry",
+          title: "04. Quality Control (QC) & Laboratory Equipment Telemetry",
           points: [
-            "Westgard Multi-Rules: Computed 1-2s warnings and 1-3s / 2-2s statistical rejections with dynamic Z-scores (Z = (x - μ) / SD).",
-            "Audit History: Enabled quick switching between today's active runs and historical control batch logs.",
-            "Live Instrument Telemetry: Aggregated analyzer statuses and daily test counts directly from PostgreSQL database queries.",
-            "Cross-Department Overview: Provided supervisors with a unified radar view across Collected, Accepted, Entered, and Dispatched test states.",
+            "QC Run Tracking: Implemented recording and monitoring of daily Quality Control (QC) batch runs.",
+            "Instrument Status Monitoring: Tracked laboratory analyzer availability, operational statuses, and live test volume metrics directly from the database.",
+          ],
+          screenshots: [
+            {
+              url: "/projects/durdans/durdan14.png",
+              title: "Quality Control (QC) Dashboard",
+              caption: "Daily QC run recording with Westgard rules verification for analyzers (Cobas c501) and analytes (HbA1c).",
+            },
+            {
+              url: "/projects/durdans/durdan15.png",
+              title: "Live Laboratory Instrument Telemetry",
+              caption: "Real-time connectivity and QC operational status monitoring for laboratory analyzers (VITEK 2, Cobas c501, Cobas e411, Sysmex XN-1000).",
+            },
+          ],
+        },
+        {
+          title: "05. Architecture Modeling & Lead Technical Documentation",
+          points: [
+            "UML Workflow Modeling: Designed comprehensive UML Activity Diagrams and Class Diagrams defining the complete sample lifecycle, accessioning decision gates, and MLT result processing.",
+            "System Architecture Specification: Contributed to end-to-end architectural documentation, API contracts, and integration workflows.",
           ],
         },
       ],
       architecture: [
-        "Spring Boot 3 (Java 21) RESTful backend with Keycloak role-based access control across clinical staff roles.",
-        "Apache Kafka event messaging with Transactional Outbox pattern for reliable status updates.",
-        "Automated pre-analytical checks with tube-type validation, barcode printing, and STAT emergency triage.",
-        "Validation engine computing real-time delta-checks (|Δ%| ≥ 40%), reference ranges, and Westgard QC statistics.",
-        "Liquibase database schema migrations managing normalized PostgreSQL audit logs.",
+        "Spring Boot 3 (Java 21) RESTful backend with Keycloak role-based access control across clinical staff roles and branch scopes.",
+        "Apache Kafka event messaging with Transactional Outbox pattern for reliable status updates and async notifications.",
+        "Automated pre-analytical checks with tube-type validation, barcode reprinting, and STAT emergency triage.",
+        "Validation engine computing real-time reference ranges, critical alerts, and QC batch statistics.",
+        "Liquibase database schema migrations managing normalized PostgreSQL audit logs and clinical tables.",
         "Next.js 15 App Router frontend with real-time TAT monitors and responsive dashboard layouts.",
         "Containerized deployment with Docker and automated GitHub Actions CI/CD workflows.",
       ],
       hardParts: [
-        "Implementing Westgard statistical calculations (mean, standard deviation, and rule violations) across historical control batches in real time.",
-        "Ensuring zero message loss during high-volume sample intake using Kafka transactional outbox patterns.",
-        "Calculating delta-checks comparing current tests against historical patient baselines with low database query latency.",
+        "Ensuring zero-duplication sample integrity in PostgreSQL when reprinting damaged thermal barcode labels under high-throughput reception.",
+        "Building real-time reference range evaluation and abnormal flag calculation with low query latency across multi-test panels.",
+        "Maintaining strict state synchronization between MLT result entry, draft saving, and supervisor technical verification handoff.",
       ],
       stackBreakdown: [
-        { category: "Frontend", tools: "Next.js 15 (App Router), React, TypeScript, Tailwind CSS, Lucide Icons, Axios" },
-        { category: "Backend", tools: "Java 21, Spring Boot 3, Spring Data JPA, Hibernate, Gradle Multi-Module" },
-        { category: "Auth & Security", tools: "Keycloak OIDC (Role-Based Access Control)" },
+        { category: "Frontend", tools: "Next.js 15 (App Router), React, TypeScript, Tailwind CSS, Axios" },
+        { category: "Backend", tools: "Java 21, Spring Boot 3, Spring Data JPA, Hibernate, RESTful APIs" },
+        { category: "Auth & Security", tools: "Keycloak OAuth2 / OIDC (Multi-Role & Branch-Scoped RBAC)" },
         { category: "Messaging & Events", tools: "Apache Kafka (Transactional Outbox Pattern)" },
         { category: "Database", tools: "PostgreSQL, Liquibase (Version-Controlled Migrations)" },
-        { category: "Testing", tools: "JUnit 5, Testcontainers, k6 Load Testing" },
-        { category: "Cloud & DevOps", tools: "AWS, Terraform, Docker, GitHub Actions CI/CD" },
-        { category: "Monitoring", tools: "Prometheus, Grafana, OpenTelemetry" },
+        { category: "Project Management", tools: "Agile Scrum (Jira, 2-Week Sprints), Git / GitHub" },
+        { category: "Testing & Quality", tools: "JUnit 5, Testcontainers (144 Automated Tests)" },
+        { category: "Cloud & DevOps", tools: "AWS (EC2, S3), Terraform, Docker, GitHub Actions CI/CD" },
       ],
       repoNote: "Enterprise Project · Durdans Hospital PLC, IFS Sri Lanka & University of Moratuwa",
     },

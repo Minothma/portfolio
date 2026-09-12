@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import { createPortal } from "react-dom";
 import { projectsData, ProjectItem } from "@/data/projects";
 import { usePortfolioUI } from "@/components/ui/PortfolioUIContext";
@@ -25,6 +26,8 @@ import {
   Filter,
   Copy,
   Check,
+  ZoomIn,
+  Maximize2,
 } from "lucide-react";
 
 export function Projects() {
@@ -32,6 +35,7 @@ export function Projects() {
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [localSelectedProject, setLocalSelectedProject] = useState<ProjectItem | null>(null);
   const [copiedSummary, setCopiedSummary] = useState(false);
+  const [activeLightboxImage, setActiveLightboxImage] = useState<{ url: string; title: string; caption: string } | null>(null);
 
   const {
     selectedProjectId,
@@ -175,63 +179,61 @@ export function Projects() {
                 </div>
 
                 {/* Project Title & Tagline */}
-                <div className="mb-3">
+                <div className="mb-4">
                   <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-tight group-hover:text-emerald-300 transition-colors">
                     Durdans Hospital LIMS
                   </h3>
                   <p className="text-xs font-mono text-emerald-400/90 mt-1 font-semibold">
-                    Role: Full-Stack Developer (Accessioning & Quality Control Module)
+                    Role: Full-Stack Developer & Lead Technical Documenter
                   </p>
                 </div>
 
-                {/* Compliance & Standards Bar */}
-                <div className="flex flex-wrap gap-1.5 mb-4">
-                  <span className="px-2 py-0.5 rounded text-[10px] font-mono text-emerald-300 bg-emerald-500/10 border border-emerald-500/20">
-                    ISO 15189 Quality Verification
-                  </span>
-                  <span className="px-2 py-0.5 rounded text-[10px] font-mono text-cyan-300 bg-cyan-500/10 border border-cyan-500/20">
-                    Reference Interval Auto-Flagging
-                  </span>
-                  <span className="px-2 py-0.5 rounded text-[10px] font-mono text-emerald-300 bg-emerald-500/10 border border-emerald-500/20">
-                    Westgard Quality Control
-                  </span>
+                {/* Official Showcase Banner Preview */}
+                <div 
+                  onClick={() => handleOpenModal(projectsData.find((p) => p.id === "durdans-lims")!)}
+                  className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden border border-white/10 mb-5 group/img cursor-pointer shadow-xl hover:border-emerald-500/50 transition-all duration-300"
+                >
+                  <Image
+                    src="/durdans-lims-banner.jpg"
+                    alt="Durdans Hospital LIMS System Architecture & Showcase"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 700px"
+                    className="object-cover group-hover/img:scale-105 transition-transform duration-500 ease-out"
+                    priority
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#090e15]/60 via-transparent to-transparent opacity-40 group-hover/img:opacity-10 transition-opacity" />
                 </div>
 
                 {/* Description */}
                 <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-5">
-                  Full-stack hospital laboratory information system digitizing specimen intake, automated delta-check validation, and diagnostic quality control.
+                  Full-stack healthcare enterprise ERP developed to digitize and automate clinical laboratory diagnostic workflows across 100+ hospital branches in Sri Lanka.
                 </p>
 
-                {/* Architectural Pipeline Flow Diagram */}
-                <div className="p-4 rounded-xl bg-black/40 border border-white/[0.06] mb-5 space-y-2">
-                  <div className="text-[10px] font-mono uppercase text-slate-400 tracking-wider flex items-center gap-1.5">
-                    <Activity className="w-3.5 h-3.5 text-emerald-400" />
-                    <span>SAMPLE WORKFLOW PIPELINE</span>
+                {/* Architecture Highlights Pill Box */}
+                <div className="p-4 rounded-xl bg-black/40 border border-white/[0.06] mb-5 space-y-2.5">
+                  <div className="flex items-center justify-between text-[11px] font-mono">
+                    <span className="text-slate-400">Specimen Lifecycle</span>
+                    <span className="text-emerald-400 font-semibold">STAT Triage & 5-Point Quality Gate</span>
                   </div>
-                  <div className="flex flex-wrap items-center gap-1.5 text-[11px] font-mono text-slate-300">
-                    <span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Sample Intake</span>
-                    <span className="text-slate-500">→</span>
-                    <span className="px-2 py-0.5 rounded bg-white/5 text-slate-300 border border-white/10">Quality Gate</span>
-                    <span className="text-slate-500">→</span>
-                    <span className="px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">Delta-Checks (Δ% ≥ 40%)</span>
-                    <span className="text-slate-500">→</span>
-                    <span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Supervisor Verification</span>
+                  <div className="flex items-center justify-between text-[11px] font-mono">
+                    <span className="text-slate-400">Specimen Integrity</span>
+                    <span className="text-cyan-400 font-semibold">Zero-Duplication Barcode Engine</span>
+                  </div>
+                  <div className="flex items-center justify-between text-[11px] font-mono">
+                    <span className="text-slate-400">Clinical Verification</span>
+                    <span className="text-emerald-300 font-semibold">MLT Result Entry & Auto-Flags</span>
                   </div>
                 </div>
 
-                {/* Individual Ownership Highlights */}
+                {/* Concise Highlights */}
                 <ul className="space-y-2 mb-6">
                   <li className="flex items-start gap-2.5 text-xs text-slate-300 leading-relaxed">
                     <span className="text-emerald-400 font-bold mt-0.5">✔</span>
-                    <span><strong>Sample Accessioning & Quality Gate:</strong> 3-tier priority queue (STAT, Urgent, Normal), tube type validation, and barcode reprinting.</span>
+                    <span>Built sample reception worklists with 3-tier priority triage and pre-analytical validation.</span>
                   </li>
                   <li className="flex items-start gap-2.5 text-xs text-slate-300 leading-relaxed">
                     <span className="text-emerald-400 font-bold mt-0.5">✔</span>
-                    <span><strong>Result Verification Engine:</strong> Reference range auto-flagging, longitudinal delta-checks (|Δ%| ≥ 40%), and Save Draft / Submit for Verification workflow.</span>
-                  </li>
-                  <li className="flex items-start gap-2.5 text-xs text-slate-300 leading-relaxed">
-                    <span className="text-emerald-400 font-bold mt-0.5">✔</span>
-                    <span><strong>Quality Control (QC) & Telemetry:</strong> Westgard multi-rules evaluation with dynamic Z-scores and live PostgreSQL test count aggregations.</span>
+                    <span>Engineered zero-duplication barcode reprint engine and MLT diagnostic result-entry state machine.</span>
                   </li>
                 </ul>
               </div>
@@ -239,7 +241,7 @@ export function Projects() {
               {/* Footer: Tech Stack + GitHub + Case Study Trigger */}
               <div className="pt-4 border-t border-white/[0.06] flex flex-wrap items-center justify-between gap-4">
                 <div className="flex flex-wrap gap-1.5">
-                  {["Next.js 15", "Java 21 / Spring Boot 3", "Apache Kafka", "PostgreSQL", "Keycloak OIDC", "Liquibase", "AWS / Terraform"].map((tech) => (
+                  {["Next.js 15", "Java 21 / Spring Boot 3", "Apache Kafka", "PostgreSQL", "Keycloak OIDC", "Liquibase"].map((tech) => (
                     <span
                       key={tech}
                       className="px-2.5 py-1 rounded text-[11px] font-mono text-slate-300 bg-[#141d2a] border border-white/[0.08]"
@@ -628,29 +630,69 @@ export function Projects() {
                 </div>
               )}
 
+              {/* Showcase Banner inside Modal (For Durdans LIMS) */}
+              {localSelectedProject.id === "durdans-lims" && (
+                <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+                  <Image
+                    src="/durdans-lims-banner.jpg"
+                    alt="Durdans Hospital LIMS System Architecture & Showcase"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 900px"
+                    className="object-cover"
+                  />
+                </div>
+              )}
+
               {/* Overview */}
-              <div className="space-y-2">
+              <div className="space-y-3">
                 <h4 className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-semibold">
-                  // SYSTEM OVERVIEW & SCOPE
+                  SYSTEM OVERVIEW & SCOPE
                 </h4>
                 <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
                   {localSelectedProject.writeUp.overview}
                 </p>
+
+                {/* Architectural Pipeline Flow Diagram (For Durdans LIMS) */}
+                {localSelectedProject.id === "durdans-lims" && (
+                  <div className="p-4 rounded-2xl bg-black/40 border border-emerald-500/20 space-y-2 mt-2">
+                    <div className="text-[11px] font-mono uppercase text-emerald-400 tracking-wider flex items-center gap-2 font-semibold">
+                      <Activity className="w-4 h-4 text-emerald-400" />
+                      <span>CLINICAL DIAGNOSTIC WORKFLOW PIPELINE (8-PHASE LIFECYCLE)</span>
+                    </div>
+                    <div className="flex flex-wrap items-center gap-2 text-xs font-mono text-slate-300 pt-1">
+                      <span className="px-2.5 py-1 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Patient Registration</span>
+                      <span className="text-slate-500">→</span>
+                      <span className="px-2.5 py-1 rounded bg-white/5 text-slate-300 border border-white/10">Order & Billing</span>
+                      <span className="text-slate-500">→</span>
+                      <span className="px-2.5 py-1 rounded bg-white/5 text-slate-300 border border-white/10">Phlebotomy</span>
+                      <span className="text-slate-500">→</span>
+                      <span className="px-2.5 py-1 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Sample Reception</span>
+                      <span className="text-slate-500">→</span>
+                      <span className="px-2.5 py-1 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">MLT Result Entry</span>
+                      <span className="text-slate-500">→</span>
+                      <span className="px-2.5 py-1 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Supervisor Verification</span>
+                      <span className="text-slate-500">→</span>
+                      <span className="px-2.5 py-1 rounded bg-white/5 text-slate-300 border border-white/10">Pathologist Auth</span>
+                      <span className="text-slate-500">→</span>
+                      <span className="px-2.5 py-1 rounded bg-white/5 text-slate-300 border border-white/10">Dispatch Portals</span>
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Structured Individual Contributions & Modules (If Available) */}
               {localSelectedProject.writeUp.contributions && (
                 <div className="space-y-4">
                   <h4 className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-semibold">
-                    // INDIVIDUAL ARCHITECTURAL OWNERSHIP & CONTRIBUTIONS
+                    INDIVIDUAL ARCHITECTURAL OWNERSHIP & CONTRIBUTIONS
                   </h4>
-                  <div className="space-y-3.5">
+                  <div className="space-y-4">
                     {localSelectedProject.writeUp.contributions.map((sec, idx) => (
                       <div
                         key={idx}
-                        className="p-5 rounded-2xl bg-[#090e15] border border-white/[0.08] space-y-2.5"
+                        className="p-5 sm:p-6 rounded-2xl bg-[#090e15] border border-white/[0.08] space-y-3 shadow-lg"
                       >
-                        <h5 className="text-sm font-bold text-white font-mono flex items-center gap-2 text-emerald-300">
+                        <h5 className="text-sm sm:text-base font-bold text-white font-mono flex items-center gap-2 text-emerald-300">
                           {sec.title}
                         </h5>
                         <ul className="space-y-2 pl-1">
@@ -664,6 +706,47 @@ export function Projects() {
                             </li>
                           ))}
                         </ul>
+
+                        {/* Module Screenshots Gallery */}
+                        {sec.screenshots && sec.screenshots.length > 0 && (
+                          <div className="mt-4 pt-3 border-t border-white/[0.06] space-y-2.5">
+                            <div className="text-[10px] font-mono uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
+                              <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
+                              <span>VERIFIED SYSTEM UI ARTIFACTS & SCREENSHOTS</span>
+                            </div>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                              {sec.screenshots.map((img, sIdx) => (
+                                <div
+                                  key={sIdx}
+                                  onClick={() => setActiveLightboxImage(img)}
+                                  className="group/img relative rounded-xl overflow-hidden border border-white/10 bg-black/60 cursor-pointer hover:border-emerald-500/60 transition-all duration-300 shadow-md flex flex-col"
+                                >
+                                  <div className="relative w-full aspect-[16/9] overflow-hidden bg-slate-950">
+                                    <Image
+                                      src={img.url}
+                                      alt={img.title}
+                                      fill
+                                      sizes="(max-width: 768px) 100vw, 400px"
+                                      className="object-cover object-top group-hover/img:scale-105 transition-transform duration-300"
+                                    />
+                                    <div className="absolute inset-0 bg-black/50 opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center gap-2 text-white font-mono text-xs backdrop-blur-[2px]">
+                                      <ZoomIn className="w-4 h-4 text-emerald-400" />
+                                      <span>Click to Zoom</span>
+                                    </div>
+                                  </div>
+                                  <div className="p-3 bg-[#0e141e] border-t border-white/5 flex-1 flex flex-col justify-between">
+                                    <div className="text-xs font-mono font-bold text-slate-200 group-hover/img:text-emerald-300 transition-colors">
+                                      {img.title}
+                                    </div>
+                                    <p className="text-[11px] text-slate-400 leading-relaxed mt-1 line-clamp-2">
+                                      {img.caption}
+                                    </p>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
                       </div>
                     ))}
                   </div>
@@ -673,7 +756,7 @@ export function Projects() {
               {/* Architecture Details */}
               <div className="space-y-3">
                 <h4 className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-semibold">
-                  // SYSTEM ARCHITECTURE & DESIGN DECISIONS
+                  SYSTEM ARCHITECTURE & DESIGN DECISIONS
                 </h4>
                 <ul className="space-y-2.5">
                   {localSelectedProject.writeUp.architecture.map((item, idx) => (
@@ -710,7 +793,7 @@ export function Projects() {
               {/* 8-Tier Technology Stack Breakdown */}
               <div className="space-y-3">
                 <h4 className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-semibold">
-                  // COMPREHENSIVE TECHNOLOGY STACK MATRIX
+                  COMPREHENSIVE TECHNOLOGY STACK MATRIX
                 </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {localSelectedProject.writeUp.stackBreakdown.map((sb, idx) => (
@@ -739,6 +822,60 @@ export function Projects() {
                 >
                   Close Case Study
                 </button>
+              </div>
+            </div>
+          </div>,
+          document.body
+        )}
+
+      {/* Image Lightbox Portal for High-Resolution Artifact Inspection */}
+      {mounted &&
+        activeLightboxImage &&
+        createPortal(
+          <div
+            className="fixed inset-0 z-[999999] flex items-center justify-center p-3 sm:p-6 bg-black/95 backdrop-blur-xl animate-in fade-in duration-200"
+            onClick={() => setActiveLightboxImage(null)}
+          >
+            <div
+              className="relative max-w-5xl w-full max-h-[94vh] flex flex-col rounded-3xl bg-[#0d121c] border border-white/20 shadow-2xl overflow-hidden text-slate-200"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Lightbox Header */}
+              <div className="flex items-center justify-between p-4 sm:p-5 border-b border-white/10 bg-[#090e15]">
+                <div className="space-y-0.5">
+                  <div className="text-[11px] font-mono uppercase tracking-wider text-emerald-400 font-bold flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                    <span>DURDANS LIMS · VERIFIED SYSTEM UI ARTIFACT</span>
+                  </div>
+                  <h4 className="text-sm sm:text-base font-bold text-white font-mono">
+                    {activeLightboxImage.title}
+                  </h4>
+                </div>
+                <button
+                  onClick={() => setActiveLightboxImage(null)}
+                  className="p-2 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors"
+                  aria-label="Close image preview"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Lightbox Image Preview Frame */}
+              <div className="relative w-full aspect-[16/9] sm:aspect-[16/10] bg-black/80 overflow-hidden flex items-center justify-center p-2">
+                <Image
+                  src={activeLightboxImage.url}
+                  alt={activeLightboxImage.title}
+                  fill
+                  sizes="(max-width: 1200px) 100vw, 1200px"
+                  className="object-contain"
+                  priority
+                />
+              </div>
+
+              {/* Lightbox Footer & Caption */}
+              <div className="p-4 sm:p-5 bg-[#0e141f] border-t border-white/10 text-xs sm:text-sm text-slate-300 leading-relaxed font-mono flex items-start gap-2.5">
+                <span className="text-emerald-400 font-bold text-base mt-[-2px]">ℹ</span>
+                <span>{activeLightboxImage.caption}</span>
               </div>
             </div>
           </div>,
