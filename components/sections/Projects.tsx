@@ -33,7 +33,7 @@ import {
 export function Projects() {
   const [mounted, setMounted] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
-  const [localSelectedProject, setLocalSelectedProject] = useState<ProjectItem | null>(null);
+  const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
   const [copiedSummary, setCopiedSummary] = useState(false);
   const [activeLightboxImage, setActiveLightboxImage] = useState<{ url: string; title: string; caption: string } | null>(null);
 
@@ -50,22 +50,52 @@ export function Projects() {
     setMounted(true);
   }, []);
 
+  // Sync with global UI context (e.g. from Command Palette or direct triggers)
   useEffect(() => {
     if (selectedProjectId) {
       const p = projectsData.find((proj) => proj.id === selectedProjectId);
       if (p) {
-        setLocalSelectedProject(p);
+        setSelectedProject(p);
       }
+    } else {
+      setSelectedProject(null);
     }
   }, [selectedProjectId]);
 
+  // Lock body scroll when modal or lightbox is active
+  useEffect(() => {
+    if (selectedProject || activeLightboxImage) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [selectedProject, activeLightboxImage]);
+
+  // Close on Escape key press
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        if (activeLightboxImage) {
+          setActiveLightboxImage(null);
+        } else if (selectedProject) {
+          handleCloseModal();
+        }
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [selectedProject, activeLightboxImage]);
+
   const handleOpenModal = (project: ProjectItem) => {
-    setLocalSelectedProject(project);
+    setSelectedProject(project);
     openProjectModal(project.id);
   };
 
   const handleCloseModal = () => {
-    setLocalSelectedProject(null);
+    setSelectedProject(null);
     closeProjectModal();
   };
 
@@ -442,9 +472,9 @@ export function Projects() {
                     onClick={() =>
                       handleOpenModal(projectsData.find((p) => p.id === "inkora")!)
                     }
-                    className="text-xs font-mono text-emerald-400 hover:text-emerald-300 inline-flex items-center gap-1 font-semibold"
+                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold text-emerald-300 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 hover:border-emerald-500/50 transition-all active:scale-95"
                   >
-                    <span>Details</span>
+                    <span>System & Security</span>
                     <ArrowUpRight className="w-3.5 h-3.5" />
                   </button>
                 </div>
@@ -515,9 +545,9 @@ export function Projects() {
                     onClick={() =>
                       handleOpenModal(projectsData.find((p) => p.id === "battery-vitals")!)
                     }
-                    className="text-xs font-mono text-cyan-400 hover:text-cyan-300 inline-flex items-center gap-1 font-semibold"
+                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold text-cyan-300 bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 hover:border-cyan-500/50 transition-all active:scale-95"
                   >
-                    <span>Details</span>
+                    <span>Firmware & Telemetry</span>
                     <ArrowUpRight className="w-3.5 h-3.5" />
                   </button>
                 </div>
@@ -537,9 +567,12 @@ export function Projects() {
 
       {/* Case Study Modal Dialog */}
       {mounted &&
-        localSelectedProject &&
+        selectedProject &&
         createPortal(
-          <div className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-6 bg-black/90 backdrop-blur-lg animate-in fade-in duration-200">
+          <div 
+            className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-6 bg-black/90 backdrop-blur-lg animate-in fade-in duration-200"
+            onClick={handleCloseModal}
+          >
             <div
               className="relative w-full max-w-4xl max-h-[92vh] overflow-y-auto rounded-3xl bg-[#0d121c] border border-white/15 shadow-2xl p-6 sm:p-9 space-y-7 text-slate-200"
               onClick={(e) => e.stopPropagation()}
@@ -548,29 +581,29 @@ export function Projects() {
               <div className="flex items-start justify-between gap-4 pb-5 border-b border-white/10">
                 <div className="space-y-1.5">
                   <div className="flex flex-wrap items-center gap-2 text-xs font-mono uppercase tracking-wider text-emerald-400">
-                    <span>{localSelectedProject.badge}</span>
-                    {localSelectedProject.writeUp.teamContext && (
+                    <span>{selectedProject.badge}</span>
+                    {selectedProject.writeUp.teamContext && (
                       <>
                         <span className="text-slate-600">•</span>
                         <span className="text-slate-400 font-normal">
-                          {localSelectedProject.writeUp.teamContext}
+                          {selectedProject.writeUp.teamContext}
                         </span>
                       </>
                     )}
                   </div>
                   <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-                    {localSelectedProject.name}
+                    {selectedProject.name}
                   </h3>
-                  {localSelectedProject.writeUp.role && (
+                  {selectedProject.writeUp.role && (
                     <p className="text-xs font-mono text-cyan-300 font-semibold">
-                      Role: {localSelectedProject.writeUp.role}
+                      Role: {selectedProject.writeUp.role}
                     </p>
                   )}
                 </div>
 
                 <div className="flex items-center gap-2">
                   <button
-                    onClick={() => handleCopySummary(localSelectedProject)}
+                    onClick={() => handleCopySummary(selectedProject)}
                     className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#141d2a] hover:bg-slate-800 border border-white/10 text-xs font-mono text-slate-200 hover:text-white transition-colors"
                     title="Copy brief summary for recruiters"
                   >
@@ -587,9 +620,9 @@ export function Projects() {
                     )}
                   </button>
 
-                  {localSelectedProject.githubUrl && (
+                  {selectedProject.githubUrl && (
                     <a
-                      href={localSelectedProject.githubUrl}
+                      href={selectedProject.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-xs font-mono text-emerald-300 transition-colors"
@@ -611,14 +644,14 @@ export function Projects() {
               </div>
 
               {/* Compliance Standards Badge Bar (For Durdans LIMS) */}
-              {localSelectedProject.writeUp.complianceStandards && (
+              {selectedProject.writeUp.complianceStandards && (
                 <div className="p-4 rounded-2xl bg-[#101826] border border-emerald-500/30 space-y-2">
                   <div className="flex items-center gap-2 text-xs font-mono uppercase text-emerald-400 font-bold">
                     <Award className="w-4 h-4" />
                     <span>INTERNATIONAL LABORATORY COMPLIANCE STANDARDS ENFORCED</span>
                   </div>
                   <div className="flex flex-wrap gap-2 pt-1">
-                    {localSelectedProject.writeUp.complianceStandards.map((std, idx) => (
+                    {selectedProject.writeUp.complianceStandards.map((std, idx) => (
                       <span
                         key={idx}
                         className="px-3 py-1 rounded-lg text-xs font-mono text-emerald-200 bg-emerald-950/60 border border-emerald-500/30"
@@ -631,7 +664,7 @@ export function Projects() {
               )}
 
               {/* Showcase Banner inside Modal (For Durdans LIMS) */}
-              {localSelectedProject.id === "durdans-lims" && (
+              {selectedProject.id === "durdans-lims" && (
                 <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
                   <Image
                     src="/durdans-lims-banner.jpg"
@@ -649,11 +682,11 @@ export function Projects() {
                   SYSTEM OVERVIEW & SCOPE
                 </h4>
                 <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
-                  {localSelectedProject.writeUp.overview}
+                  {selectedProject.writeUp.overview}
                 </p>
 
                 {/* Architectural Pipeline Flow Diagram (For Durdans LIMS) */}
-                {localSelectedProject.id === "durdans-lims" && (
+                {selectedProject.id === "durdans-lims" && (
                   <div className="p-4 rounded-2xl bg-black/40 border border-emerald-500/20 space-y-2 mt-2">
                     <div className="text-[11px] font-mono uppercase text-emerald-400 tracking-wider flex items-center gap-2 font-semibold">
                       <Activity className="w-4 h-4 text-emerald-400" />
@@ -681,13 +714,13 @@ export function Projects() {
               </div>
 
               {/* Structured Individual Contributions & Modules (If Available) */}
-              {localSelectedProject.writeUp.contributions && (
+              {selectedProject.writeUp.contributions && (
                 <div className="space-y-4">
                   <h4 className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-semibold">
                     INDIVIDUAL ARCHITECTURAL OWNERSHIP & CONTRIBUTIONS
                   </h4>
                   <div className="space-y-4">
-                    {localSelectedProject.writeUp.contributions.map((sec, idx) => (
+                    {selectedProject.writeUp.contributions.map((sec, idx) => (
                       <div
                         key={idx}
                         className="p-5 sm:p-6 rounded-2xl bg-[#090e15] border border-white/[0.08] space-y-3 shadow-lg"
@@ -759,7 +792,7 @@ export function Projects() {
                   SYSTEM ARCHITECTURE & DESIGN DECISIONS
                 </h4>
                 <ul className="space-y-2.5">
-                  {localSelectedProject.writeUp.architecture.map((item, idx) => (
+                  {selectedProject.writeUp.architecture.map((item, idx) => (
                     <li
                       key={idx}
                       className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-300 leading-relaxed"
@@ -778,7 +811,7 @@ export function Projects() {
                   <span>TECHNICAL CHALLENGES & ARCHITECTURAL RESOLUTIONS</span>
                 </h4>
                 <ul className="space-y-2">
-                  {localSelectedProject.writeUp.hardParts.map((item, idx) => (
+                  {selectedProject.writeUp.hardParts.map((item, idx) => (
                     <li
                       key={idx}
                       className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-300 leading-relaxed"
@@ -796,7 +829,7 @@ export function Projects() {
                   COMPREHENSIVE TECHNOLOGY STACK MATRIX
                 </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {localSelectedProject.writeUp.stackBreakdown.map((sb, idx) => (
+                  {selectedProject.writeUp.stackBreakdown.map((sb, idx) => (
                     <div
                       key={idx}
                       className="p-3.5 rounded-xl bg-[#141a24] border border-white/[0.06] text-xs"
@@ -813,7 +846,7 @@ export function Projects() {
               {/* Modal Footer */}
               <div className="pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-4 text-xs font-mono text-slate-400">
                 <span>
-                  {localSelectedProject.writeUp.repoNote ||
+                  {selectedProject.writeUp.repoNote ||
                     "Faculty of IT · University of Moratuwa"}
                 </span>
                 <button
