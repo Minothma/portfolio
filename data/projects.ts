@@ -209,41 +209,156 @@ export const projectsData: ProjectItem[] = [
     badge: "INDIVIDUAL PROJECT · COMPLETED",
     statusTag: "COMPLETED",
     category: "Full-Stack",
-    tagline: "Career Lifecycle Management Platform with Real-Time Kanban & AWS S3 Presigned Uploads",
-    role: "Lead Full-Stack Developer",
-    teamContext: "Individual Full-Stack Project",
+    tagline:
+      "Cloud-Native Career Lifecycle Platform with Optimistic Kanban, Direct AWS S3 Vault & NestJS Micro-Architecture",
+    role: "Full-Stack Software Engineer (End-to-End Ownership)",
+    teamContext: "Individual Software Engineering Project",
     description:
-      "End-to-end career lifecycle management platform featuring an interactive drag-and-drop Kanban board, multi-version resume management via direct AWS S3 presigned uploads, and containerized NestJS REST APIs.",
+      "End-to-end career lifecycle platform featuring an interactive drag-and-drop Kanban workflow, direct-to-S3 versioned resume uploads, and containerized NestJS REST APIs.",
     highlights: [
-      "Interactive drag-and-drop Kanban board managing stages from Applied to Interview, Offer, and Rejection.",
-      "Multi-version resume management with direct AWS S3 presigned uploads, interview scheduling, and activity notes timeline.",
-      "Architected modular RESTful APIs in NestJS with JWT authentication (access & refresh tokens).",
-      "Integrated Flyway database migrations with Prisma ORM and containerized the setup using Docker.",
-      "Responsive analytics dashboard providing real-time application metrics and progress tracking.",
+      "Interactive drag-and-drop Kanban board (@dnd-kit) across 5 pipeline stages with instant optimistic UI updates and server-error rollback resilience.",
+      "Direct-to-S3 presigned binary upload architecture bypassing application servers to eliminate memory bottlenecks and Node.js event-loop blocking.",
+      "Stateless dual-token JWT authentication (15-min Access / 7-day Refresh) featuring automatic silent 401 interceptor replay and user-scoped data isolation.",
+      "Database governance pairing Flyway immutable raw SQL DDL migrations with Prisma type-safe query execution and custom PostgreSQL ENUMs.",
+      "Multi-stage Alpine Docker containerization (>60% image reduction) with non-root security hardening and healthcheck orchestration.",
     ],
-    stack: ["Next.js", "React", "TypeScript", "NestJS", "PostgreSQL", "Prisma", "Flyway", "AWS S3", "Docker"],
+    stack: [
+      "Next.js 14",
+      "React 18",
+      "NestJS",
+      "TypeScript",
+      "PostgreSQL 15",
+      "Prisma ORM",
+      "Flyway",
+      "AWS S3",
+      "Docker",
+    ],
     githubUrl: "https://github.com/Minothma/JobTracker",
     demoUrl: null,
     writeUp: {
+      tagline:
+        "JobTracker · Enterprise-Grade Career Pipeline Management & Direct-to-Cloud S3 Resume Vault",
+      role: "Lead Full-Stack Developer (Sole Architecture, Implementation & DevOps)",
+      teamContext: "Individual Full-Stack Project",
+      complianceStandards: [
+        "Stateless Dual-Token Auth",
+        "Direct-to-Cloud S3 Streaming",
+        "Deterministic Flyway DDL",
+        "Non-Root Docker Hardening",
+      ],
       overview:
-        "An end-to-end application lifecycle platform built to streamline internship and job hunting pipelines with real-time stage transitions, direct cloud storage, and detailed application timeline analytics.",
+        "JobTracker is a decoupled, cloud-native career lifecycle management platform designed to replace static spreadsheets with an interactive drag-and-drop Kanban board, a direct-to-S3 versioned resume vault, structured multi-round interview tracking, and contextual communication notes. Architected with Next.js 14 App Router on the client and NestJS with PostgreSQL on the backend, it strictly isolates multi-tenant user data, guarantees zero schema drift via Flyway migrations, and optimizes server throughput using presigned S3 binary transfers.",
+      contributions: [
+        {
+          title: "01. Optimistic Kanban Pipeline with Automatic Rollback State Machine",
+          points: [
+            "5-Stage Application Pipeline: Managed career workflows across APPLIED ➔ INTERVIEW ➔ OFFER ➔ REJECTED ➔ WITHDRAWN states using @dnd-kit/core and @dnd-kit/sortable with collision detection algorithms.",
+            "Instant Optimistic Updates: Engineered immediate UI state transitions on drag-and-drop interactions without blocking the client on server round-trips.",
+            "Failure Resilience & State Rollback: Dispatched asynchronous PATCH /applications/:id updates in the background; on network drop or server failure, the UI automatically snaps the card back to its previous column and alerts the user via toast notifications.",
+          ],
+          screenshots: [
+            {
+              url: "/projects/jobtracker-banner.jpg",
+              title: "Interactive Kanban Pipeline & AWS S3 Resume Vault",
+              caption:
+                "Dynamic 5-stage Kanban board with optimistic drag-and-drop state transitions, direct-to-S3 presigned upload dropzone, and dual-token JWT security.",
+            },
+          ],
+        },
+        {
+          title: "02. Direct-to-S3 Presigned URL Upload Architecture",
+          points: [
+            "Zero-Server-Load Storage Pipeline: Eliminated multi-megabyte PDF payload memory pressure and Node.js event-loop blocking by completely bypassing the backend server for binary file transfers.",
+            "Time-Limited Presigned Authorization: NestJS generates time-limited (15-minute TTL) AWS S3 Presigned PUT URLs via @aws-sdk/s3-request-presigner with strict content-type validation.",
+            "Direct Browser Streaming & Version Vault: Client streams versioned PDF resumes directly to S3 bucket storage via standard browser fetch PUT, subsequently persisting file metadata (s3_key, version_label, mime_type) in PostgreSQL.",
+          ],
+        },
+        {
+          title: "03. Stateless Dual-Token Authentication & Silent 401 Refresh Interceptor",
+          points: [
+            "Dual-Token JWT Security: Implemented 15-minute short-lived Access Tokens and 7-day Refresh Tokens with cryptographic salted hashing (bcryptjs 10 rounds).",
+            "Transparent 401 Interceptor: Configured an Axios/Fetch HTTP interceptor that catches 401 Unauthorized responses, queues pending requests, silently calls /auth/refresh to rotate tokens, and replays failed requests seamlessly without user logout.",
+            "Multi-Tenant User Scoping: Enforced strict data isolation across all controllers using a custom @CurrentUser() decorator and Prisma queries bounded by user_id to prevent cross-tenant data leakage.",
+          ],
+        },
+        {
+          title: "04. Database Governance & Hybrid Migration Layer (Flyway + Prisma)",
+          points: [
+            "Deterministic DDL Governance: Designated Flyway as the single source of truth for immutable, version-controlled raw SQL DDL migrations (db/migrations/V1__init.sql), eliminating ORM migration drift.",
+            "Custom PostgreSQL Types & Cascades: Modeled relational schemas with custom PostgreSQL ENUMs (ApplicationStatus, Outcome), composite foreign-key indexes, and cascading delete constraints.",
+            "Type-Safe Prisma Query Engine: Introspected the live Flyway-managed schema via prisma db pull and generated type-safe TypeScript query clients without allowing Prisma to alter table schemas.",
+          ],
+        },
+        {
+          title: "05. Multi-Stage Docker Containerization & Security Hardening",
+          points: [
+            "Lean Multi-Stage Builds: Crafted multi-stage Dockerfiles for both Next.js and NestJS, separating build dependencies from Alpine Linux runtime environments to slash final image sizes by >60%.",
+            "Non-Root Hardening: Configured runtime containers to execute exclusively under unprivileged system users (node and nextjs) rather than root, minimizing host attack vectors.",
+            "Single-Command Orchestration: Composed the entire ecosystem (Next.js client, NestJS API, PostgreSQL 15, Flyway runner) into a unified docker-compose.yml with automated healthcheck dependencies.",
+          ],
+        },
+      ],
       architecture: [
-        "Modular NestJS backend implementing JWT auth with access tokens and rotating refresh tokens stored securely in HTTP-only cookies.",
-        "Direct-to-S3 presigned URL generation allowing clients to upload large PDF resume files directly to AWS S3 without loading the Node.js server.",
-        "Prisma ORM paired with Flyway migration scripts to guarantee structured database schema version control.",
-        "Multi-container Docker Compose environment encompassing frontend, NestJS backend, and PostgreSQL database.",
+        "Decoupled three-tier architecture: Next.js 14 App Router client, NestJS modular REST API gateway, and PostgreSQL 15 relational database.",
+        "Amazon S3 direct cloud streaming for binary resume storage via AWS SDK v3 presigned URLs, keeping the Node.js API server 100% lightweight and stateless.",
+        "Passport.js and Passport-JWT authentication pipeline with silent token rotation and DTO runtime validation using class-validator (whitelist: true, forbidNonWhitelisted: true).",
+        "Deterministic database version control with Flyway raw SQL migrations paired with Prisma ORM for compile-time type safety.",
+        "Multi-stage Docker Compose orchestration with isolated bridge networking, healthchecks, and non-root security hardening.",
+        "100% automated test suite passing across Jest unit tests and Supertest HTTP-level end-to-end (E2E) integration suites.",
       ],
       hardParts: [
-        "Managing optimistic UI updates for Kanban column reordering while maintaining strict synchronization with PostgreSQL state.",
-        "Generating time-limited AWS S3 presigned URLs with exact content-type validation and metadata tagging.",
+        "Architectural Trade-Off: Opted for Flyway raw SQL DDL migrations over Prisma Migrate to avoid unpredictable schema locks, maintain custom PostgreSQL ENUMs, and guarantee zero schema drift across CI/CD environments while retaining Prisma strictly for type-safe query generation.",
+        "Server Bottleneck Prevention: Avoided multipart form-data uploads through NestJS to prevent Node.js buffer memory spikes and event-loop lag; solved by brokering 15-minute AWS S3 presigned PUT URLs for direct browser-to-cloud streaming.",
+        "Cross-Platform Alpine Incompatibility: Replaced native C++ bcrypt (which fails with ERR_DLOPEN_FAILED in Alpine Linux Docker builds on Windows hosts) with pure-JS bcryptjs, preserving 10-salt-round cryptographic security without native compilation overhead.",
+        "Optimistic State Synchronization: Implemented optimistic drag-and-drop state transitions with automatic rollback resilience, ensuring the UI reverts card positions and alerts users if network errors occur during background PATCH requests.",
       ],
       stackBreakdown: [
-        { category: "Client Tier", tools: "Next.js, React, TypeScript, Tailwind CSS, dnd-kit" },
-        { category: "Server Tier", tools: "NestJS, TypeScript, JWT, Passport.js" },
-        { category: "Data & Storage", tools: "PostgreSQL, Prisma ORM, Flyway, AWS S3" },
-        { category: "DevOps", tools: "Docker, Docker Compose" },
+        {
+          category: "Frontend Client",
+          tools:
+            "Next.js 14 (App Router), React 18, TypeScript, Tailwind CSS, Lucide Icons",
+        },
+        {
+          category: "State & Drag-and-Drop",
+          tools:
+            "@dnd-kit/core, @dnd-kit/sortable, @dnd-kit/utilities, Optimistic UI State Machine",
+        },
+        {
+          category: "Backend & API Gateway",
+          tools:
+            "NestJS, Node.js, Express, TypeScript, RESTful Micro-Architecture",
+        },
+        {
+          category: "Auth & Security",
+          tools:
+            "Passport.js, Passport-JWT, Dual-Token (Access & Refresh), bcryptjs, Class-Validator DTOs",
+        },
+        {
+          category: "Database & ORM",
+          tools:
+            "PostgreSQL 15, Prisma ORM (Type-Safe Query Layer), Custom ENUMs",
+        },
+        {
+          category: "Schema Governance",
+          tools:
+            "Flyway Migration Engine (Immutable Versioned Raw SQL DDL)",
+        },
+        {
+          category: "Cloud & Storage",
+          tools: "AWS S3, AWS SDK v3 (@aws-sdk/s3-request-presigner)",
+        },
+        {
+          category: "DevOps & Containers",
+          tools:
+            "Docker, Docker Compose, Multi-Stage Alpine Builds, Non-Root Users",
+        },
+        {
+          category: "Testing & Quality",
+          tools:
+            "Jest, Supertest (Unit & End-to-End E2E Integration Suites - 100% Pass Rate)",
+        },
       ],
-      repoNote: "Open Source · github.com/Minothma/JobTracker",
+      repoNote: "Open Source Engineering Case Study · github.com/Minothma/JobTracker",
     },
   },
   {

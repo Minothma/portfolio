@@ -329,10 +329,31 @@ export function Projects() {
                   </span>
                 </div>
 
-                {/* Project Title */}
-                <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-tight group-hover:text-cyan-300 transition-colors mb-3">
-                  Job Application Tracker
-                </h3>
+                {/* Project Title & Role Subtitle */}
+                <div className="mb-4">
+                  <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-tight group-hover:text-cyan-300 transition-colors">
+                    Job Application Tracker
+                  </h3>
+                  <p className="text-xs font-mono text-cyan-400/90 mt-1 font-semibold">
+                    Role: Full-Stack Engineer (End-to-End Ownership)
+                  </p>
+                </div>
+
+                {/* Official Showcase Banner Preview */}
+                <div 
+                  onClick={() => handleOpenModal(projectsData.find((p) => p.id === "job-tracker")!)}
+                  className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden border border-cyan-500/20 mb-5 group/img cursor-pointer shadow-xl hover:border-cyan-400/60 transition-all duration-300"
+                >
+                  <Image
+                    src="/projects/jobtracker-banner.jpg"
+                    alt="JobTracker Kanban Pipeline & AWS S3 Presigned Upload Architecture"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 600px"
+                    className="object-cover group-hover/img:scale-105 transition-transform duration-500 ease-out"
+                    priority
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#090e15]/60 via-transparent to-transparent opacity-40 group-hover/img:opacity-10 transition-opacity" />
+                </div>
 
                 {/* Description */}
                 <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-6">
@@ -643,12 +664,16 @@ export function Projects() {
                 </div>
               </div>
 
-              {/* Compliance Standards Badge Bar (For Durdans LIMS) */}
+              {/* Compliance / Architectural Standards Badge Bar */}
               {selectedProject.writeUp.complianceStandards && (
                 <div className="p-4 rounded-2xl bg-[#101826] border border-emerald-500/30 space-y-2">
                   <div className="flex items-center gap-2 text-xs font-mono uppercase text-emerald-400 font-bold">
                     <Award className="w-4 h-4" />
-                    <span>INTERNATIONAL LABORATORY COMPLIANCE STANDARDS ENFORCED</span>
+                    <span>
+                      {selectedProject.id === "durdans-lims"
+                        ? "INTERNATIONAL LABORATORY COMPLIANCE STANDARDS ENFORCED"
+                        : "CORE ARCHITECTURAL PATTERNS & ENGINEERING STANDARDS"}
+                    </span>
                   </div>
                   <div className="flex flex-wrap gap-2 pt-1">
                     {selectedProject.writeUp.complianceStandards.map((std, idx) => (
@@ -663,12 +688,24 @@ export function Projects() {
                 </div>
               )}
 
-              {/* Showcase Banner inside Modal (For Durdans LIMS) */}
+              {/* Showcase Banner inside Modal */}
               {selectedProject.id === "durdans-lims" && (
                 <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
                   <Image
                     src="/durdans-lims-banner.jpg"
                     alt="Durdans Hospital LIMS System Architecture & Showcase"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 900px"
+                    className="object-cover"
+                  />
+                </div>
+              )}
+
+              {selectedProject.id === "job-tracker" && (
+                <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden border border-cyan-500/30 shadow-2xl">
+                  <Image
+                    src="/projects/jobtracker-banner.jpg"
+                    alt="JobTracker System Architecture & Showcase"
                     fill
                     sizes="(max-width: 1024px) 100vw, 900px"
                     className="object-cover"
@@ -708,6 +745,27 @@ export function Projects() {
                       <span className="px-2.5 py-1 rounded bg-white/5 text-slate-300 border border-white/10">Pathologist Auth</span>
                       <span className="text-slate-500">→</span>
                       <span className="px-2.5 py-1 rounded bg-white/5 text-slate-300 border border-white/10">Dispatch Portals</span>
+                    </div>
+                  </div>
+                )}
+
+                {/* Architectural Pipeline Flow Diagram (For Job Application Tracker) */}
+                {selectedProject.id === "job-tracker" && (
+                  <div className="p-4 rounded-2xl bg-black/40 border border-cyan-500/20 space-y-2 mt-2">
+                    <div className="text-[11px] font-mono uppercase text-cyan-400 tracking-wider flex items-center gap-2 font-semibold">
+                      <Kanban className="w-4 h-4 text-cyan-400" />
+                      <span>CAREER PIPELINE & STORAGE WORKFLOW (5-STAGE LIFECYCLE)</span>
+                    </div>
+                    <div className="flex flex-wrap items-center gap-2 text-xs font-mono text-slate-300 pt-1">
+                      <span className="px-2.5 py-1 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">APPLIED</span>
+                      <span className="text-slate-500">➔</span>
+                      <span className="px-2.5 py-1 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">INTERVIEW</span>
+                      <span className="text-slate-500">➔</span>
+                      <span className="px-2.5 py-1 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">OFFER</span>
+                      <span className="text-slate-500">➔</span>
+                      <span className="px-2.5 py-1 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30">REJECTED / WITHDRAWN</span>
+                      <span className="text-slate-500">│</span>
+                      <span className="px-2.5 py-1 rounded bg-cyan-950/60 text-cyan-300 border border-cyan-500/40">Direct AWS S3 Presigned Uploads</span>
                     </div>
                   </div>
                 )}
