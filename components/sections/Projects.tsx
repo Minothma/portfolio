@@ -800,8 +800,8 @@ export function Projects() {
               {selectedProject.id === "battery-vitals" && (
                 <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden border border-cyan-500/30 shadow-2xl">
                   <Image
-                    src="/projects/battery-vitals/battery_vitals_hardware_chassis.jpg"
-                    alt="Battery Vitals Hardware Testbed & Custom Enclosure Unit"
+                    src="/projects/battery-vitals/battery_vitals_evaluation_supervisor.jpg"
+                    alt="Battery Vitals 1st-Year Evaluation with Dean & Project Supervisor Mr. B.H. Sudantha and Live Web Dashboard"
                     fill
                     sizes="(max-width: 1024px) 100vw, 900px"
                     className="object-cover object-center"
