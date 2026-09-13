@@ -28,6 +28,7 @@ import {
   Check,
   ZoomIn,
   Maximize2,
+  Globe,
 } from "lucide-react";
 
 export function Projects() {
@@ -402,16 +403,17 @@ export function Projects() {
                   ))}
                 </div>
 
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2.5">
                   {filteredProjects.find((p) => p.id === "job-tracker")?.githubUrl && (
                     <a
                       href={filteredProjects.find((p) => p.id === "job-tracker")!.githubUrl!}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono text-slate-200 bg-[#121a24] hover:bg-slate-800 border border-white/10 transition-all active:scale-95"
+                      className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-mono text-slate-200 bg-[#141d2a] hover:bg-slate-800 border border-white/10 hover:border-white/20 transition-all active:scale-95"
                     >
-                      <Github className="w-3.5 h-3.5" />
-                      <span>Code</span>
+                      <Github className="w-3.5 h-3.5 text-white" />
+                      <span>GitHub</span>
+                      <ArrowUpRight className="w-3 h-3 opacity-60" />
                     </a>
                   )}
 
@@ -444,9 +446,30 @@ export function Projects() {
                   </span>
                 </div>
 
-                <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight group-hover:text-emerald-300 transition-colors mb-2">
-                  Inkora Content Platform
-                </h3>
+                {/* Project Title & Role Subtitle */}
+                <div className="mb-3">
+                  <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight group-hover:text-emerald-300 transition-colors">
+                    Inkora Content Platform
+                  </h3>
+                  <p className="text-xs font-mono text-emerald-400/90 mt-1 font-semibold">
+                    Role: Full-Stack Developer (Sole Ownership & Cloud Deployment)
+                  </p>
+                </div>
+
+                {/* Official Showcase Banner Preview */}
+                <div 
+                  onClick={() => handleOpenModal(projectsData.find((p) => p.id === "inkora")!)}
+                  className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden border border-emerald-500/20 mb-4 group/img cursor-pointer shadow-xl hover:border-emerald-400/60 transition-all duration-300"
+                >
+                  <Image
+                    src="/projects/inkora-banner.jpg"
+                    alt="Inkora Content Management & Publishing Platform"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 600px"
+                    className="object-cover group-hover/img:scale-105 transition-transform duration-500 ease-out"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#090e15]/60 via-transparent to-transparent opacity-40 group-hover/img:opacity-10 transition-opacity" />
+                </div>
 
                 <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-4">
                   Full-stack publishing engine with user authentication, rich-text editor, draft auto-saving, real-time AJAX live search, and CSRF/SQLi defense.
@@ -476,16 +499,30 @@ export function Projects() {
                   ))}
                 </div>
 
-                <div className="flex items-center gap-2">
+                <div className="flex flex-wrap items-center gap-2">
+                  {filteredProjects.find((p) => p.id === "inkora")?.demoUrl && (
+                    <a
+                      href={filteredProjects.find((p) => p.id === "inkora")!.demoUrl!}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono text-cyan-300 bg-cyan-950/60 hover:bg-cyan-900/60 border border-cyan-500/30 hover:border-cyan-400/60 transition-all active:scale-95"
+                    >
+                      <Globe className="w-3.5 h-3.5" />
+                      <span>Live Demo</span>
+                      <ArrowUpRight className="w-3 h-3 opacity-60" />
+                    </a>
+                  )}
+
                   {filteredProjects.find((p) => p.id === "inkora")?.githubUrl && (
                     <a
                       href={filteredProjects.find((p) => p.id === "inkora")!.githubUrl!}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono text-slate-200 bg-[#121824] hover:bg-slate-800 border border-white/10 transition-all"
+                      className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-mono text-slate-200 bg-[#141d2a] hover:bg-slate-800 border border-white/10 hover:border-white/20 transition-all active:scale-95"
                     >
-                      <Github className="w-3.5 h-3.5" />
-                      <span>Code</span>
+                      <Github className="w-3.5 h-3.5 text-white" />
+                      <span>GitHub</span>
+                      <ArrowUpRight className="w-3 h-3 opacity-60" />
                     </a>
                   )}
 
@@ -549,16 +586,17 @@ export function Projects() {
                   ))}
                 </div>
 
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2.5">
                   {filteredProjects.find((p) => p.id === "battery-vitals")?.githubUrl && (
                     <a
                       href={filteredProjects.find((p) => p.id === "battery-vitals")!.githubUrl!}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono text-slate-200 bg-[#121824] hover:bg-slate-800 border border-white/10 transition-all"
+                      className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-mono text-slate-200 bg-[#141d2a] hover:bg-slate-800 border border-white/10 hover:border-white/20 transition-all active:scale-95"
                     >
-                      <Github className="w-3.5 h-3.5" />
-                      <span>Code</span>
+                      <Github className="w-3.5 h-3.5 text-white" />
+                      <span>GitHub</span>
+                      <ArrowUpRight className="w-3 h-3 opacity-60" />
                     </a>
                   )}
 
@@ -641,6 +679,19 @@ export function Projects() {
                     )}
                   </button>
 
+                  {selectedProject.demoUrl && (
+                    <a
+                      href={selectedProject.demoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 text-xs font-mono text-cyan-300 transition-colors"
+                    >
+                      <Globe className="w-3.5 h-3.5" />
+                      <span>Live Demo</span>
+                      <ExternalLink className="w-3 h-3 opacity-60" />
+                    </a>
+                  )}
+
                   {selectedProject.githubUrl && (
                     <a
                       href={selectedProject.githubUrl}
@@ -713,6 +764,18 @@ export function Projects() {
                 </div>
               )}
 
+              {selectedProject.id === "inkora" && (
+                <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden border border-emerald-500/30 shadow-2xl">
+                  <Image
+                    src="/projects/inkora-banner.jpg"
+                    alt="Inkora Content Management & Publishing Platform"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 900px"
+                    className="object-cover"
+                  />
+                </div>
+              )}
+
               {/* Overview */}
               <div className="space-y-3">
                 <h4 className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-semibold">
@@ -766,6 +829,27 @@ export function Projects() {
                       <span className="px-2.5 py-1 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30">REJECTED / WITHDRAWN</span>
                       <span className="text-slate-500">│</span>
                       <span className="px-2.5 py-1 rounded bg-cyan-950/60 text-cyan-300 border border-cyan-500/40">Direct AWS S3 Presigned Uploads</span>
+                    </div>
+                  </div>
+                )}
+
+                {/* Architectural Pipeline Flow Diagram (For Inkora Content Platform) */}
+                {selectedProject.id === "inkora" && (
+                  <div className="p-4 rounded-2xl bg-black/40 border border-emerald-500/20 space-y-2 mt-2">
+                    <div className="text-[11px] font-mono uppercase text-emerald-400 tracking-wider flex items-center gap-2 font-semibold">
+                      <FileCode2 className="w-4 h-4 text-emerald-400" />
+                      <span>PUBLISHING & DEFENSIVE SECURITY PIPELINE</span>
+                    </div>
+                    <div className="flex flex-wrap items-center gap-2 text-xs font-mono text-slate-300 pt-1">
+                      <span className="px-2.5 py-1 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">TinyMCE Authoring</span>
+                      <span className="text-slate-500">➔</span>
+                      <span className="px-2.5 py-1 rounded bg-white/5 text-slate-300 border border-white/10">Draft / SEO Auto-Slug</span>
+                      <span className="text-slate-500">➔</span>
+                      <span className="px-2.5 py-1 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">CSRF & PDO Parameterization</span>
+                      <span className="text-slate-500">➔</span>
+                      <span className="px-2.5 py-1 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">5-Type Reaction UX</span>
+                      <span className="text-slate-500">➔</span>
+                      <span className="px-2.5 py-1 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30">Admin RBAC Moderation</span>
                     </div>
                   </div>
                 )}

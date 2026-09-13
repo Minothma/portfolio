@@ -367,39 +367,146 @@ export const projectsData: ProjectItem[] = [
     badge: "PERSONAL PROJECT · COMPLETED",
     statusTag: "COMPLETED",
     category: "Full-Stack",
-    tagline: "Full-Stack Content Platform with Real-Time Search & Security Hardening",
-    role: "Full-Stack Developer",
-    teamContext: "Personal Project",
+    tagline:
+      "Modern Full-Stack Content Management & Publishing Engine with OWASP Hardening & 5-Type Reaction UX",
+    role: "Full-Stack Developer (Sole Architecture, Implementation & Cloud Deployment)",
+    teamContext: "Personal Full-Stack Engineering Project",
     description:
-      "Full-stack blogging platform with user authentication, rich-text publishing, draft auto-saving, real-time AJAX search, and an admin moderation dashboard with CSRF and SQL injection defense.",
+      "Enterprise-grade content management and publishing platform with TinyMCE rich-text authoring, dynamic reader engagement tools, and multi-layer OWASP defensive hardening.",
     highlights: [
-      "Full-stack publishing platform with user authentication and complete CRUD functionality.",
-      "Rich-text editor with draft auto-saving and clean, SEO-friendly URL slugs.",
-      "Real-time AJAX live search, multi-type reaction system, and dynamic comment threads.",
-      "Strengthened security with CSRF tokens, session hardening, and PDO prepared statements.",
-      "Comprehensive Admin Dashboard for moderation, user management, and article analytics.",
+      "Modular PHP 8 / MySQL MVC-inspired architecture delivering sub-second page loads with zero bloated framework dependencies.",
+      "Rich-text publishing workflow powered by TinyMCE 6 with draft auto-saving and real-time SEO clean URL slug generation.",
+      "Dynamic reader retention engine featuring 5-type emotion reactions (Like, Love, Wow, Sad, Angry), threaded comment hierarchy, and scroll-depth progress tracking.",
+      "Defensive security subsystem enforcing 100% parameterized PDO prepared statements, per-session CSRF token validation, and XSS HTML-entity escaping.",
+      "Comprehensive Admin Command Center with real-time analytics, user RBAC management, and editorial content moderation.",
     ],
-    stack: ["PHP", "MySQL", "JavaScript", "HTML5", "CSS3", "Bootstrap", "AJAX"],
+    stack: [
+      "PHP 8.0+",
+      "MySQL 8.0",
+      "PDO",
+      "JavaScript (ES6+)",
+      "Bootstrap 5.3",
+      "TinyMCE 6",
+      "Apache",
+      "Bcrypt",
+    ],
     githubUrl: "https://github.com/Minothma/inkora-blog-application",
-    demoUrl: null,
+    demoUrl: "http://inkora-app.infinityfreeapp.com/",
     writeUp: {
+      tagline:
+        "Inkora · Modern Full-Stack Content Management & Publishing Engine with OWASP Hardening",
+      role: "Full-Stack Developer (Sole Architecture, Implementation & Cloud Deployment)",
+      teamContext: "Personal Full-Stack Engineering Project",
+      complianceStandards: [
+        "100% Parameterized PDO (SQLi Immunity)",
+        "Per-Session CSRF Token Defense",
+        "XSS HTML-Entity Escaping",
+        "Secure File Pipeline (Anti-RCE)",
+      ],
       overview:
-        "A full-stack content publishing engine built from foundational web standards, focusing on high security, interactive engagement features, and sub-second page performance.",
+        "Inkora is an enterprise-grade, full-stack content management and blogging platform engineered from foundational web standards without bloated dependencies. Featuring a modular PHP 8 / MySQL MVC-inspired architecture, it couples an intuitive TinyMCE rich-text authoring suite and real-time auto-slug SEO generation with dynamic reader engagement tools (5-type reaction engine, threaded discussions, reading progress indicators). The platform enforces rigorous OWASP defensive hardening, including 100% parameterized PDO prepared statements, cryptographic CSRF session tokens, strict MIME-type file verification, and role-based administrative moderation.",
+      contributions: [
+        {
+          title: "01. Content Authoring & Publishing Engine (TinyMCE 6 Suite)",
+          points: [
+            "TinyMCE 6 WYSIWYG Suite: Seamless rich-text authoring environment supporting custom typography, code formatting blocks, inline media embedding, and hyperlinking.",
+            "Draft vs. Publish State Machine: Writers compose and persist private drafts with instant preview capabilities before committing to public publication.",
+            "Automated SEO Engine: Real-time slug generator converting post titles into human-readable, SEO-friendly clean URLs mapped via Apache rewrite rules.",
+            "Smart Media Management: Multi-tier file validation checking MIME types, binary image headers, and executing cryptographic hashing to prevent file collisions.",
+          ],
+          screenshots: [
+            {
+              url: "/projects/inkora-banner.jpg",
+              title: "Publishing Editor & Active Article Feed",
+              caption:
+                "Split-screen TinyMCE authoring environment, real-time AJAX search overlay, 5-type emotion reactions, and active security defense indicators.",
+            },
+          ],
+        },
+        {
+          title: "02. Multi-Faceted Reader Engagement & 5-Type Reaction Engine",
+          points: [
+            "5-Type Reaction System: Interactive emotional feedback suite allowing readers to express reactions (Like, Love, Wow, Sad, Angry) with dynamic count updates.",
+            "Threaded Comment Hierarchy: Contextual discussion forum per article with author avatars, parent-child reply nesting, and user attribution.",
+            "Reading Progress Bar: Smooth visual scroll-depth indicator tracking reader progress in real-time across long-form content.",
+            "Social Amplification: One-click social sharing buttons for LinkedIn, Twitter/X, and Facebook pre-configured with OpenGraph meta tags.",
+          ],
+        },
+        {
+          title: "03. Defensive Security Subsystem & OWASP Hardening",
+          points: [
+            "SQL Injection Immunity: 100% of database interactions execute through parameterized PDO prepared statements, eliminating SQLi attack vectors.",
+            "XSS Neutralization: All dynamic user inputs and outputs are sanitized and HTML-entity escaped using htmlspecialchars() to neutralize stored and reflected XSS.",
+            "CSRF Session Defense: Cryptographically secure, per-session tokens generated and validated on all state-changing POST requests.",
+            "Anti-RCE File Pipeline: Multi-tier verification checking file extensions, MIME types, and image magic bytes, storing uploads outside executable web directories.",
+          ],
+        },
+        {
+          title: "04. Role-Based Admin Command Center & Metrics Telemetry",
+          points: [
+            "Operational Analytics Dashboard: Live metrics monitoring total page views, registered user growth, published articles, and active discussions.",
+            "Editorial Content Moderation: Comprehensive administrative controls to review, edit, approve, or prune user submissions.",
+            "User & RBAC Management: Elevated privileges enabling administrators to promote roles, manage profiles, and suspend unauthorized accounts.",
+            "Comment Moderation: Dedicated spam-prevention tools maintaining community standards and conversational integrity.",
+          ],
+        },
+        {
+          title: "05. Relational Schema Architecture & Apache URL Rewriting",
+          points: [
+            "Normalized Database Design: Structured 7+ relational tables with primary keys, foreign key cascade rules, and B-tree indexes on frequently queried columns (slug, username, email).",
+            "Front Controller Routing: Centralized Apache .htaccess rewrite engine routing friendly RESTful URLs to modular PHP controllers.",
+            "Live Cloud Deployment: Production deployment on Linux/Apache with DNS configuration and persistent database backups.",
+          ],
+        },
+      ],
       architecture: [
-        "Custom MVC structure with centralized router handling friendly URL rewrites and parameter sanitation.",
-        "Debounced AJAX search engine querying full-text MySQL indexes with instant UI rendering.",
-        "Security subsystem enforcing CSRF tokens on mutating requests and PDO prepared statements preventing SQL injections.",
-        "Admin control center for editorial reviews, comment moderation, and engagement metrics.",
+        "Modular PHP 8 MVC-inspired structure separating business logic, database queries, and presentation templates.",
+        "PDO database abstraction layer enforcing parameterized prepared statements across all read and write queries.",
+        "Centralized Apache .htaccess routing mapping clean SEO URLs to front-controller endpoints.",
+        "Multi-layer input sanitization pipeline neutralizing XSS, SQLi, and CSRF attack surfaces.",
+        "Normalized MySQL 8.0 schema with composite indexes and referential integrity constraints.",
+        "Responsive Bootstrap 5.3 interface with vanilla JavaScript AJAX DOM updates and modern gradient aesthetics.",
       ],
       hardParts: [
-        "Designing an asynchronous draft autosave mechanism that preserves rich markup without colliding with active user typing.",
+        "Defensive OWASP Architecture: Guaranteed complete SQL Injection immunity across 7+ tables by enforcing 100% parameterized PDO prepared statements, coupled with per-session CSRF token validation on all state-changing endpoints.",
+        "Secure Binary File Pipeline: Prevented Remote Code Execution (RCE) during avatar and header image uploads by validating magic bytes and MIME types, stripping EXIF metadata, and saving files under cryptographically hashed names.",
+        "Asynchronous Draft State Persistence: Engineered asynchronous draft auto-saving without colliding with active user keystrokes in TinyMCE or corrupting HTML DOM hierarchies.",
       ],
       stackBreakdown: [
-        { category: "Backend", tools: "PHP 8, PDO, Session Security" },
-        { category: "Database", tools: "MySQL (Relational Schema & Full-Text Indexes)" },
-        { category: "Frontend", tools: "JavaScript (ES6), AJAX, Bootstrap 5, CSS3" },
+        {
+          category: "Backend & Business Logic",
+          tools: "PHP 8.0+, MVC Architecture, RESTful Endpoints",
+        },
+        {
+          category: "Database & Persistence",
+          tools:
+            "MySQL 8.0, PDO (Parameterized Prepared Statements), B-Tree Indexing",
+        },
+        {
+          category: "Frontend & UI",
+          tools:
+            "Bootstrap 5.3, Vanilla JavaScript (ES6+), Modern Gradient Styling",
+        },
+        {
+          category: "Rich Editor & SEO",
+          tools: "TinyMCE 6 WYSIWYG Suite, Automated Auto-Slug Engine",
+        },
+        {
+          category: "Security & Auth",
+          tools:
+            "Bcrypt Hashing, CSRF Tokens, XSS Sanitization (htmlspecialchars)",
+        },
+        {
+          category: "Web Server & Routing",
+          tools: "Apache Server, .htaccess URL Rewriting Engine",
+        },
+        {
+          category: "Deployment & Cloud",
+          tools: "Linux Hosting (InfinityFree), DNS Management, Production Deployment",
+        },
       ],
-      repoNote: "Open Source · github.com/Minothma/inkora-blog-application",
+      repoNote:
+        "Open Source CMS Platform · github.com/Minothma/inkora-blog-application",
     },
   },
   {
