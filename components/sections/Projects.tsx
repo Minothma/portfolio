@@ -554,29 +554,50 @@ export function Projects() {
                   </span>
                 </div>
 
-                <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight group-hover:text-cyan-300 transition-colors mb-2">
-                  Battery Vitals Testbed
-                </h3>
+                {/* Project Title & Role Subtitle */}
+                <div className="mb-3">
+                  <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight group-hover:text-cyan-300 transition-colors">
+                    Battery Vitals Testbed
+                  </h3>
+                  <p className="text-xs font-mono text-cyan-400/90 mt-1 font-semibold">
+                    Role: Embedded Software & Telemetry Developer (Presenter at FITExpo 2025)
+                  </p>
+                </div>
+
+                {/* Official Showcase Banner Preview */}
+                <div 
+                  onClick={() => handleOpenModal(projectsData.find((p) => p.id === "battery-vitals")!)}
+                  className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden border border-cyan-500/20 mb-4 group/img cursor-pointer shadow-xl hover:border-cyan-400/60 transition-all duration-300"
+                >
+                  <Image
+                    src="/projects/battery-vitals/battery_vitals_expo_presentation.jpg"
+                    alt="Battery Vitals Hardware Testbed Showcase at FITExpo 2025"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 600px"
+                    className="object-cover group-hover/img:scale-105 transition-transform duration-500 ease-out"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#090e15]/60 via-transparent to-transparent opacity-40 group-hover/img:opacity-10 transition-opacity" />
+                </div>
 
                 <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-4">
-                  Automated testbed for Li-Po batteries using ESP32 microcontroller, relay switching, DS18B20 thermal monitoring, and a Python State of Health (SOH) evaluation pipeline.
+                  Microcontroller-based hardware testing apparatus and IoT telemetry platform for Li-ion, Li-Po, and Lead-Acid batteries with automated Charge-Rest-Discharge cycles.
                 </p>
 
                 <ul className="space-y-1.5 mb-4">
                   <li className="flex items-start gap-2 text-xs text-slate-300">
                     <span className="text-cyan-400 font-bold">•</span>
-                    <span>Automated charge-rest-discharge cycles with emergency thermal cutoffs.</span>
+                    <span>Multi-chemistry support with ADS1115 16-bit ADC, INA219 current sensing, and buck regulation.</span>
                   </li>
                   <li className="flex items-start gap-2 text-xs text-slate-300">
                     <span className="text-cyan-400 font-bold">•</span>
-                    <span>Python telemetry pipeline generating voltage decay and internal resistance curves.</span>
+                    <span>State of Health (SOH) calculation engine with 16×4 LCD & web dashboard; showcased at FITExpo 2025.</span>
                   </li>
                 </ul>
               </div>
 
               <div className="pt-4 border-t border-white/[0.06] flex flex-wrap items-center justify-between gap-4">
                 <div className="flex flex-wrap gap-1.5">
-                  {["ESP32", "C++", "Python", "IoT", "Relays"].map((tech) => (
+                  {["ESP32", "C++", "ADS1115", "INA219", "DS18B20", "Relays", "FITExpo 2025"].map((tech) => (
                     <span
                       key={tech}
                       className="px-2.5 py-0.5 rounded text-[11px] font-mono text-slate-300 bg-[#121824] border border-white/[0.06]"
@@ -776,6 +797,18 @@ export function Projects() {
                 </div>
               )}
 
+              {selectedProject.id === "battery-vitals" && (
+                <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden border border-cyan-500/30 shadow-2xl">
+                  <Image
+                    src="/projects/battery-vitals/battery_vitals_expo_presentation.jpg"
+                    alt="Battery Vitals Hardware Testbed Showcase at FITExpo 2025"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 900px"
+                    className="object-cover"
+                  />
+                </div>
+              )}
+
               {/* Overview */}
               <div className="space-y-3">
                 <h4 className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-semibold">
@@ -850,6 +883,27 @@ export function Projects() {
                       <span className="px-2.5 py-1 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">5-Type Reaction UX</span>
                       <span className="text-slate-500">➔</span>
                       <span className="px-2.5 py-1 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30">Admin RBAC Moderation</span>
+                    </div>
+                  </div>
+                )}
+
+                {/* Architectural Pipeline Flow Diagram (For Battery Vitals Testbed) */}
+                {selectedProject.id === "battery-vitals" && (
+                  <div className="p-4 rounded-2xl bg-black/40 border border-cyan-500/20 space-y-2 mt-2">
+                    <div className="text-[11px] font-mono uppercase text-cyan-400 tracking-wider flex items-center gap-2 font-semibold">
+                      <Cpu className="w-4 h-4 text-cyan-400" />
+                      <span>HARDWARE CYCLIC & IOT TELEMETRY PIPELINE</span>
+                    </div>
+                    <div className="flex flex-wrap items-center gap-2 text-xs font-mono text-slate-300 pt-1">
+                      <span className="px-2.5 py-1 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">Multi-Chemistry Input (3.7V / 12V)</span>
+                      <span className="text-slate-500">➔</span>
+                      <span className="px-2.5 py-1 rounded bg-white/5 text-slate-300 border border-white/10">Buck Regulation & Relays</span>
+                      <span className="text-slate-500">➔</span>
+                      <span className="px-2.5 py-1 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">ADS1115 & INA219 Sensing</span>
+                      <span className="text-slate-500">➔</span>
+                      <span className="px-2.5 py-1 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">SOH & IR Computation</span>
+                      <span className="text-slate-500">➔</span>
+                      <span className="px-2.5 py-1 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30">16×4 LCD & Web Dashboard</span>
                     </div>
                   </div>
                 )}
@@ -1020,7 +1074,11 @@ export function Projects() {
                 <div className="space-y-0.5">
                   <div className="text-[11px] font-mono uppercase tracking-wider text-emerald-400 font-bold flex items-center gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                    <span>DURDANS LIMS · VERIFIED SYSTEM UI ARTIFACT</span>
+                    <span>
+                      {selectedProject
+                        ? `${selectedProject.name.toUpperCase()} · VERIFIED ARTIFACT & TELEMETRY`
+                        : "PROJECT ARTIFACT PREVIEW"}
+                    </span>
                   </div>
                   <h4 className="text-sm sm:text-base font-bold text-white font-mono">
                     {activeLightboxImage.title}
