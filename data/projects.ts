@@ -512,17 +512,18 @@ export const projectsData: ProjectItem[] = [
   {
     id: "battery-vitals",
     name: "Battery Vitals Testbed",
-    badge: "1ST-YEAR HARDWARE & IOT PROJECT · COMPLETED",
+    badge: "1ST-YEAR HARDWARE & IOT · FITEXPO 2025 SELECTED",
     statusTag: "COMPLETED",
     category: "Embedded & IoT",
     tagline:
-      "Microcontroller-Based Multi-Chemistry Battery Health & IoT Telemetry Testbed (Showcased at FITExpo 2025)",
-    role: "Embedded Software & Telemetry Developer (Presenter at FITExpo 2025)",
+      "Microcontroller-Based Multi-Chemistry Battery Health & IoT Telemetry Testbed (Selected & Showcased at FITExpo 2025)",
+    role: "Embedded Software & Telemetry Developer · Official FITExpo 2025 Presenter",
     teamContext:
-      "5-Member Engineering Team · Faculty of Information Technology, University of Moratuwa (Supervised by Dean B.H. Sudantha)",
+      "5-Member Engineering Team · Faculty of Information Technology, University of Moratuwa (Selected among all 1st-year hardware projects for FITExpo 2025; Supervised by Dean B.H. Sudantha)",
     description:
-      "Automated battery health monitoring, cyclic charging/discharging testbed, and real-time IoT telemetry system supporting Li-ion 18650, Li-Po, and Lead-Acid chemistries.",
+      "Automated battery health monitoring, cyclic charging/discharging testbed, and real-time IoT telemetry system supporting Li-ion 18650, Li-Po, and Lead-Acid chemistries. Selected to be exhibited at the 2-day FITExpo 2025.",
     highlights: [
+      "Selected from all 1st-year microcontroller hardware projects to be exhibited and presented live at FITExpo 2025 (2-Day Exhibition).",
       "Multi-chemistry support (Li-ion 18650 3.7V, Li-Po 3.7V, and Lead-Acid 12V) with automated Charge ➔ Rest ➔ Discharge state machines.",
       "High-precision telemetry acquisition with INA219 current monitoring, ADS1115 16-bit ADC conversion, and XL4015/XL4016 buck regulation.",
       "Empirical State of Health (SOH) evaluation calculating internal resistance and live charge–discharge decay curves.",
@@ -544,21 +545,23 @@ export const projectsData: ProjectItem[] = [
     demoUrl: null,
     writeUp: {
       tagline:
-        "Battery Vitals · Microcontroller-Based Battery Health Monitoring System (Showcased & Presented at FITExpo 2025)",
-      role: "Embedded Software & Telemetry Developer (Presenter at FITExpo 2025)",
+        "Battery Vitals · Microcontroller-Based Battery Health Monitoring System (Selected, Showcased & Presented at FITExpo 2025)",
+      role: "Embedded Software & Telemetry Developer · Official FITExpo 2025 Presenter",
       teamContext:
         "5 Members · Faculty of IT, University of Moratuwa (Supervised by Dean B.H. Sudantha & Instructors Ms. Lakdini Manchanayaka, Mr. Udeepa Sandakal)",
       complianceStandards: [
-        "FITExpo 2025 Presenter & Certificate of Appreciation",
+        "Selected from All 1st-Year Hardware Projects",
+        "Official 2-Day FITExpo 2025 Presenter",
+        "Certificate of Appreciation (Dean B.H. Sudantha & Director Dr. T.M. Thanthriwatta)",
         "Multi-Chemistry (Li-ion 18650, Li-Po, Lead-Acid 12V)",
         "Active Thermal Failsafe (DS18B20 + Cooling Fan)",
         "Custom PCB & 16×4 LCD Dual-Screen Telemetry",
       ],
       overview:
-        "Battery Vitals is an innovative microcontroller-based hardware testing apparatus and IoT telemetry platform developed at the Faculty of Information Technology, University of Moratuwa. Engineered to evaluate battery health, optimize usage efficiency, and ensure operational safety, the system autonomously conducts cyclic charge, rest, and discharge protocols across Li-ion 18650, Li-Po, and 12V Lead-Acid batteries. By sampling voltage, current, and temperature at sub-second intervals, Battery Vitals computes battery State of Health (SOH), internal resistance, and empirical decay curves, broadcasting telemetry simultaneously to an onboard 16×4 LCD and an interactive web dashboard. The project was showcased live and recognized with a Certificate of Appreciation at FITExpo 2025.",
+        "Battery Vitals is an innovative microcontroller-based hardware testing apparatus and IoT telemetry platform developed at the Faculty of Information Technology, University of Moratuwa. Selected from among all first-year microcontroller hardware projects to be exhibited at FITExpo 2025, the system was physically showcased and demonstrated over the 2-day exhibition to university faculty, industry professionals, and public visitors. Engineered to evaluate battery health, optimize usage efficiency, and ensure operational safety, the system autonomously conducts cyclic charge, rest, and discharge protocols across Li-ion 18650, Li-Po, and 12V Lead-Acid batteries. By sampling voltage, current, and temperature at sub-second intervals, Battery Vitals computes battery State of Health (SOH), internal resistance, and empirical decay curves, broadcasting telemetry simultaneously to an onboard 16×4 LCD and an interactive web dashboard. Minothma served as an official booth presenter across both days and was awarded the Certificate of Appreciation signed by Dean Mr. B.H. Sudantha and Director Dr. T.M. Thanthriwatta.",
       contributions: [
         {
-          title: "01. Multi-Chemistry Charging & Relay State Machine",
+          title: "01. Multi-Chemistry Hardware Testbed & Relay Switching Matrix",
           points: [
             "Chemistry Agnostic Architecture: Engineered dedicated charge/discharge pathways for Li-ion 18650 (3.7V), Li-Po (3.7V), and Lead-Acid (12V) batteries utilizing XL4015 and XL4016 DC-DC buck converters.",
             "Automated Cyclic State Machine: Implemented autonomous transitions across Charge ➔ Rest ➔ Discharge cycles managed through 5V 8-channel and 1-channel relay switching matrices.",
@@ -580,29 +583,13 @@ export const projectsData: ProjectItem[] = [
             "High-Side Current Sensing: Utilized INA219 I2C current and power monitor ICs to sample instantaneous milliampere draw and compute cumulative milliamp-hours (mAh).",
             "I2C Bus Multiplexing: Synchronized multiple I2C sensors (INA219, ADS1115, LCD backpack) on the ESP32 microcontroller with non-blocking polling intervals.",
           ],
-          screenshots: [
-            {
-              url: "/projects/battery-vitals/battery_vitals_expo_booth.jpg",
-              title: "FITExpo 2025 Hardware & Circuit Schematics",
-              caption:
-                "Exhibition display showcasing custom PCB routing, block diagram architectures, and live hardware evaluation testbed.",
-            },
-          ],
         },
         {
-          title: "03. State of Health (SOH) Evaluation & Curve Analytics",
+          title: "03. State of Health (SOH) Evaluation & Empirical Degradation Curves",
           points: [
             "Calibrated Load Discharging: Applied precision power resistor banks (2.2Ω, 3.9Ω, 6.8Ω) to simulate real-world current draw during discharge cycles.",
             "Internal Resistance (IR) Calculation: Computed dynamic internal resistance by evaluating instantaneous voltage drops under stepped load transitions (ΔV / ΔI).",
             "Empirical SOH Degradation Curve: Logged voltage decay curves against nominal manufacturer capacities to score battery degradation and estimate remaining operational lifespan.",
-          ],
-          screenshots: [
-            {
-              url: "/projects/battery-vitals/battery_vitals_expo_presentation.jpg",
-              title: "FITExpo 2025 Live Telemetry Presentation",
-              caption:
-                "Minothma Sithumini and Janani Pitawala presenting Battery Vitals alongside live SOH discharge curve charts and the official technical poster.",
-            },
           ],
         },
         {
@@ -612,28 +599,40 @@ export const projectsData: ProjectItem[] = [
             "Automated Active Cooling: Dynamically triggered a brushless DC cooling fan and aluminum extruded heat sink upon detecting temperature increases beyond baseline thresholds.",
             "Emergency Thermal Cutoff: Programmed hardware-level emergency interrupt cutoffs that immediately isolate relay circuits if cell temperature exceeds safe thermal limits (45°C for Li-ion).",
           ],
-          screenshots: [
-            {
-              url: "/projects/battery-vitals/battery_vitals_live_demonstration.jpg",
-              title: "Live Hardware Demonstration to Evaluators",
-              caption:
-                "Demonstrating active thermal management, relay switching, and live battery health monitoring to faculty evaluators and industry attendees.",
-            },
-          ],
         },
         {
-          title: "05. Dual-Interface Telemetry & FITExpo 2025 Recognition",
+          title: "05. FITExpo 2025 2-Day Public Exhibition, Live Demonstration & Honors",
           points: [
-            "Integrated 16×4 LCD Display: Programmed standalone on-device telemetry rendering real-time voltage, current, temperature, and SOH percentage.",
-            "IoT Web Dashboard: Streamed serial and Wi-Fi telemetry to an interactive web interface for long-term data logging and curve visualization.",
-            "Exhibition Presenter & Award: Selected as an official project presenter at FITExpo 2025, receiving the Certificate of Appreciation under Dean B.H. Sudantha and the Department of Microcontroller Applications.",
+            "Competitive 1st-Year Project Selection: Selected from among all first-year microcontroller hardware projects across the Faculty of Information Technology, University of Moratuwa, to be exhibited on the main floor at FITExpo 2025.",
+            "2-Day Official Booth Presenter: Served as the official project presenter across the full 2-day public exhibition, explaining battery chemistry safety, automated state transitions, and SOH decay curve analytics to visiting academics, industry delegates, and hundreds of students.",
+            "Live Hardware Demonstration & Evaluator Q&A: Conducted interactive, live hardware tests demonstrating real-time relay switching, sub-second telemetry acquisition, and dynamic fan cooling under evaluator inspection.",
+            "Dual-Screen Telemetry Output: Broadcasted synchronized real-time metrics across the standalone on-device 16×4 character LCD and an interactive web dashboard simultaneously.",
+            "Official Certificate of Appreciation: Honored with the Certificate of Appreciation awarded to C.M.M.S.U. Chandrasekara by Dean Mr. B.H. Sudantha and Director Dr. T.M. Thanthriwatta in recognition of outstanding hardware engineering and exhibition presentation.",
           ],
           screenshots: [
             {
               url: "/projects/battery-vitals/battery_vitals_fitexpo_certificate.jpg",
-              title: "FITExpo 2025 Certificate of Appreciation",
+              title: "Official FITExpo 2025 Certificate of Appreciation",
               caption:
-                "Official Certificate of Appreciation awarded to C.M.M.S.U. Chandrasekara for active participation and presentation of Battery Vitals at FITExpo 2025.",
+                "Certificate of Appreciation awarded to C.M.M.S.U. Chandrasekara, signed by Dean Mr. B.H. Sudantha and Director Dr. T.M. Thanthriwatta for project innovation and booth presentation.",
+            },
+            {
+              url: "/projects/battery-vitals/battery_vitals_expo_presentation.jpg",
+              title: "2-Day Public Exhibition & Live Technical Presentation",
+              caption:
+                "Minothma Sithumini explaining real-time battery telemetry, empirical SOH decay curves, and cyclic testbed architecture to exhibition attendees and faculty delegates.",
+            },
+            {
+              url: "/projects/battery-vitals/battery_vitals_live_demonstration.jpg",
+              title: "Live Hardware Demonstration to Faculty Judges & Visitors",
+              caption:
+                "Demonstrating active thermal management, relay switching, and live 16×4 LCD / Web dashboard telemetry during evaluation rounds to faculty judges and industry visitors.",
+            },
+            {
+              url: "/projects/battery-vitals/battery_vitals_expo_booth.jpg",
+              title: "Exhibition Booth Testbed & Schematic Display",
+              caption:
+                "Public testbed display featuring the custom PCB layout, block diagram schematics, ESP32 microcontroller unit, and multi-chemistry charging modules.",
             },
           ],
         },
@@ -645,7 +644,7 @@ export const projectsData: ProjectItem[] = [
         "Precision power resistor loads (2.2Ω, 3.9Ω, 6.8Ω) for controlled discharge profiling and internal resistance calculation.",
         "DS18B20 1-Wire thermal monitoring with active fan cooling and emergency relay disconnection failsafes.",
         "Dual-screen output combining an integrated 16×4 I2C character LCD and an interactive web telemetry dashboard.",
-        "Peer-reviewed and publicly demonstrated at FITExpo 2025, Faculty of Information Technology, University of Moratuwa.",
+        "Peer-reviewed, selected from all 1st-year hardware projects, and publicly demonstrated at FITExpo 2025 (2-Day Exhibition).",
       ],
       hardParts: [
         "ADC Calibration & Voltage Drift Elimination: Compensated for non-linear ADC artifacts and voltage drops across relay contacts under fluctuating discharge currents by integrating the ADS1115 16-bit I2C converter with hardware Kelvin connections.",
@@ -683,7 +682,8 @@ export const projectsData: ProjectItem[] = [
         },
         {
           category: "Exhibition & Honors",
-          tools: "FITExpo 2025 Presenter, Certificate of Appreciation (UOM)",
+          tools:
+            "Selected from 1st-Year Projects, 2-Day FITExpo 2025 Presenter, Certificate of Appreciation (UOM)",
         },
       ],
       repoNote:

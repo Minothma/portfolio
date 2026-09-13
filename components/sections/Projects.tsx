@@ -547,7 +547,7 @@ export function Projects() {
                 <div className="flex flex-wrap items-center justify-between gap-3 mb-3">
                   <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-mono tracking-wider text-cyan-300 bg-cyan-950/40 border border-cyan-500/20">
                     <Cpu className="w-3.5 h-3.5" />
-                    <span>EMBEDDED & IOT · 1ST YEAR PROJECT</span>
+                    <span>FITEXPO 2025 SELECTED · 1ST YEAR HARDWARE</span>
                   </div>
                   <span className="px-2.5 py-0.5 rounded text-[10px] font-mono font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20">
                     🟢 COMPLETED
@@ -560,7 +560,7 @@ export function Projects() {
                     Battery Vitals Testbed
                   </h3>
                   <p className="text-xs font-mono text-cyan-400/90 mt-1 font-semibold">
-                    Role: Embedded Software & Telemetry Developer (Presenter at FITExpo 2025)
+                    Role: Embedded Software & Telemetry Developer · Official FITExpo Presenter
                   </p>
                 </div>
 
@@ -570,17 +570,17 @@ export function Projects() {
                   className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden border border-cyan-500/20 mb-4 group/img cursor-pointer shadow-xl hover:border-cyan-400/60 transition-all duration-300"
                 >
                   <Image
-                    src="/projects/battery-vitals/battery_vitals_expo_presentation.jpg"
-                    alt="Battery Vitals Hardware Testbed Showcase at FITExpo 2025"
+                    src="/projects/battery-vitals/battery_vitals_hardware_chassis.jpg"
+                    alt="Battery Vitals Hardware Testing Apparatus & Enclosure Unit"
                     fill
                     sizes="(max-width: 768px) 100vw, 600px"
-                    className="object-cover group-hover/img:scale-105 transition-transform duration-500 ease-out"
+                    className="object-cover object-[50%_65%] group-hover/img:scale-105 transition-transform duration-500 ease-out"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#090e15]/60 via-transparent to-transparent opacity-40 group-hover/img:opacity-10 transition-opacity" />
                 </div>
 
                 <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-4">
-                  Microcontroller-based hardware testing apparatus and IoT telemetry platform for Li-ion, Li-Po, and Lead-Acid batteries with automated Charge-Rest-Discharge cycles.
+                  Microcontroller-based hardware testbed selected from all 1st-year projects for the 2-day FITExpo 2025 exhibition. Autonomous Charge-Rest-Discharge cycles for Li-ion, Li-Po, and Lead-Acid batteries.
                 </p>
 
                 <ul className="space-y-1.5 mb-4">
@@ -590,7 +590,7 @@ export function Projects() {
                   </li>
                   <li className="flex items-start gap-2 text-xs text-slate-300">
                     <span className="text-cyan-400 font-bold">•</span>
-                    <span>State of Health (SOH) calculation engine with 16×4 LCD & web dashboard; showcased at FITExpo 2025.</span>
+                    <span>Live 2-day exhibition presentation & SOH calculation; honored with UOM Certificate of Appreciation.</span>
                   </li>
                 </ul>
               </div>
