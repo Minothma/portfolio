@@ -59,7 +59,7 @@ export function Hero() {
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] sm:w-[800px] h-[400px] bg-gradient-to-tr from-emerald-500/10 via-cyan-500/5 to-transparent blur-3xl pointer-events-none -z-10" />
 
       <div className="w-full max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
-        
+
         {/* Availability & Location Pill */}
         <div className="flex flex-wrap items-center justify-between gap-3 mb-5">
           <div className="flex flex-wrap items-center gap-2.5">
@@ -75,13 +75,13 @@ export function Hero() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center mb-8">
-          
+
           {/* Left Column: Big Typography, Value Pitch & CTAs */}
           <div className="lg:col-span-7 space-y-5">
             <div className="space-y-3">
               <div className="text-xs sm:text-sm font-mono tracking-widest text-emerald-400 uppercase font-semibold flex items-center gap-2">
                 <span>IT & MANAGEMENT UNDERGRADUATE</span>
-                <span className="w-8 h-[1px] bg-emerald-500/40" />
+                <span className="w-3 h-[2px] bg-emerald-500/40" />
                 <span className="text-slate-400 font-normal">UNIVERSITY OF MORATUWA</span>
               </div>
               <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-tight">
@@ -160,27 +160,25 @@ export function Hero() {
 
           {/* Right Column: Dual-Mode Bento Console (Visual ⇄ Tech Specs) */}
           <div className="lg:col-span-5 flex flex-col items-center lg:items-end space-y-3">
-            
+
             {/* Mode Switcher Pills */}
             <div className="flex items-center gap-1 p-1 rounded-full bg-[#0c1118] border border-white/10 shadow-lg">
               <button
                 onClick={() => setHeroMode("visual")}
-                className={`inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-mono font-medium transition-all ${
-                  heroMode === "visual"
-                    ? "bg-emerald-400 text-slate-950 font-bold shadow-md shadow-emerald-500/20"
-                    : "text-slate-400 hover:text-slate-200"
-                }`}
+                className={`inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-mono font-medium transition-all ${heroMode === "visual"
+                  ? "bg-emerald-400 text-slate-950 font-bold shadow-md shadow-emerald-500/20"
+                  : "text-slate-400 hover:text-slate-200"
+                  }`}
               >
                 <User className="w-3.5 h-3.5" />
                 <span>Visual Profile</span>
               </button>
               <button
                 onClick={() => setHeroMode("telemetry")}
-                className={`inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-mono font-medium transition-all ${
-                  heroMode === "telemetry"
-                    ? "bg-cyan-400 text-slate-950 font-bold shadow-md shadow-cyan-500/20"
-                    : "text-slate-400 hover:text-slate-200"
-                }`}
+                className={`inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-mono font-medium transition-all ${heroMode === "telemetry"
+                  ? "bg-cyan-400 text-slate-950 font-bold shadow-md shadow-cyan-500/20"
+                  : "text-slate-400 hover:text-slate-200"
+                  }`}
               >
                 <Activity className="w-3.5 h-3.5" />
                 <span>Tech Specs</span>
@@ -191,7 +189,7 @@ export function Hero() {
             {heroMode === "visual" ? (
               <div className="relative w-full max-w-[360px] aspect-[4/5] rounded-3xl bg-gradient-to-b from-emerald-400/80 via-emerald-500/20 to-cyan-500/30 p-[1.5px] shadow-2xl shadow-emerald-950/40 group hover:shadow-[0_0_40px_rgba(16,185,129,0.3)] transition-all duration-300 animate-in fade-in">
                 <div className="relative w-full h-full rounded-[22px] bg-[#0c1118] overflow-hidden flex flex-col justify-between">
-                  
+
                   {/* Real Profile Photo with full headroom & clear lighting */}
                   <div className="absolute inset-0 z-0">
                     <Image
@@ -256,7 +254,7 @@ export function Hero() {
               /* Mode 2: Tech Specs Console Card */
               <div className="relative w-full max-w-[360px] aspect-[4/5] rounded-3xl bg-gradient-to-b from-cyan-400/80 via-cyan-500/20 to-emerald-500/30 p-[1.5px] shadow-2xl shadow-cyan-950/40 group hover:shadow-[0_0_40px_rgba(6,182,212,0.3)] transition-all duration-300 animate-in fade-in">
                 <div className="relative w-full h-full rounded-[22px] bg-[#0c1118] p-5 flex flex-col justify-between overflow-hidden font-mono text-xs">
-                  
+
                   {/* Top Header */}
                   <div className="space-y-1.5 pb-3 border-b border-white/10">
                     <div className="flex items-center justify-between">

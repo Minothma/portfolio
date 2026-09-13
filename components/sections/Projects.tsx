@@ -137,32 +137,47 @@ export function Projects() {
           </span>
         </div>
 
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
-          <div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-3">
-              Featured <span className="bg-gradient-to-r from-emerald-300 via-teal-200 to-cyan-300 bg-clip-text text-transparent">Projects.</span>
-            </h2>
-            <p className="text-xs sm:text-sm text-slate-400 max-w-xl leading-relaxed">
-              Full-stack systems and engineering projects built with clean layer separation, secure APIs, and responsive UI design.
-            </p>
-          </div>
+        <div className="mb-6">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-3">
+            Featured <span className="bg-gradient-to-r from-emerald-300 via-teal-200 to-cyan-300 bg-clip-text text-transparent">Projects.</span>
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-400 max-w-2xl leading-relaxed">
+            Full-stack systems and engineering projects built with clean layer separation, secure APIs, and responsive UI design.
+          </p>
+        </div>
 
-          {/* Category Filter Pills */}
-          <div className="flex flex-wrap items-center gap-2">
-            {categories.map((cat) => (
+        {/* Dedicated Modern Segmented Filter Bar */}
+        <div className="mb-10 flex flex-wrap items-center gap-1.5 p-1.5 rounded-2xl bg-[#0c121c]/90 border border-white/[0.08] backdrop-blur-md w-fit shadow-xl">
+          {categories.map((cat) => {
+            const count =
+              cat === "All"
+                ? projectsData.length
+                : projectsData.filter((p) => p.category === cat).length;
+            const isActive = selectedCategory === cat;
+
+            return (
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-3.5 py-1.5 rounded-full text-xs font-mono tracking-wider transition-all duration-200 ${
-                  selectedCategory === cat
-                    ? "bg-emerald-400 text-slate-950 font-bold shadow-md shadow-emerald-500/20 scale-105"
-                    : "bg-[#0c1118] text-slate-400 border border-white/[0.06] hover:border-emerald-500/40 hover:text-slate-200"
+                className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-mono tracking-wide transition-all duration-200 ${
+                  isActive
+                    ? "bg-emerald-400 text-slate-950 font-bold shadow-lg shadow-emerald-500/20 scale-[1.02]"
+                    : "text-slate-400 hover:text-slate-200 hover:bg-white/[0.05]"
                 }`}
               >
-                {cat}
+                <span>{cat}</span>
+                <span
+                  className={`px-1.5 py-0.5 rounded-md text-[10px] font-bold transition-colors ${
+                    isActive
+                      ? "bg-slate-950/20 text-slate-950"
+                      : "bg-white/[0.06] text-slate-400 group-hover:text-slate-300"
+                  }`}
+                >
+                  {count}
+                </span>
               </button>
-            ))}
-          </div>
+            );
+          })}
         </div>
 
         {/* Active Skill Filter Banner (If triggered from Toolkit) */}
