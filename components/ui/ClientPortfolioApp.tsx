@@ -13,12 +13,16 @@ import { Toolkit } from "@/components/sections/Toolkit";
 import { Journey } from "@/components/sections/Journey";
 import { Contact } from "@/components/sections/Contact";
 import { Footer } from "@/components/layout/Footer";
+import { WelcomePortal } from "@/components/ui/WelcomePortal";
 
 function InnerPortfolioContent() {
   const { isCommandPaletteOpen, closeCommandPalette, openProjectModal } = usePortfolioUI();
 
   return (
     <main className="relative min-h-screen bg-background text-slate-200 bg-grid-overlay overflow-x-hidden">
+      {/* Interactive Cinematic Welcome Portal & Avatar Guide */}
+      <WelcomePortal />
+
       {/* Subtle mouse spotlight aura */}
       <MouseSpotlight />
 
