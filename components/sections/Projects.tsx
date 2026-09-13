@@ -574,7 +574,7 @@ export function Projects() {
                     alt="Battery Vitals Hardware Testing Apparatus & Enclosure Unit"
                     fill
                     sizes="(max-width: 768px) 100vw, 600px"
-                    className="object-cover object-[50%_65%] group-hover/img:scale-105 transition-transform duration-500 ease-out"
+                    className="object-cover object-center group-hover/img:scale-105 transition-transform duration-500 ease-out"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#090e15]/60 via-transparent to-transparent opacity-40 group-hover/img:opacity-10 transition-opacity" />
                 </div>
@@ -800,11 +800,11 @@ export function Projects() {
               {selectedProject.id === "battery-vitals" && (
                 <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden border border-cyan-500/30 shadow-2xl">
                   <Image
-                    src="/projects/battery-vitals/battery_vitals_expo_presentation.jpg"
-                    alt="Battery Vitals Hardware Testbed Showcase at FITExpo 2025"
+                    src="/projects/battery-vitals/battery_vitals_hardware_chassis.jpg"
+                    alt="Battery Vitals Hardware Testbed & Custom Enclosure Unit"
                     fill
                     sizes="(max-width: 1024px) 100vw, 900px"
-                    className="object-cover"
+                    className="object-cover object-center"
                   />
                 </div>
               )}
@@ -956,7 +956,7 @@ export function Projects() {
                                       alt={img.title}
                                       fill
                                       sizes="(max-width: 768px) 100vw, 400px"
-                                      className="object-cover object-top group-hover/img:scale-105 transition-transform duration-300"
+                                      className="object-cover object-center group-hover/img:scale-105 transition-transform duration-300"
                                     />
                                     <div className="absolute inset-0 bg-black/50 opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center gap-2 text-white font-mono text-xs backdrop-blur-[2px]">
                                       <ZoomIn className="w-4 h-4 text-emerald-400" />
